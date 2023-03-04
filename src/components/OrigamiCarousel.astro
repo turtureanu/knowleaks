@@ -1,16 +1,24 @@
 ---
 import "../styles/components/origami-carousel.scss";
-
+import { Debug } from "astro/components";
 const { origami } = Astro.props;
-const imagesPath = await Astro.glob("/public/origami/instuctions/*/*.svg");
-// Astro.glob dynacmic value workaround (filtering from a bigger list):
-// https://docs.astro.build/en/guides/troubleshooting/#supported-values
+
+// I'm sick with working with Astro.glob(), too abstract and hard to work with
+const imagesPath = import.meta.glob("/public/origami/instuctions/*/*.svg", {
+  eager: true,
+});
 
 let images: any[] = [];
-for (let i = 0; i < imagesPath.length; i++) {
-  let src = imagesPath[i];
-  if (src.default.includes(origami)) {
-    images.push(src.default);
+for (let image in imagesPath) {
+  // TODO: maybe use the files from the _astro directory
+  // I don't know of any benefits, besides from maybe a slight gain in fetching speeds
+  // Example of imagesPath:
+  // ...
+  // "/public/origami/instuctions/hendecagon-top-hat/1.svg": {
+  //   "default": "/_astro/1.394e0daf.svg"
+  // }...
+  if (image.includes(origami)) {
+    images.push(image.replace("/public", ""));
   }
 }
 
@@ -33,7 +41,7 @@ images.sort(ascendingSort);
         <img
           class="carousel-image"
           alt=""
-          src={images[index].replace("/public", "")}
+          src={images[index]}
           decoding="async"
         />
       ))
@@ -45,60 +53,60 @@ images.sort(ascendingSort);
   <div class="dots">
     {images.map((_, index) => <button class="dot">{index + 1}</button>)}
   </div>
-</div>
-<script is:inline>
-  // select all images
-  const images = document.querySelectorAll(".carousel-image");
-  const dot = document.querySelectorAll(".dot");
-  // index of current image
-  let currentImage = 0;
-  // index of last image
-  let lastImage = images.length - 1;
-  // move each image by 100% so that they overflow horizontally,
-  // displaying only one image at a time
-  images.forEach((image, index) => {
-    image.style.transform = `translateX(${index * 100}%)`; // width of parent
-  });
-  // selecting the class causes a delay for some reason
-  const prev = document.querySelector("#prev");
-  const next = document.querySelector("#next");
-  // Make the first dot current
-  dot[0].dataset.isCurrent = true;
-  function updateSlides() {
-    // Boundaries
-    if (currentImage < 0) {
-      currentImage = lastImage;
-    } else if (currentImage > lastImage) {
-      currentImage = 0;
-    }
-    // move images on the x.axis for carousel
+  <script>
+    // select all images
+    const images = document.querySelectorAll(".carousel-image");
+    const dot = document.querySelectorAll(".dot");
+    // index of current image
+    let currentImage = 0;
+    // index of last image
+    let lastImage = images.length - 1;
+    // move each image by 100% so that they overflow horizontally,
+    // displaying only one image at a time
     images.forEach((image, index) => {
-      image.style.transform = `translateX(${(index - currentImage) * 100}%)`;
+      image.style.transform = `translateX(${index * 100}%)`; // width of parent
     });
-    // currently displayed image indicator/dot
-    dot.forEach((dot) => {
-      if (currentImage == parseInt(dot.innerHTML) - 1) {
-        dot.dataset.isCurrent = true;
-      } else {
-        dot.dataset.isCurrent = false;
+    // selecting the class causes a delay for some reason
+    const prev = document.querySelector("#prev");
+    const next = document.querySelector("#next");
+    // Make the first dot current
+    dot[0].dataset.isCurrent = true;
+    function updateSlides() {
+      // Boundaries
+      if (currentImage < 0) {
+        currentImage = lastImage;
+      } else if (currentImage > lastImage) {
+        currentImage = 0;
       }
-    });
-  }
-  // move to next image using the currentImage index
-  next.addEventListener("click", () => {
-    currentImage++;
-    updateSlides();
-  });
-  // move to previous image using the currentImage index
-  prev.addEventListener("click", () => {
-    currentImage--;
-    updateSlides();
-  });
-  // move to image of clicked dot
-  dot.forEach((dot) => {
-    dot.addEventListener("click", () => {
-      currentImage = parseInt(dot.innerHTML) - 1;
+      // move images on the x.axis for carousel
+      images.forEach((image, index) => {
+        image.style.transform = `translateX(${(index - currentImage) * 100}%)`;
+      });
+      // currently displayed image indicator/dot
+      dot.forEach((dot) => {
+        if (currentImage == parseInt(dot.innerHTML) - 1) {
+          dot.dataset.isCurrent = true;
+        } else {
+          dot.dataset.isCurrent = false;
+        }
+      });
+    }
+    // move to next image using the currentImage index
+    next.addEventListener("click", () => {
+      currentImage++;
       updateSlides();
     });
-  });
-</script>
+    // move to previous image using the currentImage index
+    prev.addEventListener("click", () => {
+      currentImage--;
+      updateSlides();
+    });
+    // move to image of clicked dot
+    dot.forEach((dot) => {
+      dot.addEventListener("click", () => {
+        currentImage = parseInt(dot.innerHTML) - 1;
+        updateSlides();
+      });
+    });
+  </script>
+</div>
