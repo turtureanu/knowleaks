@@ -1,0 +1,23 @@
+---
+layout: "../../layouts/BlogPost.astro"
+title: "Setting up SSH for each git repository individually"
+description: "How to set up SSH authentication for each git repository individually"
+pubDate: "Feb 17 2023"
+---
+
+A lot of people have git repositories stored not just on GitHub, but on other platform such as [Codeberg.org](https://codeberg.org/), [GitLab](https://about.gitlab.com/), or their own [self-hosted alternative](https://gitea.io/en-us/).
+
+Now, the most convenient way users can authenticate and use these platforms with git is by using SSH keys. Using the same SSH key on all platforms isn't a problem per se, but it is better to use an SSH key for each platform individually.
+
+## Configuring git
+
+```sh
+git config core.sshCommand "ssh -i ~/.ssh/github_ed25519"
+```
+
+This will tell git to use the identity file stored in `~/.ssh/github_ed25519`.
+To make it the default SSH key, pass the `--global` option:
+
+```sh
+git config --global core.sshCommand "ssh -i ~/.ssh/github_ed25519"
+```

@@ -1,0 +1,14 @@
+---
+const { filename, href, content } = Astro.props;
+---
+
+<a href={href} class="button" download={filename}>{content}</a>
+
+<style lang="scss">
+  @use "src/styles/variables.scss" as *;
+  @use "src/styles/components/button.scss";
+
+  a.button {
+    margin: 0;
+  }
+</style>

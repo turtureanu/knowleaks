@@ -1,0 +1,137 @@
+@use "../variables.scss" as *;
+@use "sass:color";
+
+$pale-yellow: color.adjust($yellow, $lightness: 12.5%);
+$dark-yellow: color.adjust($yellow, $lightness: -12.5%);
+$pale-blue: color.adjust($blue, $lightness: 25%);
+$pale-green: color.adjust($green, $lightness: 12.5%);
+
+article {
+  margin: 0 auto;
+  padding: 5rem 2.5rem;
+  max-width: $article-width;
+
+  a {
+    transition: background 150ms ease-in-out;
+    background-size: 0%;
+    color: $dark;
+
+    &:hover {
+      background: linear-gradient(0deg, $pale-blue 25%, $light 25%) no-repeat;
+      background-size: 100%;
+    }
+
+    &,
+    &:hover {
+      transition: background-size 150ms ease-in-out;
+    }
+  }
+
+  // two images on top on each other
+  img + img {
+    margin-top: 2rem;
+  }
+
+  // article thumbnail
+  .article-header + hr + p img {
+    display: block;
+    width: 100%;
+    max-height: calc((100vh / 1.5));
+    object-fit: cover;
+    object-position: center;
+  }
+
+  h1 {
+    margin: 0;
+    line-height: 3ch;
+  }
+
+  time {
+    min-width: max-content;
+  }
+
+  h2 {
+    margin: 0.75em 0;
+    max-width: fit-content;
+  }
+
+  h1,
+  h2 {
+    text-decoration: wavy underline $blue 0.2rem;
+    text-decoration-skip-ink: none;
+  }
+
+  h3,
+  h4 {
+    text-decoration: solid 0.2rem $blue underline;
+  }
+
+  p {
+    line-height: 3ch;
+    font-family: "Courier New", Courier, monospace;
+  }
+
+  blockquote {
+    margin: 0;
+    border-left: solid 0.5rem $dark-yellow;
+    border-radius: 0.75rem;
+    background-color: $pale-yellow;
+    padding: 1em;
+
+    a:hover {
+      background: linear-gradient(0deg, $pale-green 25%, $pale-yellow 25%) no-repeat;
+      background-size: 100%; // in order for the transition to work
+    }
+  }
+
+  // astro stuff
+  .astro-code {
+    border-radius: 0.75rem;
+    background-color: $dark !important;
+    padding: 1em 0;
+    font-family: "Courier New", Courier, monospace;
+
+    .line {
+      padding: 0 1em;
+    }
+  }
+
+  code:not(.astro-code > code) {
+    letter-spacing: 0.125ch;
+  }
+
+  ul li::marker {
+    color: $blue;
+    font-size: 2.5ch;
+    font-weight: 900;
+    content: "× "; // unicode char U+00d7
+  }
+
+  .article-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    * {
+      padding: 0.375em 0;
+    }
+  }
+
+  hr {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  time {
+    display: block;
+    padding: 0.5em;
+    text-align: center;
+  }
+
+  @media screen and (min-width: $medium) {
+    .article-header {
+      flex-direction: row;
+      justify-content: space-between;
+    }
+  }
+}

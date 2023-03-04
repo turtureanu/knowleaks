@@ -1,0 +1,17 @@
+@use "../variables.scss" as *;
+
+.menu {
+  display: grid;
+  grid-template-columns: 50% 50%;
+  padding: 1em;
+  text-align: center;
+
+  .source-code {
+    grid-column: 1 / -1;
+  }
+
+  @media screen and (min-width: $medium) {
+    margin: 0 auto;
+    max-width: $medium;
+  }
+}

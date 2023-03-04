@@ -1,0 +1,66 @@
+---
+import BaseHead from "../components/BaseHead.astro";
+import Nav from "../components/Nav.astro";
+import { SITE_TITLE } from "../config";
+
+import "../styles/layouts/blogPost.scss";
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <BaseHead
+      title={"About me" + " | " + SITE_TITLE}
+      description="About me | Mircea-Sebastian Turtureanu"
+    />
+  </head>
+  <body>
+    <Nav />
+    <article>
+      <h1>Mircea-Sebastian Turtureanu</h1>
+      <p>
+        Hi! 👋 <br />
+        <br />
+        Name's Sebastian, I'm a hobbyist who self-taught himself front-end web development,
+        linux administration, and origami. I like hardening linux servers and thinking
+        of new ways of protecting against possible threats. My current field of study
+        is cybersecurity, but I am also interested in general IT and programming
+        languages.
+        <br />
+        <br />
+        My favorite color's a saturated blue around <span style="color:#00AAFF"
+          >#00AAFF</span
+        >.
+      </p>
+
+      <a href="https://github.com/turtureanu">My GitHub</a>
+      <p>
+        <h2>Learning goals for 2023:</h2>
+        <p>
+          <ul class="tasks">
+            <li>
+              Finish the <a href="https://scrimba.com/learn/javascript"
+                >Scrimba JS deep dive course</a
+              >
+            </li>
+            <li>
+              Take part in the <a href="https://exercism.org/challenges/12in23"
+                >Exercism #12in23 challenge</a
+              >
+            </li>
+            <li>
+              Complete at least one learning path on <a
+                href="https://tryhackme.com/hacktivities">TryHackMe</a
+              >
+            </li>
+            <style lang="scss">
+              li.completed::marker {
+                content: "✓ ";
+              }
+            </style>
+          </ul>
+        </p>
+      </p>
+    </article>
+  </body>
+</html>

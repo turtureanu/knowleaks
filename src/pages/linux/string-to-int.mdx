@@ -1,0 +1,36 @@
+---
+layout: "../../layouts/BlogPost.astro"
+title: "Converting a char array to an int in C"
+description: "Converting a char array to an int in C"
+pubDate: "Mar 3 2023"
+---
+
+## Avoid `atoi()`
+
+It's easy to work with `atoi()`, but you have to be sure that what you want to convert is a char array that only contains numbers and not any other characters (symbols, for example).
+
+Passing a char such as `e` to atoi() **will result in undefined behavior**. Error handling can get a bit _messy_.
+
+## Use `strtol()` instead
+
+`long int strtol (const char* str, char** endptr, int base)`
+
+In summary, the first parameter is the string (char array), the second can be ignored by passing `NULL`, and the final one is the number base (usually 10).
+
+There are some interesting things that you can do with this function, such as splitting a string into text and numbers.
+
+## A simple example
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+
+int main() {
+  char str[] = "123";
+
+  int num = strtol(str, NULL, 10);
+
+  printf("%d", num);
+  return 0;
+}
+```

@@ -1,0 +1,13 @@
+---
+const { href, content } = Astro.props;
+---
+
+<a href={href} target="_blank"><span id="info">ℹ</span>{content}</a>
+
+<style lang="scss">
+  #info {
+    display: table-cell; // text-decoration override trick
+    text-decoration: none;
+    padding-right: 1ch;
+  }
+</style>

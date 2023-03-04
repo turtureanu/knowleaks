@@ -1,0 +1,31 @@
+@use "../variables.scss" as *;
+
+.button {
+  // most readable CSS way to align the text
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  // the button body
+  margin: 0.25em 0.375em;
+  outline: solid 0.275rem $dark;
+  padding: 0.5em;
+  text-decoration: none;
+  color: $dark;
+
+  &:hover,
+  &:focus,
+  &:active {
+    outline-color: $blue;
+    box-shadow: 0 0 0.5rem $blue;
+  }
+
+  &:active {
+    outline-color: $orange;
+    color: $orange;
+  }
+
+  &:visited {
+    color: $dark;
+  }
+}

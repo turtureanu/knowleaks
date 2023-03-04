@@ -1,0 +1,27 @@
+<blockquote>
+  The page appears to have been lost <br />
+  this is but the <span>404</span> HTTP response <br />
+  try to go back and double check <br />
+  perhaps the URL is incorrect
+</blockquote>
+
+<style lang="scss">
+  @forward "../styles/global.scss";
+  @use "../styles/variables.scss" as *;
+
+  body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  blockquote {
+    line-height: 3ch;
+    font-size: 2.5ch;
+
+    span {
+      color: $red;
+      font-weight: 900;
+    }
+  }
+</style>

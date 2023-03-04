@@ -1,46 +1,61 @@
 ---
-import BaseHead from '../components/BaseHead.astro';
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
+import BaseHead from "../components/BaseHead.astro";
+import Nav from "../components/Nav.astro";
+import "../styles/layouts/blogPost.scss";
 
 export interface Props {
-	content: {
-		title: string;
-		description: string;
-		pubDate?: string;
-		updatedDate?: string;
-		heroImage?: string;
-	};
+  content: {
+    title: string;
+    description: string;
+    pubDate?: string;
+    updatedDate?: string;
+    heroImage?: string;
+  };
 }
 
 const {
-	content: { title, description, pubDate, updatedDate, heroImage },
+  content: { title, description, pubDate, updatedDate, heroImage },
 } = Astro.props;
 ---
 
 <html lang="en">
-	<head>
-		<BaseHead title={title} description={description} />
-		<style lang="scss">
-		</style>
-	</head>
+  <head>
+    <BaseHead title={title} description={description} />
+  </head>
 
-	<body>
-		<Header />
-		<main>
-			<article>
-				{heroImage && <img width={720} height={360} src={heroImage} alt="" />}
-				<h1 class="title">{title}</h1>
-				{pubDate && <time>{pubDate}</time>}
-				{updatedDate && (
-					<div>
-						Last updated on <time>{updatedDate}</time>
-					</div>
-				)}
-				<hr />
-				<slot />
-			</article>
-		</main>
-		<Footer />
-	</body>
+  <body>
+    <Nav />
+    <main>
+      <article>
+        {heroImage && <img src={heroImage} alt="" />}
+        <div class="article-header">
+          <h1 class="title">{title}</h1>
+          {pubDate && <time>{pubDate}</time>}
+          {
+            updatedDate && (
+              <div>
+                Last updated on <time>{updatedDate}</time>
+              </div>
+            )
+          }
+        </div>
+        <hr />
+        <slot />
+      </article>
+    </main>
+
+    <script>
+      // I don't like this, but it makes sure all links inside the article open in a new tab
+      // compiled MDX and Markdown files set only the `href` attribute
+      if (document.body.contains(document.querySelector("article"))) {
+        const article = document.querySelector("article");
+        const links = article.querySelectorAll("a");
+        links.forEach((link) => {
+          link.target = "_blank";
+          link.rel = "noopener noreferrer";
+        });
+      }
+    </script>
+    <style lang="scss"></style>
+  </body>
 </html>

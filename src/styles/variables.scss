@@ -1,2 +1,17 @@
-$dark: #303030;
+// Colors
 $light: #fff;
+$dark: hsl(50deg 10% 15%);
+$blue: #0077cc;
+$red: hsl(334deg 50% 50%);
+$orange: hsl(18deg 50% 60%);
+$purple: hsl(250deg 50% 60%);
+$yellow: #cc6;
+$green: #48a07c;
+
+// Media Query Breakpoints
+$small: 400px;
+$medium: 700px;
+$large: 1600px;
+
+// Article
+$article-width: 800px;

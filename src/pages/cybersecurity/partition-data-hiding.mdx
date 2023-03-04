@@ -1,0 +1,200 @@
+---
+layout: "../../layouts/BlogPost.astro"
+title: "How to hide data between drive partitions"
+description: "How to hide data between drive partitions"
+pubDate: "Feb 9 2023"
+---
+
+![thumbnail](/linux/partition-key-hiding/thumbnail.svg)
+
+## Pros
+
+- fast (of course)
+- easy to set up and automate
+- can be used as an MFA method (something you know\* + something you have)
+
+## Cons
+
+- not invisible from basic forensic techniques
+- \*security by obscurity (if not encrypted)
+
+## Setup
+
+Here's an example drive using the following partition configuration:
+
+```sh
+Disk /dev/sdb: 15728640 sectors, 7.5 GiB
+...
+Sector size (logical/physical): 512/512 bytes
+...
+Number  Start (sector)    End (sector)  Size       Code  Name
+   1            4096         4198399   2.0 GiB     8300  Linux filesystem
+   2         4202496        15724543   5.5 GiB     8300  Linux filesystem
+```
+
+Notice that there is a gap between the end sector of the first partition and the start sector of the second partition, this is the gap we're going to use to write our hidden data to.
+
+The reason the sector alignment value is `4096`, is because it targets a specific group of people who might assume that the partitioning program accidentally (or purposefully) left a gap between the partitions equal to the sector alignment value. In the real world this should never happen. Anyone experienced enough won't be fooled by this.
+
+### Partitioning the drive
+
+For partitioning we're going to use `gdisk`, but any other disk manipulating utility should work just as well.
+
+#### Create a new GPT
+
+```sh
+$ sudo gdisk /dev/sda
+GPT fdisk (gdisk) version 1.0.9.1
+
+Partition table scan:
+  MBR: protective
+  BSD: not present
+  APM: not present
+  GPT: present
+
+Found valid GPT with protective MBR; using GPT.
+
+Command (? for help): o
+This option deletes all partitions and creates a new protective MBR.
+Proceed? (Y/N): y
+```
+
+### Set the sector alignment value (optional)
+
+```sh
+Command (? for help): x
+
+Expert command (? for help): l
+Enter the sector alignment value (1-65536, default = 2048): 4096
+
+Expert command (? for help): m
+
+Command (? for help):
+```
+
+#### Create the first partition
+
+```sh
+Command (? for help): n
+Partition number (1-128, default 1):
+First sector (34-15728606, default = 4096) or {+-}size{KMGTP}:
+Last sector (4096-15728606, default = 15724543) or {+-}size{KMGTP}: +2G
+Current type is 8300 (Linux filesystem)
+Hex code or GUID (L to show codes, Enter = 8300):
+Changed type of partition to 'Linux filesystem'
+
+Command (? for help):
+```
+
+#### Create the second partition with a starting sector offset of 4096
+
+```sh
+Command (? for help): n
+Partition number (2-128, default 2):
+First sector (34-15728606, default = 4198400) or {+-}size{KMGTP}: +4096
+Last sector (4202496-15728606, default = 15724543) or {+-}size{KMGTP}:
+Current type is 8300 (Linux filesystem)
+Hex code or GUID (L to show codes, Enter = 8300):
+Changed type of partition to 'Linux filesystem'
+```
+
+#### Print the GPT
+
+```sh
+Command (? for help): p
+Disk /dev/sda: 15728640 sectors, 7.5 GiB
+Model: UDisk
+Sector size (logical/physical): 512/512 bytes
+Disk identifier (GUID): AA1E2E4C-26BC-477D-BD76-0391D5958730
+Partition table holds up to 128 entries
+Main partition table begins at sector 2 and ends at sector 33
+First usable sector is 34, last usable sector is 15728606
+Partitions will be aligned on 4096-sector boundaries
+Total free space is 12221 sectors (6.0 MiB)
+
+Number  Start (sector)    End (sector)  Size       Code  Name
+   1            4096         4198399   2.0 GiB     8300  Linux filesystem
+   2         4202496        15724543   5.5 GiB     8300  Linux filesystem
+
+```
+
+Things to write down and remember:
+
+- A value: end sector of the first partition (4198399)
+- B value: start sector of the second partition (4202496)
+
+### Creating a loop device
+
+We are going to create a loop device in which we're going to store the data, this has the following benefits:
+
+- easy to work with, and generally considered less error-prone
+- may be encrypted using LUKS and a detached header
+- one and done, you only need to pass the `A` and `B` values once
+
+The loop device will have an `--offset` of `A` and a `--sizelimit` of `B`:
+
+```sh
+sudo losetup /dev/loop0 /dev/sda --offset 4198399 --sizelimit 4096
+```
+
+The `--sizelimit` option makes it so that `losetup` only reads 4096 _bytes_ from the end sector of the first partition (value `A`). This is the space where we can store anything as raw data.
+
+## Writing data
+
+To write data we are going to use `dd`, also known as the "disk destroyer".
+It is a convenient tool used to copy data, but if used incorrectly, can give you quite a bad time.
+
+### Check the data prior to writing
+
+```sh
+$ sudo dd if=/dev/loop0 of=tmp.bin
+8+0 records in
+8+0 records out
+4096 bytes (4.1 kB, 4.0 KiB) copied, 0.000284813 s, 14.4 MB/s
+$ hexyl tmp.bin
+┌────────┬─────────────────────────┬─────────────────────────┬────────┬────────┐
+│00000000│ 00 00 00 00 00 00 00 00 ┊ 00 00 00 00 00 00 00 00 │00000000┊00000000│
+│*       │                         ┊                         │        ┊        │
+│00001000│                         ┊                         │        ┊        │
+└────────┴─────────────────────────┴─────────────────────────┴────────┴────────┘
+```
+
+`dd` options:
+
+- `if` input file
+- `of` output file
+
+### Write the data
+
+In this example we are going to use `/dev/urandom` as input, but you can theoretically use anything that'll fit.
+
+```sh
+$ sudo dd if=/dev/urandom of=/dev/loop0
+dd: writing to '/dev/loop0': No space left on device
+9+0 records in
+8+0 records out
+4096 bytes (4.1 kB, 4.0 KiB) copied, 0.000393695 s, 10.4 MB/s
+```
+
+### Check the data after writing
+
+```sh
+$ sudo dd if=/dev/loop0 of=tmp.bin
+8+0 records in
+8+0 records out
+4096 bytes (4.1 kB, 4.0 KiB) copied, 0.000288863 s, 14.2 MB/s
+$ hexyl tmp.bin
+┌────────┬─────────────────────────┬─────────────────────────┬────────┬────────┐
+│00000000│ 00 61 ac a7 31 22 aa ea ┊ 90 62 cf c4 cc fb dd d1 │0a××1"××┊×b××××××│
+│00000010│ 3b ae 9f 37 f2 cd 19 01 ┊ cb d2 01 d5 c5 26 37 52 │;××7××••┊××•××&7R│
+│00000020│ 53 85 d1 10 96 86 dc b4 ┊ 81 90 79 8c 7e 8a 9c d6 │S××•××××┊××y×~×××│
+│00000030│ c4 be 16 a6 e9 20 f2 63 ┊ a5 07 52 7c 76 e0 48 ae │××•×× ×c┊×•R|v×H×│
+.
+.
+.
+│00000fc0│ 86 fa 10 52 f9 62 06 38 ┊ a5 7e a4 f4 2b dd 89 6c │××•R×b•8┊×~××+××l│
+│00000fd0│ ab e8 ea a7 17 4e 28 ce ┊ fd e7 17 22 7a 93 54 32 │××××•N(×┊××•"z×T2│
+│00000fe0│ db 4c c9 30 06 b0 9d 55 ┊ 1c 6a 6b 50 3e 73 e0 d6 │×L×0•××U┊•jkP>s××│
+│00000ff0│ 8b bc f3 b7 b3 33 03 18 ┊ 37 7c d7 d4 62 3e 2e d1 │×××××3••┊7|××b>.×│
+└────────┴─────────────────────────┴─────────────────────────┴────────┴────────┘
+```

@@ -1,0 +1,26 @@
+---
+layout: "../../layouts/BlogPost.astro"
+title: "Raspberry Pi Pico Rubber Ducky"
+description: "Making a Rubber Ducky using a 5$ Raspberry Pi Pico"
+pubDate: "Feb 3 2023"
+---
+
+![A giant rubber duck, literally](https://upload.wikimedia.org/wikipedia/commons/1/14/Rubber_Duck_%288374802487%29.jpg)
+
+<div style="text-align: center">
+  Florentijn Hofman's Rubber Duck sculpture in Sydney <br />
+  [image source and credits](https://commons.wikimedia.org/wiki/File:Rubber_Duck_(8374802487).jpg)
+</div>
+
+## What's a rubber ducky?
+
+[The USB Rubber Ducky](https://shop.hak5.org/products/usb-rubber-ducky) was another [Hak5](https://hak5.org/) product, its use? A programmable keyboard used for physical attacks. The term "rubber ducky" has since its release been more generalized to include any programmable keyboard that can be used for physical [HID](https://en.wikipedia.org/wiki/Human_interface_device) attacks.
+
+The ducky can be easily programmed using the [duckyscript language](https://docs.hak5.org/hak5-usb-rubber-ducky/duckyscript-tm-quick-reference), which is written in ALL-CAPS because duckys like to quack!
+
+Instructions on how to configure the Raspberry Pi Pico as a Rubber Ducky can be found here: https://github.com/dbisu/pico-ducky
+
+To enter setup mode, short pins `1` and `3`:
+![pins 1 and 3 on a RPi Pico](https://raw.githubusercontent.com/dbisu/pico-ducky/main/images/setup-mode.png)
+To enable/disable USB, short pins `18` and `20`:
+![pins 18 and 20 on a RPi Pico](https://raw.githubusercontent.com/dbisu/pico-ducky/main/images/usb-boot-mode.png)

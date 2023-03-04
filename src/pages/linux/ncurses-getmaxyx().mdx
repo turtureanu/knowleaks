@@ -1,0 +1,33 @@
+---
+layout: "../../layouts/BlogPost.astro"
+title: "Get terminal dimensions using ncurses in C"
+description: "Getting terminal dimensions using ncurses.h in C"
+pubDate: "Mar 3 2023"
+---
+
+## `getmaxyx()`
+
+Don't use `getmaxyx()`, use `LINES` and `COLS` instead.
+
+The variables are as follows:
+
+`COLS` — returns the number of columns (characters horizontally)
+`LINES` — returns the number of rows (characters vertically)
+
+## An example C program
+
+The program below simply prints out the dimensions of the terminal.
+
+```c
+#include <stdio.h>
+#include <ncurses.h>
+
+int main() {
+  initscr(); // initialize screen
+  printw("Terminal height: %d\nTerminal width: %d", LINES, COLS);
+  refresh(); // actually print what we printed: refresh the screen
+  return 0;
+}
+```
+
+Compile using: `gcc -lncurses program.c -o output`
