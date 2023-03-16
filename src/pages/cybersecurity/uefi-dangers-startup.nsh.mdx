@@ -7,7 +7,7 @@ pubDate: "Mar 16 2023"
 
 ![Photo of an UEFI screen](/cybersecurity/uefi-dangers-startup.nsh/thumbnail.png)
 
-### What is `startup.nsh`
+### What is startup.nsh?
 
 `startup.nsh` is a simple script that should contain only one line, its purpose is to execute UEFI v2 shell code. It is usually located in the EFI system partition (traditionally mounted as `/boot` or `/boot/efi`). The script is useful for a number of reasons, for example: what if you have an EFISTUB kernel and for some reason can't/don't want to use a tool such as `efibootmgr` to create the UEFI entry? Now, this script allows you to more easily pass and modify everything, from kernel parameters to the location of the kernel itself.
 

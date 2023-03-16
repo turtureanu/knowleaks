@@ -5,13 +5,13 @@ description: "Converting a char array to an int in C"
 pubDate: "Mar 3 2023"
 ---
 
-## Avoid `atoi()`
+## Avoid atoi()
 
 It's easy to work with `atoi()`, but you have to be sure that what you want to convert is a char array that only contains numbers and not any other characters (symbols, for example).
 
-Passing a char such as `e` to atoi() **will result in undefined behavior**. Error handling can get a bit _messy_.
+Passing a char such as `e` to `atoi()` **will result in undefined behavior**. Error handling can get a bit _messy_.
 
-## Use `strtol()` instead
+## Use strtol() instead
 
 `long int strtol (const char* str, char** endptr, int base)`
 
