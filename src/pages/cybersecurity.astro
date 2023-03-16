@@ -4,7 +4,11 @@ import Footer from "../components/Footer.astro";
 import Nav from "../components/Nav.astro";
 import { SITE_TITLE, SITE_DESCRIPTION } from "../config";
 
-const posts = await Astro.glob("./cybersecurity/*.{md,mdx}");
+const posts = (await Astro.glob("./cybersecurity/*.{md,mdx}")).sort(
+  (a, b) =>
+    new Date(b.frontmatter.pubDate).valueOf() -
+    new Date(a.frontmatter.pubDate).valueOf(),
+);
 ---
 
 <!DOCTYPE html>
