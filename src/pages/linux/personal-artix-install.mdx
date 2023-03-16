@@ -1,0 +1,279 @@
+---
+layout: "../../layouts/BlogPost.astro"
+title: "Installing and configuring Artix Linux with OpenRC, BtrFS, and Secure Boot"
+description: ""
+pubDate: "Mar 16 2023"
+---
+
+## Preparing for the install
+
+### Get an Artix bootable image
+
+The download page:
+
+https://artixlinux.org/download.php
+
+The init system (openrc, runit, dinit, or s6) in the filename is the init system the live image uses, not the image you are necessarily going to install.
+
+The Artix live image can bootstrap any package from the Artix package repositories.
+
+### Flash the image
+
+You can use any of the following and more:
+
+- [(Balena) Etcher](https://www.balena.io/etcher) (universaL)
+- [Rufus](https://www.rufus.ltd/) (for Windows users)
+- `dd` command (for Linux users)
+
+### Boot and log in as root
+
+Logging in as `root`'ll save you some time:
+
+```bash
+username: root
+password: artix
+```
+
+### Partition the disks
+
+To partition the disks I'll use `gdisk`, 'cause it's simple, and I like it.
+
+### Formatting the disks
+
+```sh
+lsblk # get the identifiers of the partitions (e.g. /dev/sda1)
+```
+
+#### EFI System Partition (ESP) — FAT32
+
+```sh
+mkfs.vfat -n "ESP" /dev/sda1
+```
+
+#### Storage Partition — BtrFS
+
+```sh
+mkfs.btrfs -L "Artix" /dev/sda2
+```
+
+#### Swap (optional)
+
+```sh
+mkswap -L "Swap" /dev/sda3
+```
+
+### Configuring BtrFS
+
+BtrFS allows for things like blazing-fast small system snapshots (in case `pacman` breaks your system), self-healing of data, and also filesystem-level compression. It's more simple than OpenZFS, doesn't have any license conflicts, and works well.
+
+<iframe
+  width="420"
+  height="315"
+  src="https://www.youtube-nocookie.com/embed/-m01x3gHNjg"
+></iframe>
+
+That said, it also has some downsides:
+
+- the `nodatacow` and `datacow` mounting options (for using [copy-on-write](https://en.wikipedia.org/wiki/Copy-on-write)) [cannot be separately used for each subvolume](https://wiki.archlinux.org/title/Btrfs#Disabling_CoW)
+- some potentially destructive outcomes when using RAID5 or RAID6
+- can become really slow if incorrectly configured
+- criticized for slowness in general, I haven't personally noticed it nor cared
+- less mature than OpenZFS, its stability is sometimes questioned
+
+#### Create the filesystem
+
+```bash
+mkfs.btrfs -L "Artix" /dev/sda
+```
+
+> `/dev/sda` is the drive we are writing to, do not confuse this with the flash disk! Use `lsblk` or `blkid` to get the identifier of the drive.
+
+From now on, the disks will be identified as such:
+
+1. `/dev/sda1` -- ESP
+2. `/dev/sda2` -- BtrFS
+3. `/dev/sda3` -- linux swap
+
+#### Mount the "Artix" BtrFS partition
+
+```sh
+mount /dev/sda2 /mnt
+```
+
+#### Create the subvolumes
+
+> `@` represents root, it is merely a popular BtrFS naming convention, you can completely omit it, but its purpose is to make it clear that the subvolume is actually a subvolume and not something else
+
+Subvolumes allow us to more elegantly control the `mount` options of certain directories, such as compression, `nosuid`, or `noexec`.
+
+```sh
+btrfs sub cr /mnt/@ #root
+btrfs sub cr /mnt/@home
+btrfs sub cr /mnt/@var_cache
+btrfs sub cr /mnt/@var_log
+btrfs sub cr /mnt/@var_tmp
+brtfs sub cr /mnt/@tmp
+btrfs sub cr /mnt/@snapshots
+```
+
+> `btrfs sub cr` is the same as `btrfs subvolume create`
+
+#### Mount the subvolumes
+
+```sh
+umount /mnt
+mount -o rw,noatime,compress=zstd:3,ssd,discard=async,space_cache=v2,commit=60,subvol=@ /dev/sda2 /mnt
+mkdir -p /mnt/{boot,home,var/log,var/cache,var/tmp,tmp,.snapshots}
+mount -o rw,nosuid,nodev,noexec,relatime /dev/sda1 /mnt/boot
+mount -o rw,nodev,noatime,compress=lzo,ssd,discard=async,space_cache=v2,commit=120,subvol=@home /mnt/home
+mount -o rw,nosuid,nodev,noexec,noatime,compress=zstd:3,ssd,discard=async,space_cache=v2,commit=120,subvol=@var_cache /dev/sda2 /mnt/var/cache
+mount -o rw,nosuid,nodev,noexec,noatime,compress=zstd:4,ssd,discard=async,space_cache=v2,commit=120,subvol=@var_log /dev/sda2 /mnt/var/log
+mount -o rw,nosuid,nodev,noexec,noatime,compress=zstd:3,ssd,discard=async,space_cache=v2,commit=120,subvol=@var_tmp /dev/sda2 /mnt/var/tmp
+mount -o rw,nosuid,nodev,noatime,compress=zstd:10,ssd,discard=async,space_cache=v2,subvol=@snapshots /dev/sda2 /mnt/.snapshots
+```
+
+LWN article on atime, relatime, and noatime in BtrFS: [Atime and btrfs: a bad combination?](https://lwn.net/Articles/499293/)
+
+## Install Artix
+
+```sh
+basestrap /mnt base base-devel openrc elogind-openrc linux-zen linux-zen-headers linux-firmware amd-ucode fish efibootmgr git neovim btrfs-progs
+```
+
+### Generate the fstab
+
+```sh
+fstabgen -L /mnt >> /mnt/etc/fstab
+```
+
+> Make sure to edit this file and double check everything
+
+### Chroot
+
+```sh
+artix-chroot /mnt
+```
+
+### Set up locale
+
+#### Timezone
+
+```sh
+ln -sf /usr/share/zoneinfo/Region/City /etc/localtime
+hwclock --systohc
+```
+
+#### Edit /etc/locale.gen
+
+```sh
+nvim /etc/locale.gen
+```
+
+#### Generate locale
+
+```sh
+locale-gen
+```
+
+### Create a user
+
+```sh
+passwd # change the root password
+useradd -m -s $(which fish) -G wheel tux
+passwd tux
+```
+
+### Configure the network
+
+Let's install `connman`
+
+```sh
+pacman -S connman-openrc
+rc-update add connmand
+```
+
+### Configure BtrFS snapshots
+
+First, we need to install `yay`:
+
+```sh
+git clone https://aur.archlinux.org/yay.git
+cd yay
+makepkg -si
+```
+
+Install `snap-pac-git`, which create a snapshot pre and post transaction.
+
+```sh
+yay snap-pac-git
+```
+
+We need to temporarily delete the /.snapshots directory, so we ca recreate it using `snapper`:
+
+```sh
+umount /.snapshots
+rmdir /.snapshots
+snapper -c root create-config / # configure snapper and create /.snapshots
+mount -a # remount /.snapshots
+```
+
+I should probably change snapper's default configuration, but I don't think I'll ever be bothered, it's not like snapshots occupy a lot of space.
+
+### Install Hyprland
+
+```sh
+yay hyprland-git
+```
+
+### Linux EFISTUB
+
+Generate the SB keys by following [Rod Smith's article on controlling secure boot](https://www.rodsbooks.com/efi-bootloaders/controlling-sb.html#creatingkeys).
+
+For more information on SB:
+https://www.rodsbooks.com/efi-bootloaders/index.html
+
+#### Add custom pacman hooks
+
+I created some pacman hooks to automate the process of signing and moving the installed kernel.
+
+```sh
+cd ## should now be in /root
+git clone https://github.com/turtureanu/pacman-hooks.git
+cd pacman-hooks
+cp *.hook /etc/pacman.d/hooks/
+```
+
+#### mkinitcpio configuration
+
+Edit `/etc/mkinitcpio.conf` and modify the following lines:
+
+```sh
+MODULES=(btrfs)
+.
+.
+.
+COMPRESSION="lz4"
+COMPRESSION_OPTIONS=(-9)
+```
+
+... and `mkinitcpio -p linux-zen` or whatever your linux kernel is
+
+#### Create a UEFI entry
+
+```sh
+efibootmgr -c -d /dev/sda -p 1 --label "Artix" -l "\EFI\ARTIX\VMLINUZ.EFI" --verbose
+```
+
+#### Enroll keys to UEFI
+
+In summary:
+
+1. Disable SB
+2. Enroll DB.esl
+3. Enroll KEK.esl
+4. Enroll PK.auth
+5. Enable SB
+
+You may also use a tool such as `KeyTool.efi`, if your UEFI doensn't support manually loading keys from the interface.
+
+After that, we're basically done, I guess.
