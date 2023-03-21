@@ -137,7 +137,7 @@ mount -o rw,nosuid,nodev,noexec,noatime,compress=zstd:3,ssd,discard=async,space_
 mount -o rw,nosuid,nodev,noatime,compress=zstd:10,ssd,discard=async,space_cache=v2,subvol=@snapshots /dev/sda2 /mnt/.snapshots
 ```
 
-LWN article on atime, relatime, and noatime in BtrFS: [Atime and btrfs: a bad combination?](https://lwn.net/Articles/499293/)
+LWN article on `atime`, `relatime`, and `noatime` in BtrFS: [Atime and btrfs: a bad combination?](https://lwn.net/Articles/499293/)
 
 ## Install Artix
 
@@ -207,13 +207,13 @@ cd yay
 makepkg -si
 ```
 
-Install `snap-pac-git`, which create a snapshot pre and post transaction.
+Install `snap-pac-git`, which create a snapshot pre- and post-transaction.
 
 ```sh
 yay snap-pac-git
 ```
 
-We need to temporarily delete the /.snapshots directory, so we ca recreate it using `snapper`:
+We need to temporarily delete the /.snapshots directory, so we can recreate it using `snapper`:
 
 ```sh
 umount /.snapshots
@@ -239,7 +239,7 @@ https://www.rodsbooks.com/efi-bootloaders/index.html
 
 #### Add custom pacman hooks
 
-I created some pacman hooks to automate the process of signing and moving the installed kernel.
+I created some `pacman` hooks to automate the process of signing and moving the installed kernel.
 
 ```sh
 cd ## should now be in /root
@@ -261,7 +261,7 @@ COMPRESSION="lz4"
 COMPRESSION_OPTIONS=(-9)
 ```
 
-... and `mkinitcpio -p linux-zen` or whatever your linux kernel is
+... and `mkinitcpio -p linux-zen` or whatever your Linux kernel is
 
 #### Create a UEFI entry
 
@@ -279,6 +279,6 @@ In summary:
 4. Enroll PK.auth
 5. Enable SB
 
-You may also use a tool such as `KeyTool.efi`, if your UEFI doensn't support manually loading keys from the interface.
+You may also use a tool such as `KeyTool.efi`, if your UEFI doesn't support manually loading keys from the interface.
 
 After that, we're basically done, I guess.
