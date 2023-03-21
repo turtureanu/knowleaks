@@ -67,7 +67,7 @@ article {
   }
 
   p {
-    line-height: 3.75ch;
+    line-height: 2.75ch;
     font-family: Roboto, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   }
 
@@ -76,7 +76,7 @@ article {
     border-left: solid 0.5rem $dark-yellow;
     border-radius: 0.75rem;
     background-color: $pale-yellow;
-    padding: 1em;
+    padding: 0 1em;
 
     a:hover {
       background: linear-gradient(0deg, $pale-green 25%, $pale-yellow 25%) no-repeat;
@@ -102,7 +102,8 @@ article {
 
   ul li::marker {
     color: $blue;
-    font-size: 2.5ch;
+    font-family: "Courier New", Courier, monospace;
+    font-size: 1.5ch;
     font-weight: 900;
     content: "× "; // unicode char U+00d7
   }

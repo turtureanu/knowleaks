@@ -1,0 +1,107 @@
+---
+layout: "../../layouts/BlogPost.astro"
+title: "Self-encrypting drives, Secure Boot, and UEFI tricks"
+description: "SEDs or Self-encrypting drives are drives which are capable of hardware encryption, in this article I go into how to enable hardware encryption and a how I solved a bunch of roadblocks along the way."
+pubDate: "Mar 21 2023"
+---
+
+![an HDD with a label on it that says "ENCRYPTED"](/linux/hardware-encryption/thumbnail.jpg)
+
+## A word of advice
+
+You should not solely rely on hardware encryption! Unless you reverse-engineer the firmware, you don't know how the drive implements the encryption, therefore you should NOT trust it!
+
+Study on firmware weaknesses in SSDs: https://www.ru.nl/publish/pages/909275/draft-paper_1.pdf
+
+### Self-encrypting drives
+
+A self-encrypting drive (SED) is basically a drive that is capable of hardware encryption.
+
+All you need to know, is that a SED has a pre-boot authentication (PBA) image which the UEFI/BIOS finds and boots, the PBA presents you with a prompt where you enter the drive password, then the PBA decrypts the drive and _usually_ reboots the system keeping the drive unlocked.
+
+After you shut down your computer, you also shut down the drive, more specifically: the power to the drive. When the drive loses power, it locks itself, end of story. When you start your computer, the UEFI finds the PBA, boots it, and presents you with an input screen.
+
+### How do you encrypt an SED?
+
+In summary, nowadays, we have a tool called [SEDutil](https://sedutil.com/) which contains most of the stuff you need for dealing with SEDs.
+
+First off, you need to check if your drive is even capable of hardware encryption.
+
+The `sedutil` command for that would be:
+
+```
+# sedutil-cli --scan
+```
+
+If you get something like:
+
+```
+[sudo] password for tux:
+Scanning for Opal compliant disks
+/dev/nvme0  2      Samsung SSD 980 PRO 500GB
+```
+
+then your drive is using the [Opal](https://en.wikipedia.org/wiki/Opal_Storage_Specification) v2 specification (the second value after the drive path). It's not really important what specification your drive uses, what's important is that your drive is capable of encrypting itself.
+
+### Actually encrypting the drive
+
+In reality, you only need three core commands:
+
+1. `sedutil-cli --initialsetup drive_password path_to_drive`
+
+   > The drive name is something like `nvme0n1` or `nvme0n2`. \
+   > So, the path would be something like: `/dev/nvme0n1`
+
+   > drive_password is the password used to encrypt/decrypt the drive.
+
+2. `sedutil-cli --loadPBAimage drive_password pba path_to_drive`
+
+   > Get the PBA from here if you have a Ryzen CPU: https://github.com/ChubbyAnt/sedutil/releases \
+   > The PBA name is UEFI64\*.img
+
+3. `sedutil-cli --setMBREnable on drive_password path_to_drive`
+
+#### PSID Revert
+
+If the initial setup failed, then you most likely need to reset the encryption on the drive.
+
+In most cases, the drive is already encrypted but unlocked with an unknown password from the factory.
+
+You may try to find this password using: `sedutil --printDefaultPassword path_to_drive`
+
+If that fails, you'll need to reset the password.
+
+To do that, you need to physically look on the SSD for a PSID and issue the following command:
+
+`sedutil --PSIDRevert drive_PSID path_to_drive`
+
+## UEFI complications
+
+If your UEFI is the same as mine, it will quite easily forget the boot entries, this happens for a simple reason: the (unlocked) device in the boot entry is not available at boot, and so the UEFI deletes it.
+
+At this point there are only a few things you can try, for example:
+
+- patching the PBA image to directly boot the OS kernel
+- trying to find a predefined boot path
+- disable hardware encryption
+
+I personally tried to find a path in the ESP that the UEFI would try to boot, in my case it was: `ESP\EFI\Microsoft\Boot\bootmgfw.efi`
+
+So, I installed rEFInd, renamed it to `bootmgfw.efi` and moved it to that location.
+
+Things to know about rEFInd:
+
+- can read a file such as `refind_linux.conf` from the root of the ESP
+- will only apply configurations from the same directory as the binary (e.g., `refind.conf`, `themes/`, `vars/` must be in `ESP\EFI\Microsoft\Boot\`)
+
+## Secure Boot
+
+Despite what all the wikis say, you _CAN_ enable Secure Boot, all you need is to enroll your own keys to the UEFI and sign the PBA.
+
+A good guide is available at: https://github.com/Drive-Trust-Alliance/sedutil/issues/259
+
+Useful links:
+
+- https://wiki.archlinux.org/title/Self-encrypting_drives
+- https://github.com/ChubbyAnt/sedutil (AMD Ryzen support)
+- https://github.com/ratcashdev/sedutil (sleep support)
