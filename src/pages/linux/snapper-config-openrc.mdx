@@ -1,0 +1,18 @@
+---
+layout: "../../layouts/BlogPost.astro"
+title: "Configuring snapper with any init system that isn't systemd"
+description: "How to set up snapper with any init system other than systemd. This is done using cron."
+pubDate: "Mar 24 2023"
+---
+
+## Installing the necessary packages
+
+Because of how `snapper` works, on any system that doesn't use `systemd`, you'll need to install `cronie` or a similar cron implementation that provides you with `cron` directories, such as `/etc/cron.hourly` or `/etc/cron.daily`.
+
+Upon installation, `snapper` will use these directories to create its cron jobs, so if you already installed `snapper` but you didn't install `cronie`, you'll need to remove `snapper`, install `cronie`, and finally reinstall `snapper`.
+
+## Configurations
+
+Configuring `snapper` is done through the config files in `/etc/snapper/configs/<profile>`; the default profile is `root`.
+
+Additionally, you may manually edit or move the cron jobs.
