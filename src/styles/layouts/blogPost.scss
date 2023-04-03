@@ -109,12 +109,20 @@ article {
     font-weight: 300;
   }
 
+  ol li {
+    padding: 0.5em 0.25em;
+
+    &::marker {
+      color: $blue;
+    }
+  }
+
   ul li::marker {
     color: $blue;
     font-family: "Courier New", Courier, monospace;
-    font-size: 1.5ch;
+    font-size: 1.25ch;
     font-weight: 900;
-    content: "× "; // unicode char U+00d7
+    content: "❭ "; // unicode char U+00d7
   }
 
   .article-header {

@@ -1,0 +1,49 @@
+---
+import BaseHead from "../components/BaseHead.astro";
+import Nav from "../components/Nav.astro";
+import { SITE_TITLE, SITE_DESCRIPTION } from "../config";
+
+const posts = (await Astro.glob("./other/*.{md,mdx}")).sort(
+  (a, b) =>
+    new Date(b.frontmatter.pubDate).valueOf() -
+    new Date(a.frontmatter.pubDate).valueOf(),
+);
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <BaseHead
+      title={"Other" + " | " + SITE_TITLE}
+      description="Other | Everything I find interesting, really."
+    />
+  </head>
+  <body>
+    <Nav />
+    <h1>Other</h1>
+    <hr />
+    <main>
+      <nav class="menu">
+        {
+          posts.map((post) => {
+            if (!post.frontmatter.draft) {
+              // all posts which are not drafts
+              return (
+                <a href={post.url} class="button">
+                  {post.frontmatter.title}
+                </a>
+              );
+            }
+          })
+        }
+      </nav>
+    </main>
+    <style lang="scss">
+      @use "src/styles/components/menu.scss";
+      @use "src/styles/components/button.scss";
+      h1 {
+        text-align: center;
+      }
+    </style>
+  </body>
+</html>
