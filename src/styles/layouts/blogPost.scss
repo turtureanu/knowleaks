@@ -10,6 +10,8 @@ article {
   margin: 0 auto;
   padding: 5rem 2.5rem;
   max-width: $article-width;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
 
   a {
     transition: background 150ms ease-in-out;
