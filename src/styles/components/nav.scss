@@ -1,5 +1,7 @@
 @use "../variables.scss" as *;
 
+$top-padding: 2rem;
+
 .site-nav {
   display: flex;
   flex-direction: column;
@@ -9,7 +11,8 @@
     position: absolute;
     top: 0;
     left: 0;
-    padding: 0.5rem 1em;
+    padding: 6.75px 1em;
+    padding-top: calc(6.75px + $top-padding);
     width: unset;
     height: 5rem;
   }
@@ -25,7 +28,7 @@
   .nav-items {
     position: absolute;
     z-index: 20;
-    margin-top: 6.375rem;
+    margin-top: calc(6.375rem + $top-padding);
     padding: 0;
     width: 50vw;
     list-style-type: none;
@@ -60,6 +63,7 @@
     z-index: 20;
     cursor: pointer;
     padding: 1.5em 1em;
+    padding-top: calc(1.5em + $top-padding);
   }
 
   .hamburger-lines,
@@ -139,6 +143,10 @@
     .logo {
       display: block;
       align-self: flex-start;
+
+      img {
+        padding-top: 6.75px;
+      }
     }
 
     .hamburger-button,
