@@ -1,6 +1,5 @@
 ---
 import BaseHead from "../components/BaseHead.astro";
-import Nav from "../components/Nav.astro";
 import { SITE_TITLE, SITE_DESCRIPTION } from "../config";
 import "../styles/components/button.scss";
 import "../styles/components/menu.scss";
@@ -11,31 +10,82 @@ const posts = (await Astro.glob("./*/*.{md,mdx}")).sort(
 );
 ---
 
-<!DOCTYPE html>
+<style lang="scss">
+  @use "../styles/variables.scss" as *;
+  .header-banner {
+    border-bottom: $dark dashed 2px;
+    max-width: 410px;
+    padding: 0 2.75rem;
+    display: flex;
+    justify-content: space-between;
+    margin: 0 auto;
+    align-items: center;
+
+    img {
+      width: 135px;
+      padding-right: 10px;
+    }
+
+    p {
+      font-size: 35px;
+      width: 240px;
+      text-align: center;
+    }
+  }
+
+  header {
+    h1 {
+      margin: 0;
+      padding: 1em;
+      padding-bottom: 0.5em;
+      text-align: center;
+      font-size: 2.5rem;
+      font-weight: 500;
+    }
+  }
+
+  h2 {
+    text-align: center;
+  }
+
+  .topics-menu {
+    display: grid;
+    grid-template: auto / 50% 50%;
+
+    .button {
+      margin-bottom: 0;
+    }
+  }
+</style>
+
 <html lang="en">
   <head>
     <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
   </head>
   <body>
     <header>
-      <h1>Sharing things I might <i>forget</i>.</h1>
-      <nav class="menu">
-        <a class="button" href="/cybersecurity">Cybersecurity</a>
-        <a class="button" href="/origami">Origami</a>
-        <a class="button" href="/linux">Linux</a>
-        <a class="button" href="/other">Other</a>
-        <style>
-          nav.menu {
-            grid-template-columns: 50% 50%;
-          }
-        </style>
-      </nav>
+      <div class="header-banner">
+        <img src="/logo-know.svg" alt="Knowleaks logo" />
+        <p>
+          <strong> Sharing things I might</strong>
+          <em>forget</em><strong>.</strong>
+        </p>
+      </div>
+      <section class="menu">
+        <h2>Topics</h2>
+        <nav class="topics-menu">
+          <a class="button" href="/cybersecurity">Cybersecurity</a>
+          <a class="button" href="/origami">Origami</a>
+          <a class="button" href="/linux">Linux</a>
+          <a class="button" href="/other">Other</a>
+        </nav>
+      </section>
     </header>
 
     <section class="menu new-posts">
       <h2>New posts</h2>
       {
-        posts.slice(0, 5).map((post) => {
+        posts.slice(0, 6).map((post) => {
           if (!post.frontmatter.draft) {
             // all posts which are not drafts
             return (
@@ -50,28 +100,13 @@ const posts = (await Astro.glob("./*/*.{md,mdx}")).sort(
     <footer>
       <nav class="menu">
         <a class="button" href="/about-me">About me</a>
-        <a class="button" href="https://github.com/turtureanu/personal-website"
-          >Website Source code</a
+        <a
+          class="button"
+          href="https://github.com/turtureanu/personal-website"
+          target="_blank"
+          rel="norefferer">Website Source code</a
         >
       </nav>
     </footer>
-    <style lang="scss">
-      @use "src/styles/variables.scss" as *;
-
-      header {
-        h1 {
-          margin: 0;
-          padding: 1em;
-          padding-bottom: 0.5em;
-          text-align: center;
-          font-size: 2.5rem;
-          font-weight: 500;
-        }
-      }
-
-      .new-posts {
-        grid-template-columns: 100%;
-      }
-    </style>
   </body>
 </html>

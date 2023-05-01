@@ -1,2 +1,4 @@
 [ ] Add support for user theme preference (dark mode)
-[ ] Add a copy URL+heading.id button to article headings
+[x] Add a copy URL+heading.id button to article headings
+[x] Minimalistic website redesign
+[ ] Refactor redesign code

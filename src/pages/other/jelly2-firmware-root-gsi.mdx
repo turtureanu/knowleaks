@@ -5,7 +5,7 @@ description: "How I rooted and installed ArrowOS on a Jelly 2"
 pubDate: "Apr 3 2023"
 ---
 
-![Unihertz Jelly 2 alongside a standard white plastic card](/other/jelly2-firmware-root-gsi/thumbnail.webp)
+![Unihertz Jelly 2 alongside a white plastic credit-card-sized card](/other/jelly2-firmware-root-gsi/thumbnail.webp)
 
 ## Firmware Flashing!
 
@@ -164,6 +164,10 @@ fastboot flash system <path to GSI.img> # this will take some time, don't unplug
 
 I am not sure how I personally managed to disable software navigation, but I'll try and explain everything I did prior to successfully disabling it.
 
+> Edit: disabling the navigation can be done using Subtratum Lite and installing [nonavbar.apk]().
+>
+> For more info see:
+
 #### First method (unsuccessful by itself):
 
 Mount the GSI image and add the following line to all the `build.prop` files:
@@ -205,3 +209,7 @@ To install TWRP you'll need to:
 1. Downgrade to Android 10 by flashing the stock firmware (Android 11 firmware is currently not supported)
 2. Unlock the bootloader and disable verified boot
 3. Flash it using `fastboot flash recovery <path to recovery.img>`
+
+## Useful Links
+
+- [Reddit wiki](https://www.reddit.com/r/UnihertzJelly2/wiki/index/)

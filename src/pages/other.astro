@@ -1,6 +1,9 @@
 ---
 import BaseHead from "../components/BaseHead.astro";
 import Nav from "../components/Nav.astro";
+import "../styles/layouts/article-categories.scss";
+import "../styles/components/button.scss";
+import "../styles/components/menu.scss";
 import { SITE_TITLE, SITE_DESCRIPTION } from "../config";
 
 const posts = (await Astro.glob("./other/*.{md,mdx}")).sort(
@@ -18,10 +21,9 @@ const posts = (await Astro.glob("./other/*.{md,mdx}")).sort(
       description="Other | Everything I find interesting, really."
     />
   </head>
-  <body>
+  <body class="article-categories">
     <Nav />
     <h1>Other</h1>
-    <hr />
     <main>
       <nav class="menu">
         {
@@ -38,12 +40,5 @@ const posts = (await Astro.glob("./other/*.{md,mdx}")).sort(
         }
       </nav>
     </main>
-    <style lang="scss">
-      @use "src/styles/components/menu.scss";
-      @use "src/styles/components/button.scss";
-      h1 {
-        text-align: center;
-      }
-    </style>
   </body>
 </html>
