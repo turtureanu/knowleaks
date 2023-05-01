@@ -10,54 +10,6 @@ const posts = (await Astro.glob("./*/*.{md,mdx}")).sort(
 );
 ---
 
-<style lang="scss">
-  @use "../styles/variables.scss" as *;
-  .header-banner {
-    border-bottom: $dark dashed 2px;
-    max-width: 410px;
-    padding: 0 2.75rem;
-    display: flex;
-    justify-content: space-between;
-    margin: 0 auto;
-    align-items: center;
-
-    img {
-      width: 135px;
-      padding-right: 10px;
-    }
-
-    p {
-      font-size: 35px;
-      width: 240px;
-      text-align: center;
-    }
-  }
-
-  header {
-    h1 {
-      margin: 0;
-      padding: 1em;
-      padding-bottom: 0.5em;
-      text-align: center;
-      font-size: 2.5rem;
-      font-weight: 500;
-    }
-  }
-
-  h2 {
-    text-align: center;
-  }
-
-  .topics-menu {
-    display: grid;
-    grid-template: auto / 50% 50%;
-
-    .button {
-      margin-bottom: 0;
-    }
-  }
-</style>
-
 <html lang="en">
   <head>
     <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
@@ -108,5 +60,52 @@ const posts = (await Astro.glob("./*/*.{md,mdx}")).sort(
         >
       </nav>
     </footer>
+    <style lang="scss">
+      @use "../styles/variables.scss" as *;
+      .header-banner {
+        border-bottom: $dark dashed 2px;
+        max-width: 410px;
+        padding: 0 2.75rem;
+        display: flex;
+        justify-content: space-between;
+        margin: 0 auto;
+        align-items: center;
+
+        img {
+          width: 135px;
+          padding-right: 10px;
+        }
+
+        p {
+          font-size: 35px;
+          width: 240px;
+          text-align: center;
+        }
+      }
+
+      header {
+        h1 {
+          margin: 0;
+          padding: 1em;
+          padding-bottom: 0.5em;
+          text-align: center;
+          font-size: 2.5rem;
+          font-weight: 500;
+        }
+      }
+
+      h2 {
+        text-align: center;
+      }
+
+      .topics-menu {
+        display: grid;
+        grid-template: auto / 50% 50%;
+
+        .button {
+          margin-bottom: 0;
+        }
+      }
+    </style>
   </body>
 </html>
