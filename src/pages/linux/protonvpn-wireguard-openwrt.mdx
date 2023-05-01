@@ -1,0 +1,96 @@
+---
+layout: "../../layouts/BlogPost.astro"
+title: "Setting up ProtonVPN with Wireguard on OpenWrt"
+description: "ProtonVPN has been providing Wireguard configuration files for quite some time, the problem's that OpenWrt does not accept configuration files by default, so you have configure Wireguard manually."
+pubDate: "May 1 2023"
+---
+
+![an ilustration of how this setup works](/linux/protonvpn-wireguard-openwrt.mdx/thumbnail.svg)
+
+## Download the configuration file
+
+Go to [https://account.protonvpn.com/downloads#wireguard-configuration](https://account.protonvpn.com/downloads#wireguard-configuration) and download the wireguard config file.
+
+## Install Wireguard on OpenWrt
+
+First of all, update the package mirrors: `opkg update` \
+Then install Wireguard: `opkg install wireguard-tools`
+
+## Script
+
+Here's a quick and dirty script to read the config file and set up Wireguard:
+
+```sh
+# Based on the OpenWrt documentation:
+# https://openwrt.org/docs/guide-user/services/vpn/wireguard/client
+
+# This script is licensed under CC-BY-SA 4.0:
+# https://creativecommons.org/licenses/by-sa/4.0/
+
+if [[ "$#" -ne 1 ]]; then
+  printf "\nUsage: <script name> <protonvpn wireguard config>\n\n"
+  exit 1
+fi
+
+PUBLIC_KEY=`cat $1 | grep PublicKey | sed 's/PublicKey = //'`
+PRIVATE_KEY=`cat $1 | grep PrivateKey | sed 's/PrivateKey = //'`
+
+# Interface
+VPN_IF="protonvpn"
+
+# Server address
+VPN_SERV=`cat $1 | grep Endpoint | sed 's/Endpoint = //' | sed 's/:.*//'`
+
+VPN_PORT=`cat $1 | grep Endpoint | sed 's/Endpoint = .*://'`
+
+# Address
+VPN_ADDR=`cat $1 | grep Address | sed 's/Address = //'`
+
+# Configure firewall
+uci rename firewall.@zone[0]="lan"
+uci rename firewall.@zone[1]="wan"
+uci del_list firewall.wan.network="${VPN_IF}"
+uci add_list firewall.wan.network="${VPN_IF}"
+uci commit firewall
+
+/etc/init.d/firewall restart
+
+# Configure network
+uci -q delete network.${VPN_IF}
+uci set network.${VPN_IF}="interface"
+uci set network.${VPN_IF}.proto="wireguard"
+uci set network.${VPN_IF}.private_key="${PRIVATE_KEY}"
+uci add_list network.${VPN_IF}.addresses="${VPN_ADDR}"
+
+# Add VPN peers
+uci -q delete network.wgserver
+uci set network.wgserver="wireguard_${VPN_IF}"
+uci set network.wgserver.public_key="${PUBLIC_KEY}"
+uci set network.wgserver.endpoint_host="${VPN_SERV}"
+uci set network.wgserver.endpoint_port="${VPN_PORT}"
+uci set network.wgserver.route_allowed_ips="1"
+uci set network.wgserver.persistent_keepalive="25"
+uci add_list network.wgserver.allowed_ips="0.0.0.0/0"
+uci add_list network.wgserver.allowed_ips="::/0"
+uci commit network
+/etc/init.d/network restart
+
+printf "\nProtonVPN + Wireguard configuration done!\n\n"
+```
+
+Copy it to OpenWrt over SSH:
+
+```sh
+scp -O -P <port> <path to local file> user@gateway:<path to store file on OpenWrt>
+```
+
+Run it from OpenWrt:
+
+```sh
+chmod +x script-name.sh
+./script-name.sh
+```
+
+> I've no idea how to easily disable Wirguard once enabled. \
+> See: https://forum.openwrt.org/t/easiest-way-to-temporarily-disable-wireguard-vpn/47118/8 \
+> TL;DR: backtrack using another script
