@@ -7,18 +7,20 @@ pubDate: "Mar 16 2023"
 
 ![Photo of an UEFI screen](/cybersecurity/uefi-dangers-startup.nsh/thumbnail.png)
 
-### What is startup.nsh?
+## What is startup.nsh?
 
 `startup.nsh` is a simple script that should contain only one line, its purpose is to execute UEFI v2 shell code. It is usually located in the EFI system partition (traditionally mounted as `/boot` or `/boot/efi`). The script is useful for a number of reasons, for example: what if you have an EFISTUB kernel and for some reason can't/don't want to use a tool such as `efibootmgr` to create the UEFI entry? Now, this script allows you to more easily pass and modify everything, from kernel parameters to the location of the kernel itself.
 
-### Threat scenario
+## Threat scenario
 
 This scenario assumes that the `/boot` directory has incorrectly been mounted such that a normal user, a normal group, or others can modify its contents. Any intruder—be it malware or an actual attacker with enough privileges—will be able to write to this directory, in doing so, they can create and/or modify the `startup.nsh` file.
 
 They are able to, for example, pass kernel parameters that can weaken the system and open it up for more attacks (e.g. meltdown and spectre if they chose to set `mitigations=off`). They may even be able to copy their own kernel to the ESP and modify `startup.nsh` so the system boots to it; from a few innocent-looking write permissions they'll have control over the whole system.
 
-### Defense
+This is an obscure way of messing with the ESP, generally speaking, if the intruder already has write permissions, they will directly modify the kernel and bootloader parameters instead.
+
+## Defense
 
 Fortunately and hopefully, the majority of distro installations mount the ESP with options that prevent anyone but root from modifying it, more specifically setting `fmask` and `dmask` to `0077` or `0022`.
 
-Section 3.2 of the [UEFI Shell Spec 2.0](https://uefi.org/sites/default/files/resources/UEFI_Shell_Spec_2_0.pdf) describes an option (`--nostartup`) that can be passed to the UEFI shell to prevent the loading of the script. I am, however, unsure how someone might actually pass it.
+Section 3.2 of the [UEFI Shell Spec 2.0](https://uefi.org/sites/default/files/resources/UEFI_Shell_Spec_2_0.pdf) describes an option (`--nostartup`) that can be passed to the UEFI shell to prevent the loading of the script. I am, however, unsure if it matters at all.

@@ -1,4 +1,7 @@
 [ ] Add support for user theme preference (dark mode)
 [x] Add a copy URL+heading.id button to article headings
 [x] Minimalistic website redesign
-[ ] Refactor redesign code
+[ ] Refactor code from the redesign
+  [ ] SEO improvements
+    [ ] robots.txt improvements
+    [ ] pass Lighthouse tests (100% on all w/o PWA)

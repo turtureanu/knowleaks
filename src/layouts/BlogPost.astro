@@ -24,7 +24,7 @@ const {
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&family=Roboto+Mono:wght@400&display=swap"
       rel="stylesheet"
     />
   </head>
@@ -64,18 +64,22 @@ const {
 
       // Copy the heading URL+ID
       const headings = document.body.querySelectorAll("h2, h3, h4, h5, h6");
-      for (let i = 0; i < headings.length; i++) {
-        let headingName = headings[i].innerHTML
+      headings.forEach((heading) => {
+        let headingName = heading.innerHTML
           .replace(/ /gi, "-")
           .replace(/[^\x00-\x7F]/g, "")
           .toLowerCase();
-        headings[i].id = headingName;
-        headings[i].addEventListener("click", () => {
+        heading.id = headingName;
+        heading.addEventListener("click", () => {
           navigator.clipboard.writeText(
             `${window.location.href.replace(/#.*$/, "")}#${headingName}`,
           );
+          heading.classList.add("copied");
+          setTimeout(() => {
+            heading.classList.remove("copied");
+          }, 1500);
         });
-      }
+      });
     </script>
   </body>
 </html>
