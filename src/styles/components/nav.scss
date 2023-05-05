@@ -20,7 +20,8 @@ $top-padding: 2rem;
   .mobile-background {
     position: fixed;
     z-index: 10;
-    background-color: $dark;
+    border-left: dashed $dark 0.25rem;
+    background-color: $light;
     width: 50vw;
     height: 100vh;
   }
@@ -34,7 +35,6 @@ $top-padding: 2rem;
     list-style-type: none;
 
     li {
-      display: block;
       opacity: 0;
     }
   }
@@ -51,7 +51,7 @@ $top-padding: 2rem;
     display: block;
     margin: 1em 0.5em;
     text-align: center;
-    color: $light;
+    color: $dark;
   }
 
   #hamburger-input {
@@ -98,11 +98,11 @@ $top-padding: 2rem;
     .hamburger-lines {
       transition: background-color 150ms ease-out;
       transition: transform 150ms;
-      background-color: $dark;
+      background-color: $light;
 
       &::before,
       &::after {
-        background-color: $light;
+        background-color: $dark;
       }
 
       &::before {
