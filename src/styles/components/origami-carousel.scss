@@ -1,3 +1,4 @@
+/* stylelint-disable no-descending-specificity */
 @use "..//variables.scss" as *;
 
 $paper-light: #f0f0f0ff;
@@ -10,7 +11,7 @@ $paper-dark: #303030ff;
   grid-template-rows: 1fr max-content;
   grid-template-columns: max-content 1fr max-content;
 
-  & > * {
+  * {
     align-self: center;
     justify-self: center;
   }
