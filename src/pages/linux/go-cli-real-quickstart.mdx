@@ -1,0 +1,72 @@
+---
+layout: "../../layouts/BlogPost.astro"
+title: "Tidy Golang setup for CLI applications"
+description: "A quickstart guide on Golang CLI application development"
+pubDate: "May 6 2023"
+---
+
+## Setting the GOPATH variable
+
+### Create the directory for your Go projects
+
+Some people prefer having their Go projects in `$HOME/go`, I personally like to have my go projects in `~/projects/go`. It keeps my `$HOME` cleaner.
+
+To change the location of your Go projects, you'll need to set the `GOPATH` enviroment variable:
+
+#### Bash
+
+Add this to your `~/.bashrc`:
+
+```bash
+export GOPATH="~/projects/go"
+export PATH="$PATH:~/projects/go/bin"
+```
+
+#### Fish
+
+Add this to `~/.config/fish/config.fish`:
+
+```fish
+  set -gx GOPATH /home/<username>/projects/go
+  fish_add_path /home/<username>/projects/go/bin
+```
+
+> the `go/bin` directory is used to access `cobra-cli`
+
+## Create a git repository for the CLI application
+
+In this example, I'll be using GitHub to host my code, to use any other platform replace `github.com` with the domain of the hosting platform (e.g. `codeberg.org`).
+
+### Clone the repo
+
+```sh
+  git clone git@github.com:username/name-of-cli.git
+```
+
+then `cd name-of-cli`
+
+## Initalize the module of your app
+
+```sh
+  go mod init github.com/username/name-of-cli
+```
+
+## Configuring Cobra
+
+[Cobra](https://cobra.dev/) provides a [`cobra-cli`](https://github.com/spf13/cobra-cli/blob/main/README.md) tool for generating all the necessary files you'll need.
+
+### Install Cobra
+
+```sh
+  go install github.com/spf13/cobra-cli@latest
+```
+
+> Because Cobra is a dependency of `cobra-cli`, you'll only need to install the `cobra-cli` tool.
+
+### Initalize the Cobra application
+
+```sh
+  cobra-cli init
+```
+
+That's it.
