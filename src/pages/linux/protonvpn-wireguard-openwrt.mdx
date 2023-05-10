@@ -16,7 +16,7 @@ Go to [https://account.protonvpn.com/downloads#wireguard-configuration](https://
 First of all, update the package mirrors: `opkg update` \
 Then install Wireguard: `opkg install wireguard-tools`
 
-## Script
+## Configuring Wireguard
 
 Here's a quick and dirty script to read the config file and set up Wireguard:
 
@@ -91,6 +91,41 @@ chmod +x script-name.sh
 ./script-name.sh
 ```
 
-> I've no idea how to easily disable Wirguard once enabled. \
-> See: https://forum.openwrt.org/t/easiest-way-to-temporarily-disable-wireguard-vpn/47118/8 \
-> TL;DR: backtrack using another script
+You should now be connected to ProtonVPN over Wireguard.
+You may check your IP at: https://ipchicken.com/
+
+## Enabling/Disabling ProtonVPN
+
+To disable:
+
+```sh
+uci set network.protonvpn.auto='0'
+uci commit network
+/etc/init.d/network restart
+```
+
+To enable:
+
+```sh
+uci set network.protonvpn.auto='1'
+uci commit network
+/etc/init.d/network restart
+```
+
+### Toggle script
+
+```sh
+# Script licensed under CC-BY-SA 4.0
+
+if [[ `uci get network.protonvpn.auto` -eq 1 ]]; then
+  uci set network.protonvpn.auto='0'
+  uci commit network
+  /etc/init.d/network restart
+  printf "\nVPN Disabled\n"
+else
+  uci set network.protonvpn.auto='1'
+  uci commit network
+  /etc/init.d/network restart
+  printf "\nVPN Enabled\n"
+fi
+```
