@@ -27,7 +27,7 @@
     "scss": "^0.2.4",
     "sharp": "^0.31.3",
     "stylelint-config-concentric-order": "^5.1.0",
-    "stylelint-config-standard-scss": "^6.0.0",
+    "stylelint-config-standard-scss": "^9.0.0",
     "stylelint-scss": "^5.0.0",
     "svgo": "^3.0.2"
   }
