@@ -28,38 +28,78 @@ import "../styles/layouts/blogPost.scss";
         languages.
         <br />
         <br />
-        My favorite color's a saturated blue around <span style="color:#00AAFF"
-          >#00AAFF</span
+        My favorite color's a saturated blue around <span
+          style="background-color: #eee; color:#00AAFF">#00AAFF</span
         >.
       </p>
 
+      <h2>Certifications</h2>
+      <ul class="certs">
+        <li>
+          <a
+            href="https://www.freecodecamp.org/certification/turtureanu/responsive-web-design"
+          >
+            <img
+              src="/FCC-responsive-certification.png"
+              alt="Screenshot of my FreeCodeCamp certification for Responsive Web Design"
+            />
+            FreeCodeCamp: Responsive Web Design</a
+          >
+        </li>
+        <li>
+          <a
+            href="https://www.freecodecamp.org/certification/turtureanu/javascript-algorithms-and-data-structures"
+          >
+            <img
+              src="/FCC-JS-certification.png"
+              alt="Screenshot of my FreeCodeCamp certification for JavaScript Algorithms and Data Structures"
+            />
+            FreeCodeCamp: JavaScript Algorithms and Data Structures</a
+          >
+        </li>
+        <li></li>
+      </ul>
       <a href="https://github.com/turtureanu">My GitHub</a>
+      <h2>Learning goals for 2023:</h2>
       <p>
-        <h2>Learning goals for 2023:</h2>
-        <p>
-          <ul class="tasks">
-            <li>
-              Finish the <a href="https://scrimba.com/learn/javascript"
-                >Scrimba JS deep dive course</a
-              >
-            </li>
-            <li>
-              Take part in the <a href="https://exercism.org/challenges/12in23"
-                >Exercism #12in23 challenge</a
-              >
-            </li>
-            <li>
-              Complete at least one learning path on <a
-                href="https://tryhackme.com/hacktivities">TryHackMe</a
-              >
-            </li>
-            <style lang="scss">
-              li.completed::marker {
-                content: "✓ ";
+        <ul class="tasks">
+          <li>
+            Finish the <a href="https://scrimba.com/learn/javascript"
+              >Scrimba JS deep dive course</a
+            >
+          </li>
+          <li>
+            Take part in the <a href="https://exercism.org/challenges/12in23"
+              >Exercism #12in23 challenge</a
+            >
+          </li>
+          <li>
+            Complete at least one learning path on <a
+              href="https://tryhackme.com/hacktivities">TryHackMe</a
+            >
+          </li>
+          <style lang="scss">
+            .certs {
+              margin: 0;
+              padding: 0.5em 2em;
+              list-style-type: none;
+
+              text-align: center;
+
+              * + * {
+                margin-top: 2em;
               }
-            </style>
-          </ul>
-        </p>
+
+              img {
+                padding: 1em 0;
+              }
+            }
+
+            li.completed::marker {
+              content: "✓ ";
+            }
+          </style>
+        </ul>
       </p>
     </article>
   </body>
