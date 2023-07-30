@@ -131,7 +131,7 @@ $paper-dark: #303030ff;
   background-color: $paper-light;
   cursor: pointer;
   width: 4rem;
-  min-width: 3rem;
+  min-width: fit-content;
   height: 4rem;
   color: $dark;
 
