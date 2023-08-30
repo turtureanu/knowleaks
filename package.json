@@ -13,7 +13,7 @@
   "dependencies": {
     "@astrojs/image": "^0.14.0",
     "@astrojs/mdx": "^0.19.6",
-    "@astrojs/react": "^1.2.1",
+    "@astrojs/react": "^3.0.0",
     "@astrojs/rss": "^1.0.2",
     "@astrojs/sitemap": "^1.0.0",
     "@types/react": "^18.0.23",
