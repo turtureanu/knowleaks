@@ -1,8 +1,8 @@
 ---
-const { filename, href, content } = Astro.props;
+const { filename, content } = Astro.props;
 ---
 
-<a href={href} class="button" download={filename}>{content}</a>
+<a href={filename} class="button" download={filename}>{content}</a>
 
 <style lang="scss">
   @use "src/styles/variables.scss" as *;
@@ -10,5 +10,12 @@ const { filename, href, content } = Astro.props;
 
   a.button {
     margin: 0;
+    &,
+    &:hover {
+      background: none;
+    }
+    &:hover {
+      cursor: pointer;
+    }
   }
 </style>

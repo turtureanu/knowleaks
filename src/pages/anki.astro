@@ -1,0 +1,31 @@
+---
+import BaseHead from "../components/BaseHead.astro";
+import Nav from "../components/Nav.astro";
+import { SITE_TITLE } from "../config";
+import DownloadButton from "../components/DownloadButton.astro";
+
+import "../styles/layouts/blogPost.scss";
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <BaseHead
+      title={"Anki cards" + " | " + SITE_TITLE}
+      description="Anki cards | Mircea-Sebastian Turtureanu"
+    />
+  </head>
+  <body>
+    <Nav />
+
+    <article>
+      <h1>School Anki cards</h1>
+      <DownloadButton filename="collection.anki2" content="Anki collection" />
+    </article>
+    <style lang="scss">
+      h1 {
+        text-align: center;
+      }
+    </style>
+  </body>
+</html>
