@@ -12,12 +12,42 @@ Now, the most convenient way users can authenticate and use these platforms with
 ## Configuring git
 
 ```sh
-git config core.sshCommand "ssh -i ~/.ssh/github_ed25519"
+$ git config core.sshCommand "ssh -i ~/.ssh/github_ed25519"
 ```
 
 This will tell git to use the identity file stored in `~/.ssh/github_ed25519`.
 To make it the default SSH key, pass the `--global` option:
 
 ```sh
-git config --global core.sshCommand "ssh -i ~/.ssh/github_ed25519"
+$ git config --global core.sshCommand "ssh -i ~/.ssh/github_ed25519"
+```
+
+## Setting the remote
+
+If you cloned the repository over HTTPS, you might want to change the remote to use the SSH address instead.
+
+
+### Find the remote URLs
+
+```sh
+$ git remote -v
+  origin  https@github.com:turtureanu/knowleaks.git (fetch)
+  origin  https@github.com:turtureanu/knowleaks.git (push)
+
+```
+
+### Replace the remote URLs
+
+```sh
+$ git remote remove <remote name>
+$ git remote add <remote name> <remote URL>
+$ git push --set-upstream <remote name> <branch>
+```
+
+or with the example above:
+
+```sh
+$ git remote remove origin
+$ git remote add origin ssh@github.com:turtureanu/knowleaks.git
+$ git push --set-upstream origin main
 ```
