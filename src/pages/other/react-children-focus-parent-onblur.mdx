@@ -1,0 +1,76 @@
+---
+layout: "../../layouts/BlogPost.astro"
+title: "React: Why focusing children triggers parent's onBlur, and how to fix it"
+description: "Debugging focus problems with onBlur on parent container being triggered by children in React."
+pubDate: "21st Nov 2023"
+---
+
+export function issueShowcase() {
+  return (
+    <div
+      style={
+        "margin: 0 auto; text-align: center; padding: 1rem 2rem; width: fit-content; background-color: #f09090; border-radius: 1rem"
+      }
+    >
+      Parent
+      <div style={"display: flex; gap: 1rem"}>
+      <div
+        style={
+          "padding: 1rem; margin: 0.5rem 0; background-color: #8080dd; border-radius: 0.5rem;"
+        }
+      >
+        Child
+      </div>
+
+      <div
+        style={
+          "padding: 1rem; margin: 0.5rem 0; background-color: #8080dd; border-radius: 0.5rem;"
+        }
+      >
+        Child
+      </div>
+
+      <div
+        style={
+          "padding: 1rem; margin: 0.5rem 0; background-color: #8080dd; border-radius: 0.5rem;"
+        }
+      >
+        Child
+      </div>
+      </div>
+    </div>
+
+);
+}
+
+![The React Logo](https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/512px-React-icon.svg.png?20220125121207)
+
+## The issue
+
+When making a container you may not want to trigger `onBlur` on the container when a child is focused, this is really useful in the case of a dropdown menu: you don't want the menu to disappear when an element within it is clicked.
+
+{issueShowcase()}
+
+Intuintively, you may think, that since the children is focused so must be the parent, right? But that is not the case, as only one element at a time may be focused, this makes sense and can be proven by simply tabbing around any web page, you can only select one thing at a time, otherwise you wouldn't be able to select anything.
+
+So how do we stop `onBlur` from triggering? Well, `onBlur` should only trigger when you leave the container altogether.
+
+If you select a child of the container and the container's `onBlur` gets triggered, **you're doing something wrong**.
+
+## The solutions
+
+### Try adding [`tabindex`](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/tabindex)
+
+If the parent element is not an [element that can receive focus](https://stackoverflow.com/a/1600194), such as your ordinary `<div></div>` you will need to specify the `tabindex` attribute: `<div tabindex=1></div>`
+
+### Wait for the focus
+
+The next solution is relatively simple, what if the browser can't catch up? Then you'll need to wait for the focus event, luckily all of this is already documented and summed up here: https://muffinman.io/blog/catching-the-blur-event-on-an-element-and-its-children/
+
+### The mousedown event...
+
+If none of the above solutions worked, there's still hope. In most browsers, the `mousedown` event should, theoretically, trigger before the focus event, you can use this to your advantage and check for it when handling `onBlur`.
+
+I strongly disagree with this method, if nothing worked for you so far, I suggest you [get a duck](https://en.wikipedia.org/wiki/Rubber_duck_debugging).
+
+Related StackOverflow answer: https://stackoverflow.com/questions/12092261/prevent-firing-the-blur-event-if-any-one-of-its-children-receives-focus#12092486
