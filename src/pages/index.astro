@@ -63,23 +63,22 @@ const posts = (await Astro.glob("./*/*.{md,mdx}")).sort(
     <style lang="scss">
       @use "../styles/variables.scss" as *;
       .header-banner {
-        border-bottom: $dark dashed 2px;
-        max-width: 410px;
         padding: 0 2.75rem;
         display: flex;
-        justify-content: space-between;
-        margin: 0 auto;
+        justify-content: center;
         align-items: center;
 
         img {
           width: 135px;
-          padding-right: 10px;
+          padding-right: 2rem;
+          border-right: solid $dark3 0.375rem;
         }
 
         p {
           font-size: 35px;
           width: 240px;
-          text-align: center;
+          text-align: left;
+          padding-left: 2rem;
         }
       }
 

@@ -20,8 +20,7 @@ $top-padding: 2rem;
   .mobile-background {
     position: fixed;
     z-index: 10;
-    border-left: dashed $dark 0.25rem;
-    background-color: $light;
+    background-color: $dark1;
     width: 50vw;
     height: 100vh;
   }
@@ -51,7 +50,7 @@ $top-padding: 2rem;
     display: block;
     margin: 1em 0.5em;
     text-align: center;
-    color: $dark;
+    color: $light;
   }
 
   #hamburger-input {
@@ -71,7 +70,7 @@ $top-padding: 2rem;
   .hamburger-lines::after {
     display: block;
     transition: background-color 150ms ease-in-out;
-    background-color: $dark;
+    background-color: $light;
     width: 4rem;
     height: 0.375rem;
   }
@@ -98,11 +97,11 @@ $top-padding: 2rem;
     .hamburger-lines {
       transition: background-color 150ms ease-out;
       transition: transform 150ms;
-      background-color: $light;
+      background-color: $dark1;
 
       &::before,
       &::after {
-        background-color: $dark;
+        background-color: $light;
       }
 
       &::before {
@@ -136,7 +135,8 @@ $top-padding: 2rem;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    border-bottom: 0.25rem dashed $dark;
+    border-bottom: dashed $dark2 0.375rem;
+    background-color: $dark1;
     width: 100%;
     height: 6.25rem; // magic value afaik
 
@@ -163,7 +163,11 @@ $top-padding: 2rem;
       padding: 0 1em;
       width: unset;
       max-width: unset;
-
+      
+      a {
+        color: $light;
+      }
+      
       li {
         opacity: 1;
 
@@ -176,9 +180,6 @@ $top-padding: 2rem;
         }
       }
 
-      a {
-        color: $dark;
-      }
     }
   }
 }

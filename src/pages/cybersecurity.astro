@@ -5,13 +5,12 @@ import "../styles/layouts/article-categories.scss";
 import "../styles/components/button.scss";
 import "../styles/components/menu.scss";
 
-import ArticleCategories from "../components/ArticleCategories.astro";
-import { SITE_TITLE, SITE_DESCRIPTION } from "../config";
+import { SITE_TITLE } from "../config";
 
 const posts = (await Astro.glob("./cybersecurity/*.{md,mdx}")).sort(
   (a, b) =>
     new Date(b.frontmatter.pubDate).valueOf() -
-    new Date(a.frontmatter.pubDate).valueOf(),
+    new Date(a.frontmatter.pubDate).valueOf()
 );
 ---
 

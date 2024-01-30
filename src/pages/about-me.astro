@@ -29,7 +29,7 @@ import "../styles/layouts/blogPost.scss";
         <br />
         <br />
         My favorite color's a saturated blue around <span
-          style="background-color: #eee; color:#00AAFF">#00AAFF</span
+          style="background-color: #303030; color:#00AAFF">#00AAFF</span
         >.
       </p>
 
@@ -39,70 +39,61 @@ import "../styles/layouts/blogPost.scss";
           <a
             href="https://www.freecodecamp.org/certification/turtureanu/responsive-web-design"
             target="_blank"
+            rel="noopener noreferrer"
           >
             <img
               src="/FCC-responsive-certification.png"
               alt="Screenshot of my FreeCodeCamp certification for Responsive Web Design"
             />
-            FreeCodeCamp: Responsive Web Design</a
-          >
+            <p>FreeCodeCamp: Responsive Web Design</p>
+          </a>
         </li>
         <li>
           <a
             href="https://www.freecodecamp.org/certification/turtureanu/javascript-algorithms-and-data-structures"
             target="_blank"
+            rel="noopener noreferrer"
           >
             <img
               src="/FCC-JS-certification.png"
               alt="Screenshot of my FreeCodeCamp certification for JavaScript Algorithms and Data Structures"
             />
-            FreeCodeCamp: JavaScript Algorithms and Data Structures</a
+            <p>FreeCodeCamp: JavaScript Algorithms and Data Structures</p>
+          </a>
+        </li>
+      </ul>
+      <ul class="social">
+        <li>
+          GitHub: <a
+            target="_blank"
+            rel="noopener noreferrer"
+            href="https://github.com/turtureanu"
+            >https://github.com/turtureanu</a
           >
         </li>
-        <li></li>
+        <li>
+          <a
+            target="_blank"
+            rel="noopener noreferrer"
+            href="https://getsession.org">Session</a
+          > ID: 050ca685dc6ad14eb5a79cf0007f36802b109dcaba70e63bcf0a691e64c62ec56d
+        </li>
+        <li>
+          Email: <a href="mailto:sebastian.knowleaks.r9q1g@aleeas.com"
+            >sebastian.knowleaks.r9q1g@aleeas.com</a
+          >
+        </li>
       </ul>
-      <a href="https://github.com/turtureanu">My GitHub</a>
-      <h2>Learning goals for 2023:</h2>
-      <p>
-        <ul class="tasks">
-          <li>
-            Finish the <a href="https://scrimba.com/learn/javascript"
-              >Scrimba JS deep dive course</a
-            >
-          </li>
-          <li>
-            Take part in the <a href="https://exercism.org/challenges/12in23"
-              >Exercism #12in23 challenge</a
-            >
-          </li>
-          <li>
-            Complete at least one learning path on <a
-              href="https://tryhackme.com/hacktivities">TryHackMe</a
-            >
-          </li>
-          <style lang="scss">
-            .certs {
-              margin: 0;
-              padding: 0.5em 2em;
-              list-style-type: none;
-
-              text-align: center;
-
-              * + * {
-                margin-top: 2em;
-              }
-
-              img {
-                padding: 1em 0;
-              }
-            }
-
-            li.completed::marker {
-              content: "✓ ";
-            }
-          </style>
-        </ul>
-      </p>
     </article>
+    <style lang="scss">
+      .certs {
+        list-style: none;
+        text-align: center;
+
+        p {
+          padding: 1em;
+        }
+      }
+    </style>
   </body>
 </html>

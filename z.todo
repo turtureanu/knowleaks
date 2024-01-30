@@ -5,5 +5,5 @@
   [x] SEO improvements
     [x] robots.txt improvements
     [x] pass Lighthouse tests (w/o further image optimization)
-[ ] Redesign the UI to be more modern and smooth
+[x] Redesign the UI to be more modern and smooth
 [ ] Use a collection for blog posts: https://docs.astro.build/en/tutorials/add-content-collections/#create-a-collection-for-your-blog-posts

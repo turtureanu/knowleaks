@@ -2,11 +2,6 @@
 @use "sass:color";
 @use "sass:math";
 
-$pale-yellow: color.adjust($yellow, $lightness: 12.5%);
-$dark-yellow: color.adjust($yellow, $lightness: -12.5%);
-$pale-blue: color.adjust($blue, $lightness: 25%);
-$pale-green: color.adjust($green, $lightness: 12.5%);
-
 article {
   margin: 0 auto;
   padding: 5rem 2.5rem;
@@ -15,19 +10,15 @@ article {
   word-wrap: break-word;
 
   a {
-    transition: background 150ms ease-in-out;
-    background-size: 0%;
-    color: $dark;
+    color: $light;
 
     &:hover {
-      background: linear-gradient(0deg, $pale-blue 25%, $light 25%) no-repeat;
-      background-size: 100%;
+      text-decoration: underline 0.25ch $blue;
+      text-decoration-skip-ink: none;
     }
 
-    /* stylelint-disable-next-line no-descending-specificity */
-    &,
-    &:hover {
-      transition: background-size 150ms ease-in-out;
+    &:visited:hover {
+      text-decoration-color: $purple;
     }
   }
 
@@ -36,11 +27,17 @@ article {
     margin-top: 2rem;
   }
 
+  .article-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
   // article thumbnail
   .article-header + hr + p img {
     display: block;
     width: 100%;
-    max-height: calc((100vh / 1.5));
+    max-height: calc((100vh / 1));
     object-fit: cover;
     object-position: center;
   }
@@ -58,7 +55,7 @@ article {
   }
 
   h2 {
-    font-size: 2.125ch;
+    font-size: 2ch;
 
     &::before {
       content: "## ";
@@ -84,8 +81,7 @@ article {
   h4,
   h5,
   h6 {
-    margin: 0.75em 0 0.5em;
-    font-family: Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+    margin: 1.5em 0 -0.25em;
     font-weight: 900;
 
     &::before {
@@ -122,14 +118,14 @@ article {
   }
 
   p {
-    line-height: 2.75ch;
+    line-height: 3ch;
   }
 
   blockquote {
     margin: 0;
-    border-left: solid 0.5rem $dark-yellow;
+    border-left: solid 0.5rem $blue;
     border-radius: 0.75rem;
-    background-color: $pale-yellow;
+    background-color: color-mix(in srgb, $blue 20%, $dark1 100%);
     padding: 0 1em;
     font-size: 1.6ch;
 
@@ -137,19 +133,19 @@ article {
       padding: 0.5em 0;
     }
 
-    a:hover {
-      background: linear-gradient(0deg, $pale-green 25%, $pale-yellow 25%) no-repeat;
-      background-size: 100%; // in order for the transition to work
+    p code {
+      color: $blue-light !important;
+      font-weight: 900;
     }
   }
 
   // astro stuff
   .astro-code {
     border-radius: 0.75rem;
-    background-color: $dark !important;
+    background-color: $dark1 !important;
     padding: 1em 0;
     max-height: math.div($article-width, 2);
-    font-size: 1.375ch;
+    font-size: 1.5ch;
 
     .line {
       padding: 0 1em;
@@ -158,12 +154,12 @@ article {
     &,
     code {
       font-family: inherit;
-      font-family: "Roboto Mono", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
     }
   }
 
   code:not(.astro-code > code) {
-    font-weight: 300;
+    color: $blue;
+    font-family: inherit;
   }
 
   ol li {
@@ -176,7 +172,6 @@ article {
 
   ul li::marker {
     color: $blue;
-    font-family: "Courier New", Courier, monospace;
     font-size: 2ch;
     font-weight: 900;
   }
@@ -192,19 +187,4 @@ article {
     margin: 0 auto;
   }
 
-  @media screen and (min-width: $medium) {
-    .article-header {
-      justify-content: space-between;
-
-      h1 {
-        margin: 0 auto;
-        padding: 1em 0;
-      }
-
-      time {
-        margin-bottom: 0.5em;
-        padding-bottom: 0.5em;
-      }
-    }
-  }
 }
