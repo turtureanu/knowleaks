@@ -5,13 +5,11 @@ description: "Looking at common Linux setups that use the GRUB2 bootloader in an
 pubDate: "July 30 2023"
 ---
 
-![init=/bin/bash](/cybersecurity/grub2-root/thumbnail.svg)
-
 ## The problem
 
 GRUB2, by default, does not protect against configuration changes.
 
-To ***temporarily*** change the default GRUB2 configuration, you:
+To **_temporarily_** change the default GRUB2 configuration, you:
 
 1. Power on the machine
 2. Continouosly tap the ESC key (or maybe [hold down the Shift key](https://wiki.archlinux.org/title/GRUB/Tips_and_tricks#Hide_GRUB_unless_the_Shift_key_is_held_down))
@@ -27,13 +25,13 @@ The easiest method to gain control of the machine, however, is by directly booti
 1. Power on the machine
 2. Continouosly tap the ESC key
 3. Get to the GRUB2 screen
-![GRUB2 selection screen](/cybersecurity/grub2-root/grub-select.png)
+   ![GRUB2 selection screen](/cybersecurity/grub2-root/grub-select.png)
 4. Press "e"
-![GRUB2 configuration editing screen](/cybersecurity/grub2-root/grub-edit.png)
+   ![GRUB2 configuration editing screen](/cybersecurity/grub2-root/grub-edit.png)
 5. Find the line starting with "linux"
-![GRUB2 configuration editing screen](/cybersecurity/grub2-root/grub-edit-linux.png)
+   ![GRUB2 configuration editing screen](/cybersecurity/grub2-root/grub-edit-linux.png)
 6. Append `init=/bin/bash`
-![GRUB2 configuration editing screen](/cybersecurity/grub2-root/grub-edit-linux-init.png)
+   ![GRUB2 configuration editing screen](/cybersecurity/grub2-root/grub-edit-linux-init.png)
 7. Press Ctrl+x or F10 to boot
 
 ## Shutting down
