@@ -1,0 +1,76 @@
+---
+layout: "../../layouts/BlogPost.astro"
+title: "Bruteforcing sudo: the effective approach"
+draft: false
+description: "The common belief is that bruteforcing sudo is an impossible task, because of certain timeouts, but what if you could bypass them? Faillock allows you to reset the current timeout and running sudo in parallel gets rid of the timeout altogether."
+pubDate: "Jun 22 2024"
+---
+
+![xkcd comic about sudo sandwich](https://imgs.xkcd.com/comics/sandwich.png)
+
+## Why sudo is not as secure as you might think
+
+`sudo` is a program that simply allows a user to run something as _another_ user. It is usually used to execute commands as `root` by providing the current user's password. Without `sudo`, users would either have to be overprivileged, which would be a _very_ bad idea, or they would have to constantly get permission from their admins (which would be time and energy consuming).
+
+`sudo` not only allows users to authenticate themselves but also limits the access of attackers, by default ([depending on your system](https://www.sudo.ws/docs/man/sudoers.man/#Command_environment)) `sudo` allows for 3 authentication failures before locking you out (disabling authentication) for a period of 10 minutes. These values are specified and described in `/etc/security/faillock.conf` (but also `/etc/login.conf`):
+
+```sh
+# Deny access if the number of consecutive authentication failures
+# for this user during the recent interval exceeds n tries.
+# The default is 3.
+# deny = 3
+#
+# The length of the interval during which the consecutive
+# authentication failures must happen for the user account
+# lock out is <replaceable>n</replaceable> seconds.
+# The default is 900 (15 minutes).
+# fail_interval = 900
+#
+# The access will be re-enabled after n seconds after the lock out.
+# The value 0 has the same meaning as value `never` - the access
+# will not be re-enabled without resetting the faillock
+# entries by the `faillock` command.
+# The default is 600 (10 minutes).
+# unlock_time = 600
+```
+
+To your casual system admin, this might be enough to convince them that sudo is bulletproof to bruteforce attacks.
+
+### Resetting the unlock time
+
+There is a quirk though, the unlock time (the time you have to wait after getting locked out) can be instantly reset by none other than the same user account! This is done using `faillock` as follows:
+
+```sh
+faillock --user $USER --reset
+```
+
+> More info on why this works: https://wiki.archlinux.org/title/Security#Lock_out_user_after_three_failed_login_attempts
+
+### Parallel bruteforcing
+
+You might still say that `sudo` imposes a slight delay between attempts after a failure, but this too can be bypassed. What's better, we can even skip resetting our user's sudo unlock time.
+
+The traditional bruteforce attack is often described as trying a slightly different thing/password till you get it right, what is often not mentioned, however, is that modern bruteforcing attacks run in parallel, i.e. they try slightly different things at the same time. This speeds up things significantly.
+
+The final question is: How do we deal with the `sudo` timeout?
+In theory, because the timeout between failed attempts is about 2 seconds and you get 3 attempts before having to reset, you actually get about 6 seconds where you can run as many `sudo` processes in parallel as the system allows you.
+
+Practically `sudo` doesn't really limit anyone when running it in parallel.
+
+> See for example: https://askubuntu.com/a/736999
+
+### SUDON'T
+
+![a screenshot of SUDON'T](/cybersecurity/bruteforcing-sudo/sudont.png)
+
+I have created a BASH script to showcase bruteforcing `sudo` using the aforementioned methods.
+
+The script has 3 types of attacks:
+
+- one for a dictionary attack (provided as a text file)
+- dynamic bruteforcing (scaling up)
+- static bruteforcing (static length)
+
+It is quite slow compared to e.g. cracking hashes, but it is still fast enough that it could be used to bruteforce a really bad password without having any special permissions.
+
+The tool could be rewriten in a faster language than BASH, ideally something like C or C++, which would increase its efficiency tremendously.
