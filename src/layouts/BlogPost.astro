@@ -24,7 +24,7 @@ const {
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&family=Roboto+Mono:wght@400&display=swap"
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap"
       rel="stylesheet"
     />
   </head>
@@ -55,7 +55,7 @@ const {
       // compiled MDX and Markdown files set only the `href` attribute
       if (document.body.contains(document.querySelector("article"))) {
         const article = document.querySelector("article");
-        const links = article.querySelectorAll("a");
+        const links = article!.querySelectorAll("a");
         links.forEach((link) => {
           link.target = "_blank";
           link.rel = "noopener noreferrer";
@@ -72,7 +72,7 @@ const {
         heading.id = headingName;
         heading.addEventListener("click", () => {
           navigator.clipboard.writeText(
-            `${window.location.href.replace(/#.*$/, "")}#${headingName}`,
+            `${window.location.href.replace(/#.*$/, "")}#${headingName}`
           );
           heading.classList.add("copied");
           setTimeout(() => {

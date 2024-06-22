@@ -7,3 +7,8 @@
     [x] pass Lighthouse tests (w/o further image optimization)
 [x] Redesign the UI to be more modern and smooth
 [ ] Use a collection for blog posts: https://docs.astro.build/en/tutorials/add-content-collections/#create-a-collection-for-your-blog-posts
+[ ] Use Glide.js instead of the current custom implementation of a carousel
+[ ] Rewrite components in Svelte
+[ ] UI redesign
+[x] Migrate to using bun
+  [ ] Also update to the latest deps

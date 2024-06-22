@@ -5,7 +5,7 @@ import "../styles/layouts/article-categories.scss";
 import "../styles/components/button.scss";
 import "../styles/components/menu.scss";
 
-import { SITE_TITLE } from "../config";
+import { SITE_DESCRIPTION, SITE_TITLE } from "../config";
 
 const posts = (await Astro.glob("./cybersecurity/*.{md,mdx}")).sort(
   (a, b) =>
@@ -19,7 +19,7 @@ const posts = (await Astro.glob("./cybersecurity/*.{md,mdx}")).sort(
   <head>
     <BaseHead
       title={"Cybersecurity" + " | " + SITE_TITLE}
-      description="Cybersecurity | Everything I find interesting, really."
+      description={SITE_DESCRIPTION}
     />
   </head>
   <body class="article-categories">

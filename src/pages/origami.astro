@@ -9,7 +9,7 @@ import { SITE_TITLE, SITE_DESCRIPTION } from "../config";
 const posts = (await Astro.glob("./origami/*.{md,mdx}")).sort(
   (a, b) =>
     new Date(b.frontmatter.pubDate).valueOf() -
-    new Date(a.frontmatter.pubDate).valueOf(),
+    new Date(a.frontmatter.pubDate).valueOf()
 );
 ---
 
@@ -18,7 +18,7 @@ const posts = (await Astro.glob("./origami/*.{md,mdx}")).sort(
   <head>
     <BaseHead
       title={"Origami" + " | " + SITE_TITLE}
-      description="A collection of origami designs, instructions, and fold patterns."
+      description={SITE_DESCRIPTION}
     />
   </head>
   <body class="article-categories">

@@ -1,7 +1,7 @@
 ---
 import BaseHead from "../components/BaseHead.astro";
 import Nav from "../components/Nav.astro";
-import { SITE_TITLE } from "../config";
+import { SITE_DESCRIPTION, SITE_TITLE } from "../config";
 
 import "../styles/layouts/blogPost.scss";
 ---
@@ -11,7 +11,7 @@ import "../styles/layouts/blogPost.scss";
   <head>
     <BaseHead
       title={"About me" + " | " + SITE_TITLE}
-      description="About me | Mircea-Sebastian Turtureanu"
+      description={SITE_DESCRIPTION}
     />
   </head>
   <body>

@@ -9,7 +9,7 @@ import { SITE_TITLE, SITE_DESCRIPTION } from "../config";
 const posts = (await Astro.glob("./other/*.{md,mdx}")).sort(
   (a, b) =>
     new Date(b.frontmatter.pubDate).valueOf() -
-    new Date(a.frontmatter.pubDate).valueOf(),
+    new Date(a.frontmatter.pubDate).valueOf()
 );
 ---
 
@@ -18,7 +18,7 @@ const posts = (await Astro.glob("./other/*.{md,mdx}")).sort(
   <head>
     <BaseHead
       title={"Other" + " | " + SITE_TITLE}
-      description="Other | Everything I find interesting, really."
+      description={SITE_DESCRIPTION}
     />
   </head>
   <body class="article-categories">
