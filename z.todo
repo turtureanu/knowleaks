@@ -7,3 +7,13 @@
     [x] pass Lighthouse tests (w/o further image optimization)
 [x] Redesign the UI to be more modern and smooth
 [ ] Use a collection for blog posts: https://docs.astro.build/en/tutorials/add-content-collections/#create-a-collection-for-your-blog-posts
+[ ] Add tags and use a tag-based system (instead of links to other pages)
+[ ] Use Glide.js instead of the current custom implementation of a carousel
+[ ] Rewrite hamburger menu in Svelte
+[ ] UI redesign
+[x] Migrate to using bun
+  [x] Also update to the latest deps
+  [ ] Fix Netlify build issues
+[ ] Fix RSS feed
+  [ ] Promoto RSS feed in index.astro
+[ ] Add a selection box with the blog post tags in index.astro

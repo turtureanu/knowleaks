@@ -1,9 +1,9 @@
 ---
-layout: "../../layouts/BlogPost.astro"
 title: "Bruteforcing sudo: the effective approach"
 draft: false
 description: "The common belief is that bruteforcing sudo is an impossible task, because of certain timeouts, but what if you could bypass them? Faillock allows you to reset the current timeout and running sudo in parallel gets rid of the timeout altogether."
-pubDate: "Jun 22 2024"
+pubDate: 2024-06-22
+tags: [security]
 ---
 
 ![xkcd comic about sudo sandwich](https://imgs.xkcd.com/comics/sandwich.png)
@@ -74,3 +74,5 @@ The script has 3 types of attacks:
 It is quite slow compared to e.g. cracking hashes, but it is still fast enough that it could be used to bruteforce a really bad password without having any special permissions.
 
 The tool could be rewriten in a faster language than BASH, ideally something like C or C++, which would increase its efficiency tremendously.
+
+The script can be found here: https://github.com/turtureanu/sudont

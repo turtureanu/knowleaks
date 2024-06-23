@@ -3,30 +3,13 @@ import BaseHead from "../components/BaseHead.astro";
 import Nav from "../components/Nav.astro";
 import "../styles/layouts/blogPost.scss";
 
-export interface Props {
-  content: {
-    title: string;
-    description: string;
-    pubDate?: string;
-    updatedDate?: string;
-    heroImage?: string;
-  };
-}
-
-const {
-  content: { title, description, pubDate, updatedDate, heroImage },
-} = Astro.props;
+const { frontmatter } = Astro.props;
+const { title, description, heroImage, pubDate, updatedDate } = frontmatter;
 ---
 
 <html lang="en">
   <head>
     <BaseHead title={title} description={description} />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&family=Roboto+Mono:wght@400&display=swap"
-      rel="stylesheet"
-    />
   </head>
 
   <body>
@@ -36,7 +19,7 @@ const {
         {heroImage && <img src={heroImage} alt="" />}
         <div class="article-header">
           <h1 class="title">{title}</h1>
-          {pubDate && <time>{pubDate}</time>}
+          {pubDate && <time>{pubDate.toString().slice(4, 15)}</time>}
           {
             updatedDate && (
               <div>
@@ -55,7 +38,7 @@ const {
       // compiled MDX and Markdown files set only the `href` attribute
       if (document.body.contains(document.querySelector("article"))) {
         const article = document.querySelector("article");
-        const links = article.querySelectorAll("a");
+        const links = article!.querySelectorAll("a");
         links.forEach((link) => {
           link.target = "_blank";
           link.rel = "noopener noreferrer";
@@ -72,7 +55,7 @@ const {
         heading.id = headingName;
         heading.addEventListener("click", () => {
           navigator.clipboard.writeText(
-            `${window.location.href.replace(/#.*$/, "")}#${headingName}`,
+            `${window.location.href.replace(/#.*$/, "")}#${headingName}`
           );
           heading.classList.add("copied");
           setTimeout(() => {

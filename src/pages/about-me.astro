@@ -1,7 +1,7 @@
 ---
 import BaseHead from "../components/BaseHead.astro";
 import Nav from "../components/Nav.astro";
-import { SITE_TITLE } from "../config";
+import { SITE_DESCRIPTION, SITE_TITLE } from "../config";
 
 import "../styles/layouts/blogPost.scss";
 ---
@@ -11,7 +11,7 @@ import "../styles/layouts/blogPost.scss";
   <head>
     <BaseHead
       title={"About me" + " | " + SITE_TITLE}
-      description="About me | Mircea-Sebastian Turtureanu"
+      description={SITE_DESCRIPTION}
     />
   </head>
   <body>
@@ -22,7 +22,7 @@ import "../styles/layouts/blogPost.scss";
         Hi! 👋 <br />
         <br />
         Name's Sebastian, I'm a hobbyist who self-taught himself front-end web development,
-        linux administration, and origami. I like hardening linux servers and thinking
+        Linux administration, and origami. I like hardening Linux servers and thinking
         of new ways of protecting against possible threats. My current field of study
         is cybersecurity, but I am also interested in general IT and programming
         languages.

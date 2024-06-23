@@ -1,13 +1,10 @@
 ---
+import { getCollection } from "astro:content";
 import BaseHead from "../components/BaseHead.astro";
 import { SITE_TITLE, SITE_DESCRIPTION } from "../config";
 import "../styles/components/button.scss";
-import "../styles/components/menu.scss";
-const posts = (await Astro.glob("./*/*.{md,mdx}")).sort(
-  (a, b) =>
-    new Date(b.frontmatter.pubDate).valueOf() -
-    new Date(a.frontmatter.pubDate).valueOf()
-);
+
+const blogCollection = await getCollection("blog");
 ---
 
 <html lang="en">
@@ -15,7 +12,7 @@ const posts = (await Astro.glob("./*/*.{md,mdx}")).sort(
     <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
   </head>
   <body>
-    <header>
+    <div class="sidebar">
       <div class="header-banner">
         <img src="/logo-know.svg" alt="Knowleaks logo" />
         <p>
@@ -23,86 +20,146 @@ const posts = (await Astro.glob("./*/*.{md,mdx}")).sort(
           <em>forget</em><strong>.</strong>
         </p>
       </div>
-      <section class="menu">
-        <h2>Topics</h2>
-        <nav class="topics-menu">
-          <a class="button" href="/cybersecurity">Cybersecurity</a>
-          <a class="button" href="/origami">Origami</a>
-          <a class="button" href="/linux">Linux</a>
-          <a class="button" href="/other">Other</a>
-        </nav>
+      <section class="blog-posts">
+        <h2>Blog posts</h2>
+        {
+          blogCollection.map((blogPost) => {
+            if (!blogPost.data.draft) {
+              // all posts which are not drafts
+              return (
+                <a class="button" href={`/blog-posts/${blogPost.slug}/`}>
+                  <div class="title">{blogPost.data.title}</div>
+                  <div class="tags">
+                    {blogPost.data.tags.map((tag) => {
+                      return <div class={`tag ${tag}`}>{tag}</div>;
+                    })}
+                  </div>
+                  <span class="date">
+                    {blogPost.data.pubDate.toDateString().slice(4, 16)}
+                  </span>
+                </a>
+              );
+            }
+          })
+        }
       </section>
-    </header>
+      <div class="other-links">
+        <nav>
+          <a class="button" href="/about-me">About me</a>
+          <a
+            class="button"
+            href="https://github.com/turtureanu/knowleaks"
+            target="_blank"
+            rel="norefferer">Website Source code</a
+          >
+        </nav>
+      </div>
+    </div>
 
-    <section class="menu new-posts">
-      <h2>New posts</h2>
-      {
-        posts.slice(0, 6).map((post) => {
-          if (!post.frontmatter.draft) {
-            // all posts which are not drafts
-            return (
-              <a href={post.url} class="button">
-                {post.frontmatter.title}
-              </a>
-            );
-          }
-        })
-      }
-    </section>
-    <footer>
-      <nav class="menu">
-        <a class="button" href="/about-me">About me</a>
-        <a
-          class="button"
-          href="https://github.com/turtureanu/personal-website"
-          target="_blank"
-          rel="norefferer">Website Source code</a
-        >
-      </nav>
-    </footer>
     <style lang="scss">
       @use "../styles/variables.scss" as *;
-      .header-banner {
-        padding: 0 2.75rem;
+
+      .sidebar {
+        margin: 0 auto;
         display: flex;
-        justify-content: center;
-        align-items: center;
+        flex-direction: column;
 
-        img {
-          width: 135px;
-          padding-right: 2rem;
-          border-right: solid $dark3 0.375rem;
+        &,
+        .blog-posts {
+          max-width: $sidebar-width;
+
+          @media screen and (min-width: $medium) {
+            max-width: $sidebar-width + ($medium - $sidebar-width);
+          }
         }
 
-        p {
-          font-size: 35px;
-          width: 240px;
-          text-align: left;
-          padding-left: 2rem;
+        .blog-posts {
+          order: 1;
+
+          h2 {
+            text-align: center;
+          }
+
+          .tags {
+            margin-top: 0.5em;
+            display: flex;
+            justify-content: right;
+
+            * + * {
+              margin-left: 0.5em;
+            }
+
+            .tag {
+              font-size: 1.4rem;
+              padding: 0.125rem 0.375em;
+              border-radius: 0.5em;
+              text-shadow: none;
+              color: $light;
+            }
+
+            .linux {
+              background-color: $linux-tag;
+            }
+
+            .security {
+              background-color: $security-tag;
+            }
+
+            .origami {
+              background-color: $origami-tag;
+            }
+
+            .android {
+              background-color: $android-tag;
+            }
+
+            .coding {
+              background-color: $coding-tag;
+            }
+          }
         }
-      }
 
-      header {
-        h1 {
-          margin: 0;
-          padding: 1em;
-          padding-bottom: 0.5em;
-          text-align: center;
-          font-size: 2.5rem;
-          font-weight: 500;
+        .date {
+          justify-self: left;
         }
-      }
 
-      h2 {
-        text-align: center;
-      }
+        .header-banner {
+          margin: 0 auto;
+          display: flex;
+          justify-content: center;
+          align-items: center;
 
-      .topics-menu {
-        display: grid;
-        grid-template: auto / 50% 50%;
+          img {
+            width: 70px;
+            padding-right: 2rem;
+            border-right: solid $dark3 0.375rem;
+          }
 
-        .button {
-          margin-bottom: 0;
+          p {
+            font-size: 2rem;
+            width: 180px;
+            text-align: left;
+            padding-left: 2rem;
+          }
+
+          @media screen and (min-width: 400px) {
+            img {
+              width: 100px;
+            }
+
+            p {
+              font-size: 2.4rem;
+              width: 220px;
+            }
+          }
+        }
+
+        .other-links {
+          order: 0;
+
+          .button {
+            text-align: center;
+          }
         }
       }
     </style>
