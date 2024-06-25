@@ -1,0 +1,10 @@
+# Build using bun instead of npm
+[build]
+  functions = "netlify/functions"
+  command = "bun install; bun run build"
+  publish = "dist"
+
+[build.environment]
+   # disable npm initialization (see: https://github.com/JLarky/bun-netlify)
+   NPM_FLAGS = "--version"
+
