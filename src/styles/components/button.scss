@@ -1,38 +1,37 @@
 @use "../variables.scss" as *;
+@use "sass:color";
 
 .button {
-  // most readable CSS way to align the text
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  // the button body
-  margin: 0.75em 0.375em;
-  outline: $dark2 solid 0.375rem;
-  border-radius: 1rem;
+  margin: 1.25em 1.5em;
+  outline: $dark3 solid 0.25rem;
   background-color: $dark1;
-  padding: 0.5em;
+  cursor: pointer;
+  padding: 0.75em;
+  text-align: center;
   text-decoration: none;
-  color: $light !important;
-
-  &:hover,
-  &:focus,
-  &:active {
-    outline-color: $blue;
-    box-shadow: 0 0 0.5rem $blue;
-    color: $blue;
+  line-height: 2.875ch;
+  color: $light;
+  
+  &:hover {
+    outline-color: $blue !important;
+    box-shadow: 0 0 0.5em $blue;
+    text-shadow: 0 0 0.125ch $blue;
   }
 
-  &:focus {
-    outline-color: $green;
-  }
-
-  &:active {
-    outline-color: $green;
-    color: $green;
+  &:focus, &:active {
+    outline-color: $green !important;
+    box-shadow: 0 0 0.5em $green;
+    text-shadow: 0 0 0.125ch $green;
   }
 
   &:visited {
     color: inherit;
   }
+}
+
+html.light .button {
+  outline-color: $light2;
+  background-color: $light1;
+  text-shadow: unset !important;
+  color: $dark !important;
 }

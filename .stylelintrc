@@ -1,17 +1,25 @@
 {
   "extends": [
     "stylelint-config-standard-scss",
-    "stylelint-config-concentric-order"
+    "stylelint-config-concentric-order",
+    "stylelint-config-html/svelte",
+    "stylelint-config-html/astro",
+    "stylelint-config-html/html"
   ],
 
   "plugins": [
-    "stylelint-scss"
+    "stylelint-scss",
+    "stylelint-declaration-block-no-ignored-properties",
+    "stylelint-color-format",
+    "@stylistic/stylelint-plugin"
   ],
 
   "rules": {
-    "at-rule-no-unknown": null,
     "scss/at-rule-no-unknown": true,
     "scss/selector-no-redundant-nesting-selector": true,
-    "max-line-length": null
+    "plugin/declaration-block-no-ignored-properties": true,
+    "color-format/format": {
+      "format": "hsl"
+    }
   }
 }

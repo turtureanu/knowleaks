@@ -1,8 +1,8 @@
 ---
-layout: "../../layouts/BlogPost.astro"
 title: "Setting up SSH for each git repository individually"
 description: "How to set up SSH authentication for each git repository individually"
-pubDate: "Feb 17 2023"
+pubDate: 2023-02-17
+tags: [linux, security]
 ---
 
 A lot of people have git repositories stored not just on GitHub, but on other platforms such as [Codeberg.org](https://codeberg.org/), [GitLab](https://about.gitlab.com/), or their own [self-hosted alternative](https://gitea.io/en-us/).
@@ -25,7 +25,6 @@ $ git config --global core.sshCommand "ssh -i ~/.ssh/github_ed25519"
 ## Setting the remote
 
 If you cloned the repository over HTTPS, you might want to change the remote to use the SSH address instead.
-
 
 ### Find the remote URLs
 

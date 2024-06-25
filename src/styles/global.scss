@@ -7,16 +7,16 @@ html {
 
 body {
   margin: 0;
-  background-color: $darker;
+  background-color: $background;
   padding: 0;
   color: $light;
   font-family: "JetBrains Mono", Roboto, Ubuntu, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Oxygen, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   font-size: 1.6rem;
 }
 
-html,
-body {
-  height: 100%;
+.light body {
+  background-color: $background-light;
+  color: $dark;
 }
 
 img {

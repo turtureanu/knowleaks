@@ -1,6 +1,5 @@
 ---
 import "../styles/components/origami-carousel.scss";
-import { Debug } from "astro/components";
 const { origami } = Astro.props;
 
 // I'm sick with working with Astro.glob(), too abstract and hard to work with
@@ -26,7 +25,7 @@ for (let image in imagesPath) {
 // How I like to sort: 1 2 3 ... 11 12 13 ...
 let ascendingSort = (
   x: { match: (arg0: RegExp) => string },
-  y: { match: (arg0: RegExp) => string },
+  y: { match: (arg0: RegExp) => string }
 ) => parseInt(x.match(/\d+/g)) - parseInt(y.match(/\d+/g));
 images.sort(ascendingSort);
 ---
