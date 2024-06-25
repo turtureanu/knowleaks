@@ -83,12 +83,16 @@ const blogCollection = await getCollection("blog");
         <div class="tag-container">
           <script is:inline>
             const handleTags = (tag) => {
-              // add .selected to blog post tags (buttons)
+              // add `.selected` to blog post tags (buttons)
               document.querySelector(`.blog-post-tag.${tag}`).classList.toggle("selected");
               let selectedTags = []; // create an array of the selected tags (buttons)
 
-              // populate the array of selectedTags
-              document.querySelectorAll(".blog-post-tag.selected").forEach(selectedTag => selectedTags.push(selectedTag.classList[1]));
+              // populate the array of `selectedTags`
+              // for each selected `blog-post-tag` (button)
+              document.querySelectorAll(".blog-post-tag.selected").forEach(e => {
+                // push to the `selectedTags` array the names of the selected blog post tags (using their classList and the `selected` class)
+                selectedTags.push(Array.from(e.classList).filter(e => e != "blog-post-tag" && e != "selected")[0]);
+              });
 
               // for each blog post
               document.querySelectorAll(".blog-post").forEach(post => {
