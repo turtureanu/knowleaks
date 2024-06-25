@@ -250,6 +250,7 @@ const blogCollection = await getCollection("blog");
           padding: 0.5em 0.2em;
           white-space: pre;
           color: $light;
+          font-family: "Ubuntu Mono", "JetBrains Mono", Roboto, sans-serif;
           font-size: 1.5rem;
 
           &::before {
@@ -260,31 +261,6 @@ const blogCollection = await getCollection("blog");
           &::after {
             padding-left: 0.25em;
             content: " ";
-          }
-
-          &:hover {
-            outline-width: 0.2rem;
-            outline-style: solid;
-
-            &.linux {
-              outline-color: $linux-tag;
-            }
-
-            &.security {
-              outline-color: $security-tag;
-            }
-
-            &.coding {
-              outline-color: $coding-tag;
-            }
-
-            &.origami {
-              outline-color: $origami-tag;
-            }
-
-            &.android {
-              outline-color: $android-tag;
-            }
           }
 
           &.selected {
