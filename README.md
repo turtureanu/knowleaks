@@ -1,6 +1,6 @@
 ## Knowleaks
 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/6ddf346b-eabb-47aa-af64-19a59ba2b926/deploy-status)](https://app.netlify.com/sites/knowleaks/deploys)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/856d3847-fac5-4eee-82a9-eeca6097a548/deploy-status)](https://app.netlify.com/sites/knowleaks/deploys)
 
 This is my blog, its purpose is to remind me of what I have forgotten. 
 
