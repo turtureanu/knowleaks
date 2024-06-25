@@ -1,5 +1,5 @@
 ---
-title: "Installing and configuring Artix Linux with OpenRC, BtrFS, and Secure Boot"
+title: "Installing Artix Linux with OpenRC, BtrFS, and Secure Boot"
 description: "A guide for my own setup, which uses Artix as the OS, OpenRC as the init system, BtrFS as the filesystem, and secure boot to prevent booting from unauthorized media devices"
 pubDate: 2023-03-16
 tags: [linux, security]
@@ -71,11 +71,13 @@ mkswap -L "Swap" /dev/sda3
 
 BtrFS allows for things like blazing-fast small system snapshots (in case `pacman` breaks your system), self-healing of data, and also filesystem-level compression. It's more simple than OpenZFS, doesn't have any license conflicts, and works well.
 
-<iframe
-  width="420"
-  height="315"
-  src="https://www.youtube-nocookie.com/embed/-m01x3gHNjg"
-></iframe>
+<div class="video">
+  <iframe
+    width="420"
+    height="315"
+    src="https://www.youtube-nocookie.com/embed/-m01x3gHNjg"
+  ></iframe>
+</div>
 
 That said, it also has some downsides:
 
@@ -279,6 +281,6 @@ In summary:
 4. Enroll PK.auth
 5. Enable SB
 
-You may also use a tool such as `KeyTool.efi`, if your UEFI doesn't support manually loading keys from the interface.
+You may also use a tool such as [`KeyTool.efi`](https://www.rodsbooks.com/efi-bootloaders/controlling-sb.html#keytool), if your UEFI doesn't support manually loading keys from the interface.
 
 After that, we're basically done, I guess.

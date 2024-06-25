@@ -47,3 +47,10 @@ const { title, description, image = "/social-image.png" } = Astro.props;
   href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap"
   rel="stylesheet"
 />
+
+<!-- Theme -->
+<script is:inline>
+  if (localStorage.getItem("theme") == "light") {
+    document.documentElement.classList.add("light");
+  }
+</script>

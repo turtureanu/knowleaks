@@ -17,51 +17,71 @@ import "../styles/layouts/blogPost.scss";
   <body>
     <Nav />
     <article>
-      <h1>Mircea-Sebastian Turtureanu</h1>
-      <p>
-        Hi! 👋 <br />
-        <br />
-        Name's Sebastian, I'm a hobbyist who self-taught himself front-end web development,
-        Linux administration, and origami. I like hardening Linux servers and thinking
-        of new ways of protecting against possible threats. My current field of study
-        is cybersecurity, but I am also interested in general IT and programming
-        languages.
-        <br />
-        <br />
-        My favorite color's a saturated blue around <span
-          style="background-color: #303030; color:#00AAFF">#00AAFF</span
-        >.
-      </p>
-
+      <div class="container">
+        <h1>Mircea-Sebastian Turtureanu</h1>
+        <p>
+          Hi! 👋 <br />
+          <br />
+          Name's Sebastian, I'm a self-taught front-end web developer, hobbyist Linux
+          administrator, and sophisticated origamist.
+          <br /><br />
+          I like configuring and hardening Linux machines, as well as exploring inovative
+          ways of protecting assets and/or damaging them. My current field of study
+          is cybersecurity, but I am also interested in general IT and various programming
+          languages.
+          <br />
+          <br />
+          Other interests include basic IoT and electronics design, Linux gaming,
+          studying efficient learning strategies, reading, and researching <i
+            >anything</i
+          >.
+          <br />
+          <br />
+          My favorite color's a saturated blue around <span
+            class="favorite-color">#00AAFF</span
+          >.
+        </p>
+      </div>
       <h2>Certifications</h2>
-      <ul class="certs">
+      <ul class="certificates">
         <li>
           <a
+            class="certificate-container"
             href="https://www.freecodecamp.org/certification/turtureanu/responsive-web-design"
             target="_blank"
             rel="noopener noreferrer"
           >
             <img
+              class="certificate"
               src="/FCC-responsive-certification.png"
               alt="Screenshot of my FreeCodeCamp certification for Responsive Web Design"
             />
-            <p>FreeCodeCamp: Responsive Web Design</p>
+            <div class="overlay">
+              <p class="certificate-name">Responsive Web Design</p>
+            </div>
           </a>
         </li>
         <li>
           <a
+            class="certificate-container"
             href="https://www.freecodecamp.org/certification/turtureanu/javascript-algorithms-and-data-structures"
             target="_blank"
             rel="noopener noreferrer"
           >
             <img
+              class="certificate"
               src="/FCC-JS-certification.png"
               alt="Screenshot of my FreeCodeCamp certification for JavaScript Algorithms and Data Structures"
             />
-            <p>FreeCodeCamp: JavaScript Algorithms and Data Structures</p>
+            <div class="overlay">
+              <p class="certificate-name">
+                JavaScript Algorithms and Data Structures
+              </p>
+            </div>
           </a>
         </li>
       </ul>
+      <h2>Contact/Socials</h2>
       <ul class="social">
         <li>
           GitHub: <a
@@ -86,12 +106,88 @@ import "../styles/layouts/blogPost.scss";
       </ul>
     </article>
     <style lang="scss">
-      .certs {
+      @use "../styles/variables" as *;
+
+      .container {
+        h1 {
+          margin: 2rem 0 3rem;
+          padding: 0;
+          text-align: left;
+          line-height: 3ch;
+          font-size: 1.8rem;
+        }
+      }
+
+      .favorite-color {
+        background-color: $dark2;
+        color: hsl(200deg 100% 50%);
+      }
+
+      .light .favorite-color {
+        background-color: $light2;
+      }
+
+      .certificates {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 1em;
+        margin: 0;
+        margin-top: 1em;
+        padding: 0;
         list-style: none;
         text-align: center;
 
+        .certificate-container {
+          display: block;
+          position: relative;
+
+          &:visited {
+            color: $light;
+          }
+        }
+
+        .overlay {
+          position: absolute;
+          inset: 0;
+          transition: all ease-in-out 100ms;
+          opacity: 0;
+          width: 100%;
+          height: 100%;
+
+          &:hover {
+            opacity: 1;
+            background-color: color-mix(in srgb, $dark 60%, transparent 40%);
+          }
+        }
+
+        .certificate-name {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          opacity: inherit;
+          margin: 0;
+          padding: 0;
+          width: 100%;
+          color: $light;
+          font-size: 1.8rem;
+          font-weight: 600;
+        }
+
+        li {
+          padding: 0;
+
+          &::marker {
+            content: unset;
+          }
+        }
+
         p {
           padding: 1em;
+        }
+
+        @media screen and (min-width: $medium) {
+          grid-template-columns: 1fr 1fr;
         }
       }
     </style>

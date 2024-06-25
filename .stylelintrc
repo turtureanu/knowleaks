@@ -20,7 +20,6 @@
     "plugin/declaration-block-no-ignored-properties": true,
     "color-format/format": {
       "format": "hsl"
-    },
-    "@stylistic/indentation": [2, { "baseIndentLevel": 1 }]
+    }
   }
 }

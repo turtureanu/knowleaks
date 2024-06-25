@@ -1,19 +1,34 @@
-[ ] Add support for user theme preference (dark mode)
 [x] Add a copy URL+heading.id button to article headings
 [x] Minimalistic website redesign
 [x] Refactor code from the redesign
   [x] SEO improvements
     [x] robots.txt improvements
     [x] pass Lighthouse tests (w/o further image optimization)
-[x] Redesign the UI to be more modern and smooth
-[ ] Use a collection for blog posts: https://docs.astro.build/en/tutorials/add-content-collections/#create-a-collection-for-your-blog-posts
-[ ] Add tags and use a tag-based system (instead of links to other pages)
+[x] Redesign the UI to be more modern and smooth (v1)
 [ ] Use Glide.js instead of the current custom implementation of a carousel
-[ ] Rewrite hamburger menu in Svelte
-[ ] UI redesign
+[x] UI redesign (v2)
+  [x] Use a collection for blog posts: https://docs.astro.build/en/tutorials/add-content-collections/#create-a-collection-for-your-blog-posts
+  [x] Add tags and use a tag-based system (instead of links to other pages)
+  [x] Add a selection box with the blog post tags in index.astro
+  [x] Update About me
+  [x] Improve Post readability
+    [x] Typography
+  [x] Add a "new" notification on posts not older than a month
+  [x] Populate the navigation bar
+    [x] Add buttons
+      [x] Blog posts
+      [x] About me
+      [x] Theme Button
+      [x] Source code
+  [x] Add support for user theme preference (dark mode)
+    [x] Desktop navigation bar
 [x] Migrate to using bun
   [x] Also update to the latest deps
   [ ] Fix Netlify build issues
 [ ] Fix RSS feed
-  [ ] Promoto RSS feed in index.astro
-[ ] Add a selection box with the blog post tags in index.astro
+  [ ] Promote RSS feed in index.astro
+[ ] Self-host used fonts (JetBrains Mono, Roboto)
+[ ] Add a fuzzy search function for posts
+ [ ] Add it to index.astro
+ [-] Add it to Nav.astro
+  - Not a good idea on mobile (not enough space to show results)

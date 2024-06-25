@@ -1,18 +1,22 @@
 // Colors
 $light: hsl(210deg 20% 98%);
+$light1: hsl(205deg 15% 95%);
+$light2: hsl(205deg 15% 80%);
+$light3: hsl(205deg 20% 40%);
+$dark: hsl(205deg 15% 8%);
 $dark1: hsl(205deg 15% 10%);
 $dark2: hsl(205deg 15% 20%);
 $dark3: hsl(205deg 15% 30%);
 $background: hsl(220deg 20% 10%);
-$darker: hsl(205deg 15% 15%);
+$background-light: $light;
 $dark-blue: hsl(205deg 100% 25%);
 $blue: hsl(205deg 100% 60%);
+$light-blue: hsl(205deg 100% 80%);
 $red: hsl(334deg 50% 50%);
 $orange: hsl(18deg 50% 60%);
 $purple: hsl(250deg 50% 60%);
-$yellow: #cc6;
-$green: #48a07c;
-$blue-light: hsl(205deg 100% 80%);
+$yellow: hsl(60deg 50% 60%);
+$green: hsl(155deg 38% 45%);
 
 // Tags
 $linux-tag: gray;
@@ -31,3 +35,6 @@ $article-width: 800px;
 
 // Sidebar
 $sidebar-width: 500px;
+
+// Fonts
+$code-font: "JetBrainsMono";

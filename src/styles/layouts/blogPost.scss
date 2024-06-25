@@ -5,9 +5,9 @@
 article {
   margin: 0 auto;
   padding: 5rem 2.5rem;
+  padding-top: 3rem;
   max-width: $article-width;
   overflow-wrap: break-word;
-  word-wrap: break-word;
 
   a {
     color: $light;
@@ -45,6 +45,7 @@ article {
   h1 {
     margin: 0;
     padding: 1em 0.5em 1em 0;
+    text-align: center;
     line-height: 2.25ch;
     letter-spacing: 0.075ch;
   }
@@ -56,25 +57,12 @@ article {
 
   h2 {
     font-size: 2ch;
-
-    &::before {
-      content: "## ";
-    }
   }
 
   h3 {
     font-size: 1.875ch;
-
-    &::before {
-      content: "### ";
-    }
   }
 
-  h4 {
-    &::before {
-      content: "#### ";
-    }
-  }
 
   h2,
   h3,
@@ -87,6 +75,7 @@ article {
     &::before {
       opacity: 0.5;
       font-weight: 400;
+      content: "# ";
     }
 
     &:hover {
@@ -118,15 +107,15 @@ article {
   }
 
   p {
-    line-height: 3ch;
+    line-height: 3.2ch;
   }
 
   blockquote {
     margin: 0;
     border-left: solid 0.5rem $blue;
-    border-radius: 0.75rem;
     background-color: color-mix(in srgb, $blue 20%, $dark1 100%);
     padding: 0 1em;
+    color: $light;
     font-size: 1.6ch;
 
     * {
@@ -134,32 +123,37 @@ article {
     }
 
     p code {
-      color: $blue-light !important;
+      color: $light-blue !important;
       font-weight: 900;
     }
   }
 
   // astro stuff
   .astro-code {
-    border-radius: 0.75rem;
-    background-color: $dark1 !important;
+    // border-radius: 0.75rem;
+    background-color: $dark2 !important;
     padding: 1em 0;
     max-height: math.div($article-width, 2);
-    font-size: 1.5ch;
+    font-size: 1.6ch;
 
     .line {
       padding: 0 1em;
     }
 
+    // Dirty fix to get rid of the extra line that is there for some reason
+    .line:last-child {
+      display: none;
+    }
+
     &,
     code {
-      font-family: inherit;
+      font-family: $code-font;
     }
   }
 
   code:not(.astro-code > code) {
     color: $blue;
-    font-family: inherit;
+    font-family: $code-font;
   }
 
   ol li {
@@ -170,10 +164,16 @@ article {
     }
   }
 
-  ul li::marker {
-    color: $blue;
-    font-size: 2ch;
-    font-weight: 900;
+  ul li {
+    padding: 0.5em 0.25em;
+
+    &::marker {
+      color: $blue;
+      font-size: 2ch;
+      font-weight: 900;
+      /* stylelint-disable-next-line no-irregular-whitespace */
+      content: "›   ";
+    }
   }
 
   hr {
@@ -182,9 +182,39 @@ article {
     max-width: 100%;
   }
 
-  iframe {
-    display: block;
-    margin: 0 auto;
+  // https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_responsive_iframe_169
+  .video {
+    position: relative;
+    padding-top: 56.25%;
+    width: 100%;
+    overflow: hidden;
+
+    iframe {
+      position: absolute;
+      inset: 0;
+      border: none;
+      width: 100%;
+      height: 100%;
+    }
   }
 
+}
+
+html.light {
+  /* stylelint-disable no-descending-specificity */
+  a {
+    color: $dark;
+  }
+
+  blockquote {
+    background-color: color-mix(in srgb, $light-blue 80%, $dark2 75%);
+
+    a {
+      color: $light;
+    }
+  }
+
+  code:not(.astro-code > code) {
+   font-weight: 900;
+  }
 }
