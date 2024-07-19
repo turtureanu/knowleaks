@@ -27,7 +27,7 @@
     "sass": "^1.77.8",
     "scss": "^0.2.4",
     "sharp": "^0.33.4",
-    "stylelint": "^16.6.1",
+    "stylelint": "^16.7.0",
     "stylelint-color-format": "^1.1.0",
     "stylelint-config-concentric-order": "^5.2.0",
     "stylelint-config-html": "^1.1.0",
