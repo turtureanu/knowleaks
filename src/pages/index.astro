@@ -170,6 +170,7 @@ const blogCollection = await getCollection("blog");
         .title {
           grid-row: 1;
           grid-column: span 2;
+          font-family: "JetBrains Mono",'Courier New', Courier, monospace;
           font-weight: 700;
 
           .new {
@@ -324,9 +325,11 @@ const blogCollection = await getCollection("blog");
             }
           }
 
-          p {
+          p {;
             padding-left: 2.5rem;
             text-align: left;
+            line-height: 2.25ch;
+            font-family: "JetBrains Mono", 'Courier New', Courier, monospace;
             font-size: 2rem;
           }
 

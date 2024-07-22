@@ -10,7 +10,7 @@ body {
   background-color: $background;
   padding: 0;
   color: $light;
-  font-family: "JetBrains Mono", Roboto, Ubuntu, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Oxygen, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  font-family: $normal-font;
   font-size: 1.6rem;
 }
 
