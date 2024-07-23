@@ -142,7 +142,6 @@ article {
   // astro stuff
   .astro-code {
     border-radius: $border-radius;
-    background-color: $dark2 !important;
     padding: 1em 0;
     max-height: math.div($article-width, 2);
     font-family: $code-font;
@@ -162,6 +161,17 @@ article {
     code {
       font-family: $code-font;
     }
+  }
+
+  .astro-code,
+  .astro-code span {
+      background-color: var(--shiki-dark-bg) !important;
+      text-decoration: var(--shiki-dark-text-decoration) !important;
+      color: var(--shiki-dark) !important;
+      font-weight: var(--shiki-dark-font-weight) !important;
+
+      /* Optional, if you also want font styles */
+      font-style: var(--shiki-dark-font-style) !important;
   }
 
   code:not(.astro-code > code) {
@@ -194,12 +204,6 @@ article {
     }
   }
 
-  hr {
-    margin: 1em 0;
-    width: 100%;
-    max-width: 100%;
-  }
-
   // https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_responsive_iframe_169
   .video {
     position: relative;
@@ -215,7 +219,6 @@ article {
       height: 100%;
     }
   }
-
 }
 
 html.light {
@@ -234,5 +237,16 @@ html.light {
 
   code:not(.astro-code > code) {
    font-weight: 900;
+  }
+
+  .astro-code,
+  .astro-code span {
+    background-color: var(--shiki-light-bg) !important;
+    text-decoration: var(--shiki-light-text-decoration) !important;
+    color: var(--shiki-light) !important;
+    font-weight: var(--shiki-light-font-weight) !important;
+
+    /* Optional, if you also want font styles */
+    font-style: var(--shiki-light-font-style) !important;
   }
 }
