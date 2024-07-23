@@ -5,9 +5,7 @@ pubDate: 2023-01-10
 tags: [origami]
 ---
 
-import OrigamiCarousel from "/src/components/OrigamiCarousel.astro";
-
-![an tetradecagon origami hat](/origami/hendecagon/thumbnail.webp)
+![an tetradecagon origami hat](/origami/hendecagon-tophat/thumbnail.webp)
 
 <div style="text-align: center">
   Origami Tetradecagon (14 sides) example top hat. <br />
@@ -16,10 +14,9 @@ import OrigamiCarousel from "/src/components/OrigamiCarousel.astro";
 
 ## Instructions (module)
 
-<OrigamiCarousel
-  origami="hendecagon-top-hat"
-  images="/public/origami/instuctions/*/*"
-/>
+import Carousel from "../../components/OrigamiCarouselAstro.astro";
+
+<Carousel origami="hendecagon-tophat" />
 
 The last fold will be used as a reference angle to fold the 3 sides of the module.
 
@@ -27,4 +24,4 @@ The last fold will be used as a reference angle to fold the 3 sides of the modul
 
 For a sturdy structure I recommend using glue, but if you want a glueless variant, you can try to add a fold like this (or similar):
 
-![an origami instruction](/origami/hendecagon/glueless-addition.svg)
+![an origami instruction](/origami/hendecagon-tophat/glueless-addition.svg)

@@ -5,7 +5,11 @@
     [x] robots.txt improvements
     [x] pass Lighthouse tests (w/o further image optimization)
 [x] Redesign the UI to be more modern and smooth (v1)
-[ ] Use Glide.js instead of the current custom implementation of a carousel
+[-] Use Glide.js instead of the current custom implementation of a carousel
+  [-] Load Glide.js only when it's needed
+  // Glide.js is not the right tool
+[x] Replace the OrigamiCarousel with a Svelte one
+  // Use Swiper: https://swiperjs.com/
 [x] UI redesign (v2)
   [x] Use a collection for blog posts: https://docs.astro.build/en/tutorials/add-content-collections/#create-a-collection-for-your-blog-posts
   [x] Add tags and use a tag-based system (instead of links to other pages)
@@ -32,5 +36,5 @@
  [ ] Add it to index.astro
  [-] Add it to Nav.astro
   - Not a good idea on mobile (not enough space to show results)
-[x] Switch to Roboto as the main font
+[x] Switch to -Roboto- Manrope as the main font
   // Using a mono font for normal article text is not such a good idea

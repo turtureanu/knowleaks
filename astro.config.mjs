@@ -33,4 +33,7 @@ export default defineConfig({
     },
   },
   integrations: [mdx(), sitemap(), compress(), robotsTxt(), svelte()],
+  optimizeDeps: {
+    include: ["lodash.get", "lodash.isequal", "lodash.clonedeep"],
+  },
 });

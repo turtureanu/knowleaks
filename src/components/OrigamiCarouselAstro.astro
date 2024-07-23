@@ -1,0 +1,27 @@
+---
+import OrigamiCarouselSvelte from "./OrigamiCarouselSvelte.svelte";
+
+const { origami } = Astro.props;
+
+// I'm sick with working with Astro.glob(), too abstract and hard to work with
+const imagesPath = import.meta.glob("/public/origami/instructions/*/*.svg", {
+  eager: true,
+});
+
+let images: any[] = [];
+for (let image in imagesPath) {
+  if (image.includes(origami)) {
+    images.push(image.replace("/public", ""));
+  }
+}
+
+// How Astro.glob likes to sort: 1 10 11 12 13 ... 2 21 23 ...
+// How I like to sort: 1 2 3 ... 11 12 13 ...
+let ascendingSort = (
+  x: { match: (arg0: RegExp) => string },
+  y: { match: (arg0: RegExp) => string }
+) => parseInt(x.match(/\d+/g)) - parseInt(y.match(/\d+/g));
+images.sort(ascendingSort);
+---
+
+<OrigamiCarouselSvelte client:load images={images} />

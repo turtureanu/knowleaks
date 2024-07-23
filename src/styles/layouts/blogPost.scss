@@ -66,13 +66,24 @@ article {
   }
 
   h2 {
-    font-size: 2ch;
+    font-size: 2.5ch;
   }
 
   h3 {
+    font-size: 2.125ch;
+  }
+
+  h4 {
     font-size: 1.875ch;
   }
 
+  h5 {
+    font-size: 1.675ch;
+  }
+
+  h6 {
+    font-size: 1.6ch;
+  }
 
   h2,
   h3,
@@ -127,7 +138,6 @@ article {
     background-color: color-mix(in srgb, $blue 20%, $dark1 100%);
     padding: 0 1em;
     color: $light;
-    font-size: 1.6ch;
 
     * {
       padding: 0.5em 0;
@@ -145,7 +155,6 @@ article {
     padding: 1em 0;
     max-height: math.div($article-width, 2);
     font-family: $code-font;
-    font-size: 1.4ch;
     font-weight: 500;
 
     .line {
@@ -228,7 +237,7 @@ html.light {
   }
 
   blockquote {
-    background-color: color-mix(in srgb, $light-blue 80%, $dark2 75%);
+    background-image: linear-gradient(45deg, color-mix(in srgb, $blue 80%, $dark2 50%), color-mix(in srgb, $blue 80%, $light3 30%));
 
     a {
       color: $light;
