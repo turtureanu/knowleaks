@@ -31,11 +31,15 @@ $medium: 700px;
 $large: 1600px;
 
 // Article
-$article-width: 800px;
+$article-width: 700px;
 
 // Sidebar
 $sidebar-width: 500px;
 
 // Fonts
 $normal-font: roboto, ubuntu, system-ui, -apple-system, blinkmacsystemfont, "Segoe UI", oxygen, cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-$code-font: "JetBrainsMono";
+$article-font: "Manrope Variable", $normal-font;
+$code-font: "JetBrains Mono Variable";
+
+// General UI
+$border-radius: 4px;

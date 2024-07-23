@@ -51,7 +51,7 @@ When making a container you may not want to trigger `onBlur` on the container wh
 
 {issueShowcase()}
 
-Intuintively, you may think, that since the children is focused so must be the parent, right? But that is not the case, as only one element at a time may be focused, this makes sense and can be proven by simply tabbing around any web page, you can only select one thing at a time, otherwise you wouldn't be able to select anything.
+Intuitively, you may think, that since the children is focused so must be the parent, right? But that is not the case, as only one element at a time may be focused, this makes sense and can be proven by simply tabbing around any web page, you can only select one thing at a time, otherwise you wouldn't be able to select anything.
 
 So how do we stop `onBlur` from triggering? Well, `onBlur` should only trigger when you leave the container altogether.
 

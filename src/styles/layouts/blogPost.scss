@@ -7,6 +7,7 @@ article {
   padding: 5rem 2.5rem;
   padding-top: 3rem;
   max-width: $article-width;
+  font-family: $article-font;
   overflow-wrap: break-word;
 
   a {
@@ -47,13 +48,21 @@ article {
     padding: 1em 0.5em 1em 0;
     text-align: center;
     line-height: 2.25ch;
-    letter-spacing: 0.075ch;
-    font-family: "JetBrains Mono", 'Courier New', Courier, monospace;
+    font-size: 2.5rem;
+    font-weight: 700;
   }
 
   time {
     display: block;
+    margin-top: -1rem;
+    margin-bottom: 2rem;
     min-width: max-content;
+    font-family: $code-font;
+    font-weight: 500;
+  }
+
+  hr {
+    display: none;
   }
 
   h2 {
@@ -71,7 +80,6 @@ article {
   h5,
   h6 {
     margin: 1.5em 0 -0.25em;
-    font-family: $code-font;
     font-weight: 900;
 
     &::before {
@@ -109,13 +117,13 @@ article {
   }
 
   p {
-    line-height: 3.2ch;
-    font-size: 1.75rem;
+    line-height: 3ch;
   }
 
   blockquote {
     margin: 0;
     border-left: solid 0.5rem $blue;
+    border-radius: $border-radius;
     background-color: color-mix(in srgb, $blue 20%, $dark1 100%);
     padding: 0 1em;
     color: $light;
@@ -133,12 +141,13 @@ article {
 
   // astro stuff
   .astro-code {
-    // border-radius: 0.75rem;
+    border-radius: $border-radius;
     background-color: $dark2 !important;
     padding: 1em 0;
     max-height: math.div($article-width, 2);
     font-family: $code-font;
-    font-size: 1.6ch;
+    font-size: 1.4ch;
+    font-weight: 500;
 
     .line {
       padding: 0 1em;
@@ -158,6 +167,11 @@ article {
   code:not(.astro-code > code) {
     color: $blue;
     font-family: $code-font;
+    font-size: smaller;
+  }
+  
+  li {
+    font-size: 1.75rem;
   }
 
   ol li {

@@ -4,6 +4,7 @@
 .button {
   margin: 1.25em 1.5em;
   outline: $dark3 solid 0.25rem;
+  border-radius: $border-radius;
   background-color: $dark1;
   cursor: pointer;
   padding: 0.75em;
