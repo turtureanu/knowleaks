@@ -27,7 +27,7 @@
   [x] Fix Netlify build issues
 [ ] Fix RSS feed
   [ ] Promote RSS feed in index.astro
-[ ] Self-host used fonts (JetBrains Mono, Roboto)
+[x] Self-host used fonts (JetBrains Mono, -Roboto- Manrope)
 [ ] Add a fuzzy search function for posts
  [ ] Add it to index.astro
  [-] Add it to Nav.astro

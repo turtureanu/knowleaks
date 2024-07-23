@@ -9,9 +9,32 @@ tags: [security, linux]
 
 ## A word of advice
 
-You should not solely rely on hardware encryption! Unless you reverse-engineer the firmware, you don't know how the drive implements the encryption, therefore you should NOT trust it!
+You should not solely rely on hardware encryption! Unless you reverse-engineer the firmware, you don't know how the drive implements the encryption, therefore you **should NOT trust it!**
 
 Study on firmware weaknesses in SSDs: https://www.ru.nl/publish/pages/909275/draft-paper_1.pdf
+
+### Edit #1 | July 23 2024
+
+According to a research team at RedHat\* hardware encryption is **_weaker and slower_** than software-based FDE.
+
+For a tutorial on how to encrypt your drive using cryptsetup's support for SED (`--hw-opal` and `--hw-opal-only`), that is, encrypting the drive twice using HW and SW encryption or just using HW encryption with LUKS2, see: https://alexdelorenzo.dev/articles/cryptsetup-luks-self-encrypting-drives
+
+\* For more information on this issue, you might want to watch this talk:
+
+<div class="video">
+
+<iframe
+  width="560"
+  height="315"
+  src="https://www.youtube.com/embed/bQjD_0aAVaw?si=OEBkiiDR6CAMG1NE"
+  title="YouTube video player"
+  frameborder="0"
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+  referrerpolicy="strict-origin-when-cross-origin"
+  allowfullscreen
+></iframe>
+
+</div>
 
 ### Self-encrypting drives
 
@@ -106,7 +129,7 @@ Useful links:
 - https://github.com/ChubbyAnt/sedutil (AMD Ryzen support)
 - https://github.com/ratcashdev/sedutil (sleep support)
 
-## Edit: Jan 30 2024
+## Edit#0 | Jan 30 2024
 
 In August of 2023 I took a stab at making my own pre-boot authenticate image.
 I wanted it to be differenent from others, have a different greeting message and maybe play some games while at it.

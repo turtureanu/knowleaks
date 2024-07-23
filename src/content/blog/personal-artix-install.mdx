@@ -7,8 +7,11 @@ tags: [linux, security]
 
 ## Warning
 
-This guide is not too specific and might not even work if followed step-by-step. \
-It is only supposed to give you an idea of what to do.
+This guide is not too specific and might not even work if followed step-by-step. It is only supposed to give you an idea of what to do.
+
+### Edit#0 | July 23 2024
+
+Since I first published this article I have used it several times to intall Artix or other Arch-based distros while only referring to it as a mere handbook of sorts. I advise you do the same.
 
 ## Preparing for the install
 
@@ -18,21 +21,19 @@ The download page:
 
 https://artixlinux.org/download.php
 
-The init system (openrc, runit, dinit, or s6) in the filename is the init system the live image uses, not the image you are necessarily going to install.
-
-The Artix live image can bootstrap any package from the Artix package repositories.
+The init system (openrc, runit, dinit, or s6) in the filename is the init system the live image uses, not the one you are necessarily going to install.
 
 ### Flash the image
 
 You can use any of the following and more:
 
-- [(Balena) Etcher](https://www.balena.io/etcher) (universaL)
+- [(Balena) Etcher](https://www.balena.io/etcher) (universal)
 - [Rufus](https://www.rufus.ltd/) (for Windows users)
 - `dd` command (for Linux users)
 
 ### Boot and log in as root
 
-Logging in as `root`'ll save you some time:
+Logging in as `root` will save you some time:
 
 ```bash
 username: root
@@ -52,18 +53,21 @@ lsblk # get the identifiers of the partitions (e.g. /dev/sda1)
 #### EFI System Partition (ESP) — FAT32
 
 ```sh
+# -n  label
 mkfs.vfat -n "ESP" /dev/sda1
 ```
 
 #### Storage Partition — BtrFS
 
 ```sh
+# -L  label
 mkfs.btrfs -L "Artix" /dev/sda2
 ```
 
 #### Swap (optional)
 
 ```sh
+# -L  label
 mkswap -L "Swap" /dev/sda3
 ```
 
@@ -86,6 +90,9 @@ That said, it also has some downsides:
 - can become really slow if incorrectly configured
 - criticized for slowness in general, I haven't personally noticed it nor cared
 - less mature than OpenZFS, its stability is sometimes questioned
+
+> If you still want to use nodatacow on a subvolume, see this article for a workaround: https://blog.jim.nz/2015/12/04/btrfs-subvolume-with-nocow.html
+> Some people have reported that having VMs which don't use CoW make them faster
 
 #### Create the filesystem
 
@@ -132,7 +139,7 @@ umount /mnt
 mount -o rw,noatime,compress=zstd:3,ssd,discard=async,space_cache=v2,commit=60,subvol=@ /dev/sda2 /mnt
 mkdir -p /mnt/{boot,home,var/log,var/cache,var/tmp,tmp,.snapshots}
 mount -o rw,nosuid,nodev,noexec,relatime /dev/sda1 /mnt/boot
-mount -o rw,nodev,noatime,compress=lzo,ssd,discard=async,space_cache=v2,commit=120,subvol=@home /mnt/home
+mount -o rw,nodev,noatime,compress=lzo,ssd,discard=async,space_cache=v2,commit=120,subvol=@home /dev/sda2 /mnt/home
 mount -o rw,nosuid,nodev,noexec,noatime,compress=zstd:3,ssd,discard=async,space_cache=v2,commit=120,subvol=@var_cache /dev/sda2 /mnt/var/cache
 mount -o rw,nosuid,nodev,noexec,noatime,compress=zstd:4,ssd,discard=async,space_cache=v2,commit=120,subvol=@var_log /dev/sda2 /mnt/var/log
 mount -o rw,nosuid,nodev,noexec,noatime,compress=zstd:3,ssd,discard=async,space_cache=v2,commit=120,subvol=@var_tmp /dev/sda2 /mnt/var/tmp
@@ -154,6 +161,14 @@ fstabgen -L /mnt >> /mnt/etc/fstab
 ```
 
 > Make sure to edit this file and double check everything
+
+### Modify the fstab
+
+Mount /tmp as tmpfs, see https://www.kernel.org/doc/html/latest/filesystems/tmpfs.html
+
+```sh
+echo "tmpfs /tmp tmpfs defaults,noatime,mode=1777 0 0" >> /etc/fstab
+```
 
 ### Chroot
 
@@ -192,12 +207,14 @@ passwd tux
 
 ### Configure the network
 
-Let's install `connman`
+Let's install `connman`.
 
 ```sh
 pacman -S connman-openrc
 rc-update add connmand
 ```
+
+> Connman is good for basic stuff, but I came across a bug, where if you have symbols in your Wi-Fi password it fails to read the password and connect. For more advanced stuff NetworkManager is still the way to go, although I don't like (which is why I use `iwctl` with https://wiki.gentoo.org/wiki/Netifrc)
 
 ### Configure BtrFS snapshots
 
@@ -205,9 +222,18 @@ First, we need to install `yay`:
 
 ```sh
 git clone https://aur.archlinux.org/yay.git
-cd yay
+su -l tux
+cd /home/tux/yay
 makepkg -si
 ```
+
+Install `cronie` to schedule the snapshots:
+
+```sh
+pacman -S cronie
+```
+
+> More info: [Configuring snapper without systemd](/blog-posts/snapper-config-openrc/)
 
 Install `snap-pac-git`, which create a snapshot pre- and post-transaction.
 
@@ -216,6 +242,8 @@ yay snap-pac-git
 ```
 
 We need to temporarily delete the /.snapshots directory, so we can recreate it using `snapper`:
+
+> We created the /.snapshots directory in order to generate the fstab
 
 ```sh
 umount /.snapshots
@@ -226,7 +254,7 @@ mount -a # remount /.snapshots
 
 I should probably change snapper's default configuration, but I don't think I'll ever be bothered, it's not like snapshots occupy a lot of space.
 
-### Install Hyprland
+### Install Hyprland (WM)
 
 ```sh
 yay hyprland-git
@@ -239,7 +267,7 @@ Generate the SB keys by following [Rod Smith's article on controlling secure boo
 For more information on SB:
 https://www.rodsbooks.com/efi-bootloaders/index.html
 
-#### Add custom pacman hooks
+#### Add custom pacman hooks (outdated)
 
 I created some `pacman` hooks to automate the process of signing and moving the installed kernel.
 
@@ -248,6 +276,88 @@ cd ## should now be in /root
 git clone https://github.com/turtureanu/pacman-hooks.git
 cd pacman-hooks
 cp *.hook /etc/pacman.d/hooks/
+```
+
+##### Edit#1 | July 23 2024
+
+I now dual boot 2 Linux distros using a smart rEFInd & fstab setup, so my current pacman hooks are a bit different, have a look at them:
+
+Hooks:
+
+- 100-remove-linux-before-upgrade.hook
+- 940-relocate-kernel.hook
+- 940-sign_kernel_for_secure_boot.hook
+
+`100-remove-linux-before-upgrade.hook`:
+
+```sh
+[Trigger]
+Operation = Install
+Operation = Upgrade
+Type = Package
+
+Target = linux
+Target = linux-lts
+Target = linux-hardened
+Target = linux-zen
+Target = linux-xanmod
+Target = linux-xanmod-calcule
+Target = linux-xanmod-git
+Target = linux-xanmod-rt
+Target = linux-xanmod-anbox
+
+[Action]
+Description = Removing linux kernels before (re)install/upgrade, allows for 940-relocate-linux.hook to work flawlessly (no multiple kernels)
+When = PreTransaction
+Exec = /bin/sh -c 'rm /boot/vmlinuz* && rm /boot/initramfs*'
+```
+
+`940-relocate-kernel.hook`:
+
+```sh
+[Trigger]
+Operation = Install
+Operation = Upgrade
+Type = Package
+
+Target = linux
+Target = linux-lts
+Target = linux-hardened
+Target = linux-zen
+Target = linux-xanmod
+Target = linux-xanmod-calcule
+Target = linux-xanmod-git
+Target = linux-xanmod-rt
+Target = linux-xanmod-anbox
+
+[Action]
+Description = Rename kernel to know its name for when it gets signed
+When = PostTransaction
+Exec = /bin/sh -c 'mv /boot/vmlinuz-linux-* /boot/vmlinuz-linux && mv $(ls /boot/initramfs-linux*  | grep -v fallback) /boot/initramfs-linux.img'
+```
+
+`940-sign_kernel_for_secure_boot.hook`:
+
+```sh
+[Trigger]
+Operation = Install
+Operation = Upgrade
+Type = Package
+
+Target = linux
+Target = linux-lts
+Target = linux-hardened
+Target = linux-zen
+Target = linux-xanmod
+Target = linux-xanmod-calcule
+Target = linux-xanmod-git
+Target = linux-xanmod-rt
+Target = linux-xanmod-anbox
+
+[Action]
+Description = Sign the linux kernel for Secure Boot
+When = PostTransaction
+Exec = /bin/sh -c 'sbsign --key /mnt/boot/EFI_KEYS/DB.key --cert /mnt/boot/EFI_KEYS/DB.crt --output /boot/vmlinuz-linux /boot/vmlinuz-linux'
 ```
 
 #### mkinitcpio configuration

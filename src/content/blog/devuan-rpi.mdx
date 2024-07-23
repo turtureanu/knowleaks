@@ -113,10 +113,14 @@ dpkg: warning: See <https://wiki.debian.org/Teams/Dpkg/FAQ#broken-usrmerge>.
 
 Let's hope it's harmless in the long run.
 
-## Edit#1 | Feb 4 2023
+## Edit#0 | Feb 4 2023
 
 The `dpkg` problems have returned, it seems like multiple `armhf` packages have been corrupted in such a way that `dpkg` can't unpack them (`dpkg-deb` curiously works though). I tried switching to a mirror (http://sledjhamr.org/devuan/merged) and changing the suite to Chimaera (because Daedalus had the same corrupted packages). This seemed to work fine for the time being, but ended up failing because `/var/lib/dpkg/status` had a couple of random characters inserted throughout it (how does that even happen?!). Anyway, halfway through the bug report, I tried fixing up the status file and removing [`nala`](https://gitlab.com/volian/nala) (a pretty `apt` wrapper), after that and switching back to the "faulty" package repository, I once again tried installing and upgrading stuff and it surprisingly worked, couple minutes passed and the problems made themselves known again, I don't know what happened or why some archives are still getting corrupted.
 
 In the meantime I've switched to Alpine Linux, where the packages are handled by the [`apk`](https://wiki.alpinelinux.org/wiki/Alpine_Package_Keeper) package manager. I installed Alpine in [sys mode](https://wiki.alpinelinux.org/wiki/Installation#System_Disk_Mode) (default is [diskless](https://wiki.alpinelinux.org/wiki/Installation#Diskless_Mode)) with the help of the [Alpine Linux wiki article](https://wiki.alpinelinux.org/wiki/Classic_install_or_sys_mode_on_Raspberry_Pi) on how to do just that.
 
 Everything seems to be running just fine, let's just hope it stays that way.
+
+## Edit#1 | July 23 2024
+
+I switched to Raspberry Pi OS, because the packages available are more up to date compared to Alpine's arm repository.
