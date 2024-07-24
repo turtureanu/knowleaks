@@ -37,7 +37,7 @@ $article-width: 700px;
 $sidebar-width: 500px;
 
 // Fonts
-$normal-font: roboto, ubuntu, system-ui, -apple-system, blinkmacsystemfont, "Segoe UI", oxygen, cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+$normal-font: $code-font, roboto, ubuntu, system-ui, -apple-system, blinkmacsystemfont, "Segoe UI", oxygen, cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 $article-font: "Manrope Variable", $normal-font;
 $code-font: "JetBrains Mono Variable";
 
