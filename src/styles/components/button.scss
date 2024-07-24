@@ -12,7 +12,7 @@
   text-decoration: none;
   line-height: 2.875ch;
   color: $light;
-  font-family: "JetBrains Mono",'Courier New', Courier, monospace;
+  font-family: $code-font;
   
   &:hover {
     outline-color: $blue !important;
