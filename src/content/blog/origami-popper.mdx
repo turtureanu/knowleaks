@@ -1,0 +1,27 @@
+---
+title: "Origami Popper"
+description: "the traditional origami popper"
+pubDate: 2024-08-06
+tags: [origami]
+---
+
+![an origami popper](/origami/popper/thumbnail.webp)
+
+## Instructions
+
+import Carousel from "../../components/OrigamiCarouselAstro.astro";
+
+<Carousel origami="popper" />
+
+import Download from "../../components/Download.astro";
+import PrintPDF from "../../components/PrintPDF.astro";
+
+<div style="display: flex; justify-content: space-around; margin: 2em 0;">
+  <Download URL="/origami/popper/instructions.pdf" />
+  <PrintPDF pdfURL="/origami/popper/instructions.pdf" />
+</div>
+### Video
+
+import Video from "../../components/Video.astro";
+
+<Video path="/origami/popper/popper-video.mp4" />

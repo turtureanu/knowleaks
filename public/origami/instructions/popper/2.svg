@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="298.7067mm"
+   height="210.3999mm"
+   viewBox="0 0 298.70669 210.3999"
+   version="1.1"
+   id="svg5"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs2" />
+  <g
+     id="layer1"
+     transform="translate(621.26182,3442.7663)">
+    <g
+       id="g31680">
+      <g
+         id="g31565">
+        <g
+           id="g34682"
+           transform="translate(-893.92391,263.86075)">
+          <rect
+             style="font-variation-settings:normal;vector-effect:none;fill:#f0f0f0;fill-opacity:1;stroke:none;stroke-width:0.98039;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;-inkscape-stroke:none;paint-order:stroke fill markers;stop-color:#000000"
+             id="rect19703"
+             width="210"
+             height="297"
+             x="-3706.2273"
+             y="274.36877"
+             transform="matrix(0,1,1,0,0,0)" />
+          <path
+             style="color:#000000;fill:#808080;-inkscape-stroke:none"
+             d="m 274.36914,-3601.7266 v 1 h 13.125 v -1 z"
+             id="path19705" />
+          <g
+             id="path21347">
+            <path
+               style="color:#000000;fill:#303030;-inkscape-stroke:none;paint-order:stroke fill markers"
+               d="m 274.66797,-3706.627 -0.59961,0.7989 c 16.09591,12.0718 26.05078,31.9817 26.05078,52.1015 0,19.3354 -9.25735,38.4009 -24.25977,50.5782 8.39315,-15.4247 12.71987,-33.0427 12.13477,-50.5957 -0.53866,-16.1599 -5.11143,-32.1647 -13.19141,-46.17 l -0.86718,0.5 c 7.99677,13.8611 12.52547,29.7097 13.05859,45.7032 0.60561,18.1683 -3.97439,36.4884 -13.05859,52.2343 l 0.73242,0.6485 c 16.35942,-12.2695 26.45117,-32.4492 26.45117,-52.8985 0,-20.4492 -10.09175,-40.6308 -26.45117,-52.9004 z"
+               id="path33262" />
+            <g
+               id="g33254">
+              <path
+                 style="color:#000000;fill:#303030;-inkscape-stroke:none"
+                 d="m 273.89062,-3700.4941 -1.22851,4.58 0.96484,0.2598 0.97071,-3.6152 3.61523,0.9707 0.25781,-0.9668 z"
+                 id="path33256" />
+            </g>
+          </g>
+          <path
+             style="color:#000000;fill:#303030;stroke-dasharray:3.99999, 1;-inkscape-stroke:none"
+             d="m 274.36914,-3654.2266 v 1 h 4 v -1 z m 5,0 v 1 h 4 v -1 z m 5,0 v 1 h 3.125 v -1 z"
+             id="path15560-1" />
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>

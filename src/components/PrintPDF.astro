@@ -1,0 +1,25 @@
+---
+// PdfPrinter.astro
+const { pdfURL } = Astro.props;
+---
+
+<!-- Load print-js from a CDN -->
+<script>
+  import printJS from "print-js";
+
+  const printButton = document.getElementById('print-button');
+  const pdfURL = printButton!.getAttribute('data-pdf-url');
+
+  printButton!.addEventListener('click', () => {
+    printJS(pdfURL!, "pdf");
+  });
+</script>
+
+
+<button class="action-button button" id="print-button" data-pdf-url={pdfURL}>
+  Print
+</button>
+
+<style lang="scss">
+  @use "../styles/components/action-button";
+</style>

@@ -171,6 +171,7 @@ const blogCollection = await getCollection("blog");
           grid-row: 1;
           grid-column: span 2;
           font-family: $article-font;
+          font-size: 1.75rem;
           font-weight: 700;
 
           .new {
@@ -251,8 +252,9 @@ const blogCollection = await getCollection("blog");
           padding: 0.5em 0.2em;
           white-space: pre;
           color: $light;
-          font-family: "Ubuntu Mono", $code-font;
+          font-family: $code-font;
           font-size: 1.5rem;
+          font-weight: 500;
 
           &::before {
             padding-right: 0.25em;
@@ -265,7 +267,7 @@ const blogCollection = await getCollection("blog");
           }
 
           &.selected {
-            font-weight: 700;
+            font-weight: 800;
 
             &::before {
               content: ">";
@@ -278,7 +280,8 @@ const blogCollection = await getCollection("blog");
         }
 
         .blog-posts {
-          h2 { 
+          h2 {
+            margin-top: 2em;
             margin-bottom: 0.625em;
             text-align: center;
           }
@@ -287,6 +290,7 @@ const blogCollection = await getCollection("blog");
             display: flex;
             justify-content: right;
             margin-top: 0.5em;
+            font-weight: 500;
 
             * + * {
               margin-left: 0.5em;

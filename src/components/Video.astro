@@ -1,0 +1,21 @@
+---
+// Define the props
+const { youtube = false, youtubeUrl, path, thumbnail="" } = Astro.props;
+---
+
+{youtube ? (
+  <div class="plyr__video-embed" id="player">
+    <iframe src={youtubeUrl} allowfullscreen allowtransparency title=""></iframe>
+  </div>
+) : (
+  <video id="player" controls poster={thumbnail}>
+    <source src={path} type={`video/${path.split('.').pop()}`} />
+  </video>
+)}
+
+<style>
+  #player {
+    margin: 2em auto;
+    width: 100%;
+  }
+</style>

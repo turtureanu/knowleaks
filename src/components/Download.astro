@@ -1,0 +1,11 @@
+---
+const { URL } = Astro.props;
+---
+
+
+
+<a class="action-button button" href={URL} download={URL.match(/[^/]+$/)[0]}>Download</a>
+
+<style lang="scss">
+  @use "../styles/components/action-button";
+</style>

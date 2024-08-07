@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="298.70706mm"
+   height="210.80078mm"
+   viewBox="0 0 298.70706 210.80078"
+   version="1.1"
+   id="svg5"
+   inkscape:version="1.2.2 (b0a8486541, 2022-12-01)"
+   sodipodi:docname="origami-popper.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview7"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="1"
+     inkscape:showpageshadow="false"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="true"
+     inkscape:deskcolor="#ffffff"
+     inkscape:document-units="mm"
+     showgrid="false"
+     inkscape:zoom="0.32"
+     inkscape:cx="-2390.625"
+     inkscape:cy="-7956.25"
+     inkscape:window-width="1680"
+     inkscape:window-height="1041"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="g31565"
+     borderlayer="false"
+     showborder="false"
+     showguides="false" />
+  <defs
+     id="defs2" />
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(571.17148,3737.0978)">
+    <g
+       id="g31680">
+      <g
+         id="g31565">
+        <g
+           id="g33580"
+           inkscape:export-filename="../../../personal-website/public/origami/instructions/popper/1.svg"
+           inkscape:export-xdpi="96"
+           inkscape:export-ydpi="96"
+           transform="translate(-440.17339,-30.269529)">
+          <rect
+             style="font-variation-settings:normal;vector-effect:none;fill:#f0f0f0;fill-opacity:1;stroke:none;stroke-width:0.98039;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;-inkscape-stroke:none;paint-order:stroke fill markers;stop-color:#000000"
+             id="rect778"
+             width="210"
+             height="297"
+             x="-3706.4275"
+             y="-129.29103"
+             transform="matrix(0,1,1,0,0,0)" />
+          <path
+             style="color:#000000;fill:#303030;stroke-dasharray:3.99999, 1;-inkscape-stroke:none"
+             d="m -129.29102,-3601.9277 v 1 h 4 v -1 z m 5,0 v 1 h 4 v -1 z m 5,0 v 1 h 3.125 v -1 z"
+             id="path15560" />
+          <g
+             id="path16525">
+            <path
+               style="color:#000000;fill:#303030;-inkscape-stroke:none;paint-order:stroke fill markers"
+               d="m -128.99023,-3706.8281 -0.60157,0.8008 c 32.323564,24.2426 52.300784,64.1951 52.300784,104.5996 0,39.5436 -19.219291,78.5551 -50.335934,102.9297 17.44858,-31.2184 26.27748,-67.1989 25.08593,-102.9454 -1.07455,-32.2366 -10.19807,-64.1709 -26.3164,-92.1093 l -0.86719,0.5 c 16.03512,27.7941 25.11459,59.5723 26.18359,91.6425 1.2144,36.4318 -7.9677,73.1583 -26.18359,104.7325 l 0.73438,0.6504 c 32.587068,-24.4403 52.699214,-64.6666 52.699214,-105.4004 0,-40.7339 -20.112146,-80.9601 -52.699214,-105.4004 z"
+               id="path33424" />
+            <g
+               id="g33416">
+              <path
+                 style="color:#000000;fill:#303030;-inkscape-stroke:none"
+                 d="m -129.76953,-3694.1309 -1.22852,4.5801 0.96485,0.2598 0.9707,-3.6153 3.61523,0.9688 0.25782,-0.9648 z"
+                 id="path33418" />
+            </g>
+          </g>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>

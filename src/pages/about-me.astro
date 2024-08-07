@@ -112,15 +112,21 @@ import "../styles/layouts/blogPost.scss";
         h1 {
           margin: 2rem 0 3rem;
           padding: 0;
-          text-align: left;
+          text-align: center;
+          text-decoration: dashed underline $blue 0.125ch;
+          text-underline-offset: 0.5ch;
           line-height: 3ch;
-          font-size: 1.8rem;
+          font-size: 2.5rem
         }
       }
 
       .favorite-color {
-        background-color: $dark2;
+        background-color: red;
         color: hsl(200deg 100% 50%);
+        
+        @media screen and (prefers-color-scheme: dark) {
+          background-color: $dark2;
+        }
       }
 
       .light .favorite-color {
@@ -189,6 +195,10 @@ import "../styles/layouts/blogPost.scss";
         @media screen and (min-width: $medium) {
           grid-template-columns: 1fr 1fr;
         }
+      }
+
+      h2 {
+        font-size: 1.875rem;
       }
     </style>
   </body>
