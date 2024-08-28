@@ -39,7 +39,7 @@
     "stylelint-declaration-block-no-ignored-properties": "^2.8.0",
     "stylelint-scss": "^6.5.0",
     "svgo": "^3.3.2",
-    "swiper": "^11.1.9"
+    "swiper": "^11.1.10"
   },
   "devDependencies": {
     "@iconify/svelte": "^4.0.2",
