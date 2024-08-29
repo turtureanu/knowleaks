@@ -18,7 +18,7 @@
     "@astrojs/svelte": "^5.7.0",
     "@fontsource-variable/fira-code": "^5.0.19",
     "@fontsource-variable/rethink-sans": "^5.0.6",
-    "@fontsource-variable/roboto-flex": "^5.0.15",
+    "@fontsource-variable/roboto-flex": "^5.0.16",
     "@fontsource/fira-sans": "^5.0.20",
     "@stylistic/stylelint-plugin": "^3.0.1",
     "@types/js-cookie": "^3.0.6",
