@@ -22,7 +22,7 @@
     "@fontsource/fira-sans": "^5.0.20",
     "@stylistic/stylelint-plugin": "^3.0.1",
     "@types/js-cookie": "^3.0.6",
-    "astro": "^4.14.5",
+    "astro": "^4.15.1",
     "astro-compress": "^2.3.1",
     "astro-robots-txt": "^1.0.0",
     "font-awesome": "^4.7.0",
