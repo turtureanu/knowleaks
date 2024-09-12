@@ -19,7 +19,7 @@
     "@fontsource-variable/fira-code": "^5.0.19",
     "@fontsource-variable/rethink-sans": "^5.0.6",
     "@fontsource-variable/roboto-flex": "^5.0.16",
-    "@fontsource/fira-sans": "^5.0.20",
+    "@fontsource/fira-sans": "^5.1.0",
     "@stylistic/stylelint-plugin": "^3.0.1",
     "@types/js-cookie": "^3.0.6",
     "astro": "^4.14.5",
