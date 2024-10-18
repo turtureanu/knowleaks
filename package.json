@@ -16,7 +16,7 @@
     "@astrojs/rss": "^4.0.7",
     "@astrojs/sitemap": "^3.2.1",
     "@astrojs/svelte": "^5.7.0",
-    "@fontsource-variable/fira-code": "^5.0.19",
+    "@fontsource-variable/fira-code": "^5.1.0",
     "@fontsource-variable/rethink-sans": "^5.1.0",
     "@fontsource-variable/roboto-flex": "^5.1.0",
     "@fontsource/fira-sans": "^5.1.0",
