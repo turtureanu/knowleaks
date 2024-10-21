@@ -15,7 +15,7 @@
     "@astrojs/mdx": "^3.1.8",
     "@astrojs/rss": "^4.0.7",
     "@astrojs/sitemap": "^3.2.1",
-    "@astrojs/svelte": "^5.7.0",
+    "@astrojs/svelte": "^5.7.2",
     "@fontsource-variable/fira-code": "^5.1.0",
     "@fontsource-variable/rethink-sans": "^5.1.0",
     "@fontsource-variable/roboto-flex": "^5.1.0",
