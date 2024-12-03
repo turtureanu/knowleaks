@@ -1,0 +1,49 @@
+<script>
+	let otherTheme = () => (getTheme() === 'dark' ? 'light' : 'dark');
+
+	let getTheme = () =>
+		typeof localStorage !== 'undefined' && localStorage.getItem('theme') != null
+			? localStorage.getItem('theme')
+			: 'dark';
+
+	const setTheme = (themeToSet: string) => {
+		if (themeToSet === 'dark') {
+			localStorage.setItem('theme', 'dark');
+			document.documentElement.classList.remove('light');
+		} else {
+			localStorage.setItem('theme', 'light');
+			document.documentElement.classList.add('light');
+		}
+	};
+
+	const toggleTheme = () => {
+		setTheme(otherTheme());
+	};
+
+	const btn = document.querySelector('#themeButton');
+	const changeBtnText = () => {
+		btn &&
+			(btn.textContent = otherTheme().charAt(0).toUpperCase() + otherTheme().slice(1) + ' mode');
+	};
+	changeBtnText();
+
+	btn &&
+		btn.addEventListener('click', () => {
+			toggleTheme();
+			changeBtnText();
+		});
+</script>
+
+<button class="button" id="themeButton"></button>
+
+<style lang="scss">
+	@use '../../styles/variables.scss' as *;
+	@use '../../styles/components/button.scss' as *;
+
+	.button {
+		margin: 0.5em;
+		border: none;
+		font-size: 1.6rem;
+		font-weight: 400;
+	}
+</style>

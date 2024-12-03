@@ -1,6 +1,4 @@
 ---
-import OrigamiCarouselSvelte from "./OrigamiCarouselSvelte.svelte";
-
 const { origami } = Astro.props;
 
 // I'm sick with working with Astro.glob(), too abstract and hard to work with
@@ -8,7 +6,7 @@ const imagesPath = import.meta.glob("/public/origami/instructions/*/*.svg", {
   eager: true,
 });
 
-let images: any[] = [];
+let images = [];
 for (let image in imagesPath) {
   if (image.includes(origami)) {
     images.push(image.replace("/public", ""));
@@ -17,11 +15,48 @@ for (let image in imagesPath) {
 
 // How Astro.glob likes to sort: 1 10 11 12 13 ... 2 21 23 ...
 // How I like to sort: 1 2 3 ... 11 12 13 ...
-let ascendingSort = (
-  x: { match: (arg0: RegExp) => string },
-  y: { match: (arg0: RegExp) => string }
-) => parseInt(x.match(/\d+/g)) - parseInt(y.match(/\d+/g));
+let ascendingSort = (x: string, y: string) => {
+  const numX = parseInt(x.match(/\d+/g)?.[0] || '0');
+  const numY = parseInt(y.match(/\d+/g)?.[0] || '0');
+  return numX - numY;
+};
+
 images.sort(ascendingSort);
 ---
 
-<OrigamiCarouselSvelte client:load images={images} />
+<script>
+  import { register } from 'swiper/element/bundle';
+  register()
+</script>
+
+<swiper-container
+  class="swiper"
+  navigation="true"
+  pagination="true"
+  pagination-type="fraction"
+>
+  {images.map((image) => (
+    <swiper-slide>
+      <img
+        class="origami-image"
+        src={image}
+        alt="origami instruction"
+        loading="lazy"
+      />
+      <div class="swiper-lazy-preloader"></div>
+    </swiper-slide>
+  ))}
+</swiper-container>
+
+<style lang="scss">
+  @use "../styles/variables.scss" as *;
+  @use 'sass:math';
+
+  .swiper {
+    margin-top: 2rem;
+  }
+
+  .origami-image {
+    height: calc(($article-width / 2) * (math.sqrt(2) + 1));
+  }
+</style>

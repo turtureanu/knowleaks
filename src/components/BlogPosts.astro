@@ -1,0 +1,238 @@
+---
+import { getCollection } from 'astro:content';
+const blogCollection = await getCollection('blog');
+---
+
+<section class="blog-posts">
+    <h2>Blog posts</h2>
+    <div class="tag-container">
+      <script is:inline>
+        const handleTags = (tag) => {
+          // add `.selected` to blog post tags (buttons)
+          document.querySelector(`.blog-post-tag.${tag}`).classList.toggle("selected");
+          let selectedTags = []; // create an array of the selected tags (buttons)
+
+          // populate the array of `selectedTags`
+          // for each selected `blog-post-tag` (button)
+          document.querySelectorAll(".blog-post-tag.selected").forEach(e => {
+            // push to the `selectedTags` array the names of the selected blog post tags (using their classList and the `selected` class)
+            selectedTags.push(Array.from(e.classList).filter(e => e != "blog-post-tag" && e != "selected")[0]);
+          });
+
+          // for each blog post
+          document.querySelectorAll(".blog-post").forEach(post => {
+            let isHidden = false;
+            // check if all the selected tags apply
+            selectedTags.map(selectedTag => {
+              if (!post.classList.contains(selectedTag)) {
+                isHidden = true; // if not mark it for hiding
+              }
+            });
+
+            // hide/unhide posts
+            if (isHidden) {
+              post.classList.add("hidden");
+            } else {
+              post.classList.remove("hidden");
+            }
+          });
+        }
+      </script>
+      {
+        blogCollection
+          .map((blogPost: { data: { tags: any; }; }) => {
+            return blogPost.data.tags;
+          })
+          .flat()
+          .filter((value: any, index: any, self: string | any[]) => self.indexOf(value) === index)
+          .map((tag: unknown) => 
+            <button
+              onclick=`handleTags('${tag}')`
+              class={`blog-post-tag ${tag}`}
+            >{tag}</button>
+          )
+      }
+    </div>
+    {
+      blogCollection.sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime()).map((blogPost) => {
+        if (!blogPost.data.draft) {
+          // all posts which are not drafts
+          return (
+            <a
+              class=`button blog-post ${blogPost.data.tags.toString().replaceAll(',', ' ')}`
+              href={`/blog-posts/${blogPost.slug}/`}
+            >
+              <div class="title">
+                {/* Check if posts are newer than 30 days, and if so, add a New span tag (using CSS ::after) */}
+                <span class={Math.floor((new Date().getTime() - blogPost.data.pubDate.getTime()) / (24 * 60 * 60 * 1000)) <= 30 ? "new" : "hidden"}></span>
+                {blogPost.data.title}
+              </div>
+              <div class="tags">
+                {blogPost.data.tags.map((tag: unknown) => {
+                  return <div class={`tag ${tag}`}>{tag}</div>;
+                })}
+              </div>
+              <span class="date">
+                {blogPost.data.pubDate.toDateString().slice(4, 16)}
+              </span>
+            </a>
+          );
+        }
+      })
+    }
+  </section>
+
+
+  <style lang="scss">
+    @use "../styles/variables.scss" as *;
+    @use "../styles/components/button.scss" as *;
+
+    .blog-post {
+      // Post aligning
+      display: grid;
+      align-items: baseline;
+      text-align: left;
+
+      .title {
+        grid-row: 1;
+        grid-column: span 2;
+        font-family: $article-font;
+        font-size: 1.75rem;
+        font-weight: 700;
+
+        .new {
+          background-color: $light3;
+          padding: 0 0.5rem;
+
+          &::after {
+            content: "New";
+          }
+        }
+      }
+
+      .tags {
+        grid-row: 2;
+        grid-column: 2;
+      }
+
+      .date {
+        grid-row: 2;
+        grid-column: 1;
+      }
+    }
+
+  
+
+      .blog-post-tag, .blog-posts .tag {
+        border-radius: 0.375rem;
+        /* stylelint-disable no-descending-specificity */
+          &.linux + .close-button, &.linux {
+            background-color: $linux-tag;
+          }
+
+          &.security + .close-button, &.security {
+            background-color: $security-tag;
+          }
+
+          &.origami + .close-button, &.origami {
+            background-color: $origami-tag;
+          }
+
+          &.android + .close-button, &.android {
+            background-color: $android-tag;
+          }
+
+          &.coding + .close-button, &.coding {
+            background-color: $coding-tag;
+          }
+        }
+
+      .tag-container {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+        margin: 1.5em 2.4rem;
+
+        .blog-post-tag:not(.selected) + .close-button {
+          display: none;
+        }
+      }
+
+      .blog-post-tag {
+        margin: 0.25em;
+        border: none;
+        background-color: transparent;
+        cursor: pointer;
+        padding: 0.5em 0.2em;
+        white-space: pre;
+        color: $light;
+        font-family: $code-font;
+        font-size: 1.5rem;
+        font-weight: 500;
+
+        &::before {
+          padding-right: 0.25em;
+          content: " ";
+        }
+
+        &::after {
+          padding-left: 0.25em;
+          content: " ";
+        }
+
+        &.selected {
+          font-weight: 800;
+
+          &::before {
+            content: ">";
+          }
+
+          &::after {
+            content: "<";
+          }
+        }
+      }
+
+      .blog-posts {
+        h2 {
+          margin-top: 2em;
+          margin-bottom: 0.625em;
+          text-align: center;
+        }
+
+        .tags {
+          display: flex;
+          justify-content: right;
+          margin-top: 0.5em;
+          font-weight: 500;
+
+          * + * {
+            margin-left: 0.5em;
+          }
+
+          .tag {
+            padding: 0 0.375em;
+            text-shadow: none;
+            color: $light;
+            font-size: 1.4rem;
+          }
+        }
+
+        .hidden {
+          display: none;
+        }
+
+        .not-hidden {
+          display: inherit;
+        }
+      }
+    
+
+    .light {
+      .blog-post .title .new {
+        background-color: $light3;
+        color: $light;
+      }
+    }
+  </style>

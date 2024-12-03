@@ -1,7 +1,6 @@
 import { defineConfig } from "astro/config";
 import mdx from "@astrojs/mdx";
 import sitemap from "@astrojs/sitemap";
-import svelte from "@astrojs/svelte";
 
 // https://astro.build/config
 import robotsTxt from "astro-robots-txt";
@@ -32,7 +31,7 @@ export default defineConfig({
       langs: [],
     },
   },
-  integrations: [mdx(), sitemap(), compress(), robotsTxt(), svelte()],
+  integrations: [mdx(), sitemap(), compress(), robotsTxt()],
   optimizeDeps: {
     include: ["lodash.get", "lodash.isequal", "lodash.clonedeep"],
   },

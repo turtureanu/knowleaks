@@ -3,11 +3,11 @@
 
 html {
   font-size: 62.5%; // 1rem = 10px
+  background: $background;
 }
 
 body {
   margin: 0;
-  background-color: $background;
   padding: 0;
   color: $light;
   font-family: $normal-font;
@@ -15,7 +15,7 @@ body {
 }
 
 .light body {
-  background-color: $background-light;
+  background: $background-light;
   color: $dark;
 }
 
