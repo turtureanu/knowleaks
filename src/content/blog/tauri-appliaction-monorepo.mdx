@@ -1,0 +1,157 @@
+---
+title: "Migrating a Tauri application to a moon monorepo"
+description: "When scaling any project, it is easier to work in a monorepo, this tutorial focuses on using the moon monorepo tool to manage a Tauri project"
+pubDate: 2024-12-03
+tags: [coding]
+---
+
+![thumbnail](/coding/tauri-application-monorepo/thumbnail.png)
+
+## Project file structure
+
+Moon doesn't enforce any type of monorepo file structure, but for an easy to set up and maintainable project I use the following:
+
+```
+tauri/
+├── src/
+│   ├── routes/
+│   ├── app.html
+│   └── moon.yml
+├── src-tauri/
+│   ├── src/
+│   │   ├── lib.rs
+│   │   └── main.rs
+│   ├── target/
+│   ├── build.rs
+│   ├── tauri.conf.json
+│   └── moon.yml
+├── packages.json
+└── ...
+```
+
+> The above setup is a Sveltekit + Tauri setup. \
+> If you want similar tree diagrams, head on over to https://tree.nathanfriend.com/
+
+### Initializing moon
+
+```sh
+moon init
+```
+
+This creates a `.moon/` directory at the roon of the project. Inside it there is a `workspace.yml` file.
+
+The `workspace.yml` file tells moon where the projects are located (in our case in `src/` and `src-tauri`).
+
+## Configuring moon
+
+### workspace.yml
+
+Moon documentation: https://moonrepo.dev/docs/config/workspace
+
+```sh
+# https://moonrepo.dev/docs/config/workspace
+$schema: 'https://moonrepo.dev/schemas/workspace.json'
+
+projects:
+  frontend: 'src'
+  backend: 'src-tauri'
+
+vcs: # version control system
+  manager: 'git'
+  provider: 'github'
+  defaultBranch: 'main'
+  hooks:
+    pre-commit:
+      - 'moon run :lint :format --affected --status=staged'
+
+telemetry: false
+
+versionConstraint: '>=1.30.2' # moon minimal version
+```
+
+### moon.yml
+
+Each project must have a `moon.yml`, which tells moon how the project should be handled.
+
+It must contain a `name` and a `description`, other metadata is optional. The language, for example, is inherited from the files in the project but may be optionally specified.
+
+Tasks define the, you guessed it, tasks that can be run, for brevity, here are the tasks I want configured:
+
+- frontend
+  - build: `cd ../ && bun run build`
+  - dev: `cd ../ && bun run dev`
+
+- backend
+  - build: `cargo build`
+  - dev:  `bunx tauri dev`
+
+To run each task you just have to write `moon run <project-name>:<task>`. For example, if I wanted to build the web portion of my Tauri app I would just run `moon run frontend:build`.
+
+#### Frontend (`src/moon.yml`)
+
+```yml
+$schema: "https://moonrepo.dev/schemas/project.json"
+
+language: "typescript"
+
+project:
+  name: "Tauri Frontend"
+  description: "Frontend of the Tauri application"
+
+stack: "frontend"
+
+tags:
+  - "svelte"
+  - "tauri"
+
+type: "application"
+
+tasks:
+  build:
+    command: "cd ../ && bun run build"
+  dev:
+    command: "cd ../ && bun run dev"
+```
+
+#### Backend (`src-tauri/moon.yml`)
+
+```yml
+$schema: "https://moonrepo.dev/schemas/project.json"
+
+language: "rust"
+
+project:
+  name: "Tauri Backend"
+  description: "Backend of the Tauri application"
+
+stack: "backend"
+
+tags:
+  - "rust"
+  - "tauri"
+
+type: "application"
+
+platform: "rust"
+
+tasks:
+  build:
+    command: "cargo build"
+  dev:
+    command: "bunx tauri dev"
+
+dependsOn:
+  - "frontend"
+```
+
+## Installing moon
+
+According to the [moon website](https://moonrepo.dev/) the best way is to use their [proto](https://moonrepo.dev/proto) version and toolchain manager, but you can install it as an npm package as well, or get it from your distro's package manager.
+
+```sh
+proto install moon # using proto
+yay moon-bin # or get it from the AUR
+bun install --save-dev @moonrepo/cli # using npm/bun
+```
+
+Alright, that should be it, happy coding!
