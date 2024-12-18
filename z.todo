@@ -38,3 +38,11 @@
   - Not a good idea on mobile (not enough space to show results)
 [x] Switch to -Roboto- Manrope as the main font
   // Using a mono font for normal article text is not such a good idea
+[x] Remove unused font
+[x] Fix color on "New" tag when in light mode
+[-] Make a transparent + blur effect on the navbar and the buttons
+[x] Make the background a subtle gradient in light mode as well
+[x] Make the navbar sticky for desktop users
+[x] Center the desktop navigation
+[x] Convert all PNG and JPEG images to AVIF (except social-image.png)
+[ ] Have a look at https://github.com/Playform/Compress, maybe it's a slightly better and updated implementation

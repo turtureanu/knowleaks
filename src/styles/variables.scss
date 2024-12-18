@@ -7,19 +7,19 @@ $dark: hsl(205deg 15% 8%);
 $dark1: hsl(205deg 15% 10%);
 $dark2: hsl(205deg 15% 20%);
 $dark3: hsl(205deg 15% 30%);
-$background: linear-gradient(45deg, #131a1b, #101a1b);
-$background-light: $light;
+$background-dark: linear-gradient(45deg, hsl(188, 17%, 9%), hsl(185, 26%, 8%));
+$background-light: linear-gradient(45deg, hsl(194, 38%, 98%), hsl(180, 81%, 99%));
 $dark-blue: hsl(205deg 100% 25%);
 $blue: hsl(205deg 100% 60%);
 $light-blue: hsl(205deg 100% 80%);
-$red: hsl(334deg 50% 50%);
-$orange: hsl(18deg 50% 60%);
-$purple: hsl(250deg 50% 60%);
+$red: hsl(334deg 50% 45%);
+$orange: hsl(207, 100%, 40%);
+$purple: hsl(250deg 50% 50%);
 $yellow: hsl(60deg 50% 60%);
-$green: hsl(155deg 38% 45%);
+$green: hsl(143, 35%, 37%);
 
 // Tags
-$linux-tag: gray;
+$linux-tag: rgb(97, 97, 97);
 $security-tag: $red;
 $origami-tag: $orange;
 $android-tag: $green;

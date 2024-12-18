@@ -5,7 +5,7 @@ pubDate: 2023-03-21
 tags: [security, linux]
 ---
 
-![an HDD with a label on it that says "ENCRYPTED"](/linux/hardware-encryption/thumbnail.jpg)
+![an HDD with a label on it that says "ENCRYPTED"](/linux/hardware-encryption/thumbnail.avif)
 
 ## A word of advice
 
@@ -131,10 +131,16 @@ Useful links:
 
 ## Edit#0 | Jan 30 2024
 
-In August of 2023 I took a stab at making my own pre-boot authenticate image.
+In August of 2023 I took a stab at making my own pre-boot authentication image.
 I wanted it to be differenent from others, have a different greeting message and maybe play some games while at it.
 
-In the end, I created what I call UPBADOOM, or _Uncomplicated Pre-Boot Authentication and DOOM image_.
+In the end I created something that I call UPBADOOM, or _Uncomplicated Pre-Boot Authentication and DOOM image_.
 Before unlocking the disk, you have the option of playing the original DOOM.
 
 If you're curious and want to try it, it is available on my GitHub: https://github.com/turtureanu/upbadoom
+
+## Edit#2 | December 18 2024
+
+I have archived the UPBADOOM repository, because I moved on to an SSD with a higher capacity which doesn't support
+OPAL. Now thinking about it, I don't think I'll ever go back to using hardware encryption because of the flaws it
+might contain + there is no real performance advantage when compared to software FDE.

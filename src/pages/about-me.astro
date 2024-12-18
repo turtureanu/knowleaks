@@ -1,206 +1,190 @@
 ---
-import BaseHead from "../components/BaseHead.astro";
-import Nav from "../components/Nav.astro";
-import { SITE_DESCRIPTION, SITE_TITLE } from "../config";
+import BaseHead from '../components/BaseHead.astro';
+import Nav from '../components/Nav.astro';
+import { SITE_DESCRIPTION, SITE_TITLE } from '../config';
 
-import "../styles/layouts/blogPost.scss";
+import '../styles/layouts/blogPost.scss';
 ---
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-  <head>
-    <BaseHead
-      title={"About me" + " | " + SITE_TITLE}
-      description={SITE_DESCRIPTION}
-    />
-  </head>
-  <body>
-    <Nav />
-    <article>
-      <div class="container">
-        <h1>Mircea-Sebastian Turtureanu</h1>
-        <p>
-          Hi! 👋 <br />
-          <br />
-          Name's Sebastian, I'm a self-taught front-end web developer, hobbyist Linux
-          administrator, and sophisticated origamist.
-          <br /><br />
-          I like configuring and hardening Linux machines, as well as exploring inovative
-          ways of attacking them. My current field of study is cybersecurity, but I am
-          also interested in general IT and various programming
-          languages. I like experimenting with new technologies and adopting what is right,
-          not what is necessarily popular.
-          <br />
-          <br />
-          Other interests include basic IoT and electronics design, Linux gaming, retro gaming,
-          studying efficient learning strategies, reading, and researching <i
-            >anything</i
-          >.
-          <br />
-          <br />
-          My favorite color's a saturated blue around <span
-            class="favorite-color">#00AAFF</span
-          >.
-        </p>
-      </div>
-      <h2>Certifications</h2>
-      <ul class="certificates">
-        <li>
-          <a
-            class="certificate-container"
-            href="https://www.freecodecamp.org/certification/turtureanu/responsive-web-design"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <img
-              class="certificate"
-              src="/FCC-responsive-certification.png"
-              alt="Screenshot of my FreeCodeCamp certification for Responsive Web Design"
-            />
-            <div class="overlay">
-              <p class="certificate-name">Responsive Web Design</p>
-            </div>
-          </a>
-        </li>
-        <li>
-          <a
-            class="certificate-container"
-            href="https://www.freecodecamp.org/certification/turtureanu/javascript-algorithms-and-data-structures"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <img
-              class="certificate"
-              src="/FCC-JS-certification.png"
-              alt="Screenshot of my FreeCodeCamp certification for JavaScript Algorithms and Data Structures"
-            />
-            <div class="overlay">
-              <p class="certificate-name">
-                JavaScript Algorithms and Data Structures
-              </p>
-            </div>
-          </a>
-        </li>
-      </ul>
-      <h2>Contact/Socials</h2>
-      <ul class="social">
-        <li>
-          GitHub: <a
-            target="_blank"
-            rel="noopener noreferrer"
-            href="https://github.com/turtureanu"
-            >https://github.com/turtureanu</a
-          >
-        </li>
-        <li>
-          <a
-            target="_blank"
-            rel="noopener noreferrer"
-            href="https://getsession.org">Session</a
-          > ID: 050ca685dc6ad14eb5a79cf0007f36802b109dcaba70e63bcf0a691e64c62ec56d
-        </li>
-        <li>
-          Email: <a href="mailto:sebastian.knowleaks.r9q1g@aleeas.com"
-            >sebastian.knowleaks.r9q1g@aleeas.com</a
-          >
-        </li>
-      </ul>
-    </article>
-    <style lang="scss">
-      @use "../styles/variables" as *;
+	<head>
+		<BaseHead title={'About me' + ' | ' + SITE_TITLE} description={SITE_DESCRIPTION} />
+	</head>
+	<body>
+		<Nav />
+		<article>
+			<div class="container">
+				<h1>Mircea-Sebastian Turtureanu</h1>
+				<p>
+					Hi! 👋 <br />
+					<br />
+					Name's Sebastian, I'm a self-taught front-end web developer, hobbyist Linux administrator,
+					and sophisticated origamist.
+					<br /><br />
+					I like configuring and hardening Linux machines, as well as exploring inovative ways of attacking
+					them. My current field of study is cybersecurity, but I am also interested in general IT and
+					various programming languages. I like experimenting with new technologies and adopting what
+					is right, not what is necessarily popular.
+					<br />
+					<br />
+					Other interests include basic IoT and electronics design, Linux gaming, retro gaming, studying
+					efficient learning strategies, reading, and researching <i>anything</i>.
+					<br />
+					<br />
+					My favorite color's a saturated blue around <span class="favorite-color">#00AAFF</span>.
+				</p>
+			</div>
+			<h2>Certifications</h2>
+			<ul class="certificates">
+				<li>
+					<a
+						class="certificate-container"
+						href="https://www.freecodecamp.org/certification/turtureanu/responsive-web-design"
+						target="_blank"
+						rel="noopener noreferrer"
+					>
+						<img
+							class="certificate"
+							src="/FCC-responsive-certification.avif"
+							alt="Screenshot of my FreeCodeCamp certification for Responsive Web Design"
+						/>
+						<div class="overlay">
+							<p class="certificate-name">Responsive Web Design</p>
+						</div>
+					</a>
+				</li>
+				<li>
+					<a
+						class="certificate-container"
+						href="https://www.freecodecamp.org/certification/turtureanu/javascript-algorithms-and-data-structures"
+						target="_blank"
+						rel="noopener noreferrer"
+					>
+						<img
+							class="certificate"
+							src="/FCC-JS-certification.avif"
+							alt="Screenshot of my FreeCodeCamp certification for JavaScript Algorithms and Data Structures"
+						/>
+						<div class="overlay">
+							<p class="certificate-name">JavaScript Algorithms and Data Structures</p>
+						</div>
+					</a>
+				</li>
+			</ul>
+			<h2>Contact/Socials</h2>
+			<ul class="social">
+				<li>
+					GitHub: <a target="_blank" rel="noopener noreferrer" href="https://github.com/turtureanu"
+						>https://github.com/turtureanu</a
+					>
+				</li>
+				<li>
+					<a target="_blank" rel="noopener noreferrer" href="https://getsession.org">Session</a> ID:
+					050ca685dc6ad14eb5a79cf0007f36802b109dcaba70e63bcf0a691e64c62ec56d
+				</li>
+				<li>
+					Email: <a href="mailto:sebastian.knowleaks.r9q1g@aleeas.com"
+						>sebastian.knowleaks.r9q1g@aleeas.com</a
+					>
+				</li>
+			</ul>
+		</article>
+		<style lang="scss">
+			@use '../styles/variables' as *;
 
-      .container {
-        h1 {
-          margin: 2rem 0 3rem;
-          padding: 0;
-          text-align: center;
-          text-decoration: dashed underline $blue 0.125ch;
-          text-underline-offset: 0.5ch;
-          line-height: 3ch;
-          font-size: 2.5rem
-        }
-      }
+			.container {
+				h1 {
+					margin: 2rem 0 3rem;
+					padding: 0;
+					text-align: center;
+					text-decoration: dashed underline $blue 0.125ch;
+					text-underline-offset: 0.5ch;
+					line-height: 3ch;
+					font-size: 2.5rem;
+				}
+			}
 
-      .favorite-color {
-        background-color: red;
-        color: hsl(200deg 100% 50%);
-        
-        @media screen and (prefers-color-scheme: dark) {
-          background-color: $dark2;
-        }
-      }
+			.favorite-color {
+				background-color: red;
+				color: hsl(200deg 100% 50%);
 
-      .light .favorite-color {
-        background-color: $light2;
-      }
+				@media screen and (prefers-color-scheme: dark) {
+					background-color: $dark2;
+				}
+			}
 
-      .certificates {
-        display: grid;
-        grid-template-columns: 1fr;
-        gap: 1em;
-        margin: 0;
-        margin-top: 1em;
-        padding: 0;
-        list-style: none;
-        text-align: center;
+			.light .favorite-color {
+				background-color: $light2;
+			}
 
-        .certificate-container {
-          display: block;
-          position: relative;
+			.certificates {
+				display: grid;
+				grid-template-columns: 1fr;
+				gap: 1em;
+				margin: 0;
+				margin-top: 1em;
+				padding: 0;
+				list-style: none;
+				text-align: center;
 
-          &:visited {
-            color: $light;
-          }
-        }
+				.certificate-container {
+					display: block;
+					position: relative;
 
-        .overlay {
-          position: absolute;
-          inset: 0;
-          transition: all ease-in-out 100ms;
-          opacity: 0;
-          width: 100%;
-          height: 100%;
+					&:visited {
+						color: $light;
+					}
+				}
 
-          &:hover {
-            opacity: 1;
-            background-color: color-mix(in srgb, $dark 60%, transparent 40%);
-          }
-        }
+				.overlay {
+					position: absolute;
+					inset: 0;
+					transition: all ease-in-out 100ms;
+					opacity: 0;
+					width: 100%;
+					height: 100%;
 
-        .certificate-name {
-          position: absolute;
-          top: 50%;
-          left: 50%;
-          transform: translate(-50%, -50%);
-          opacity: inherit;
-          margin: 0;
-          padding: 0;
-          width: 100%;
-          color: $light;
-          font-size: 1.8rem;
-          font-weight: 600;
-        }
+					&:hover {
+						opacity: 1;
+						background-color: color-mix(in srgb, $dark 60%, transparent 40%);
+					}
+				}
 
-        li {
-          padding: 0;
+				.certificate-name {
+					position: absolute;
+					top: 50%;
+					left: 50%;
+					transform: translate(-50%, -50%);
+					opacity: inherit;
+					margin: 0;
+					padding: 0;
+					width: 100%;
+					color: $light;
+					font-size: 1.8rem;
+					font-weight: 600;
+				}
 
-          &::marker {
-            content: unset;
-          }
-        }
+				li {
+					padding: 0;
 
-        p {
-          padding: 1em;
-        }
+					&::marker {
+						content: unset;
+					}
+				}
 
-        @media screen and (min-width: $medium) {
-          grid-template-columns: 1fr 1fr;
-        }
-      }
+				p {
+					padding: 1em;
+				}
 
-      h2 {
-        font-size: 1.875rem;
-      }
-    </style>
-  </body>
+				@media screen and (min-width: $medium) {
+					grid-template-columns: 1fr 1fr;
+				}
+			}
+
+			h2 {
+				font-size: 1.875rem;
+			}
+		</style>
+	</body>
 </html>

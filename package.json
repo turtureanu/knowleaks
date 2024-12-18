@@ -12,16 +12,16 @@
   },
   "dependencies": {
     "@astrojs/image": "^0.18.0",
-    "@astrojs/mdx": "^4.0.1",
-    "@astrojs/rss": "^4.0.9",
+    "@astrojs/mdx": "4.0.2",
+    "@astrojs/rss": "4.0.10",
     "@astrojs/sitemap": "^3.2.1",
     "@fontsource-variable/fira-code": "^5.1.0",
     "@fontsource-variable/rethink-sans": "^5.1.0",
     "@fontsource-variable/roboto-flex": "^5.1.0",
-    "@fontsource/fira-sans": "^5.1.0",
+    "@funboxteam/optimizt": "^5.0.2",
     "@stylistic/stylelint-plugin": "^3.1.1",
     "@types/js-cookie": "^3.0.6",
-    "astro": "^5.0.1",
+    "astro": "5.0.9",
     "astro-compress": "^2.3.5",
     "astro-robots-txt": "^1.0.0",
     "font-awesome": "^4.7.0",
@@ -42,6 +42,8 @@
   },
   "devDependencies": {
     "prettier": "^3.4.1",
+    "prettier-plugin-svelte": "^3.3.2",
+    "prettier-plugin-tailwindcss": "^0.6.9",
     "print-js": "^1.6.0",
     "stylelint-config-recommended-scss": "^14.1.0"
   }

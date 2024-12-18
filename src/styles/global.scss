@@ -3,7 +3,7 @@
 
 html {
   font-size: 62.5%; // 1rem = 10px
-  background: $background;
+  background: $background-dark;
 }
 
 body {
@@ -14,9 +14,12 @@ body {
   font-size: 1.6rem;
 }
 
-.light body {
-  background: $background-light;
-  color: $dark;
+.light {
+  &,
+  body {
+    background: $background-light;
+    color: $dark;
+  }
 }
 
 img {
