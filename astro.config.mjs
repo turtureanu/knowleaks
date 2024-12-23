@@ -4,8 +4,6 @@ import sitemap from '@astrojs/sitemap';
 
 // https://astro.build/config
 import robotsTxt from 'astro-robots-txt';
-
-import playformCompress from '@playform/compress';
 import purgeCSS from 'astro-purgecss';
 
 import svelte from '@astrojs/svelte';
@@ -40,7 +38,6 @@ export default defineConfig({
 		purgeCSS({
 			content: ['./src/**/*.{astro,svelte,vue,tsx,jsx,ts,js}']
 		}),
-		playformCompress(),
 		svelte()
 	],
 	optimizeDeps: {
