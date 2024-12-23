@@ -29,13 +29,14 @@
 [x] Migrate to using bun
   [x] Also update to the latest deps
   [x] Fix Netlify build issues
-[ ] Fix RSS feed
-  [ ] Promote RSS feed in index.astro
+[x] Fix RSS feed
+  [x] Promote RSS feed in index.astro
 [x] Self-host used fonts (JetBrains Mono, -Roboto- Manrope)
-[ ] Add a fuzzy search function for posts
- [ ] Add it to index.astro
+[-] Add a fuzzy search function for posts
+ [-] Add it to index.astro
  [-] Add it to Nav.astro
   - Not a good idea on mobile (not enough space to show results)
+  - Not that practical
 [x] Switch to -Roboto- Manrope as the main font
   // Using a mono font for normal article text is not such a good idea
 [x] Remove unused font
@@ -45,4 +46,12 @@
 [x] Make the navbar sticky for desktop users
 [x] Center the desktop navigation
 [x] Convert all PNG and JPEG images to AVIF (except social-image.png)
-[ ] Have a look at https://github.com/Playform/Compress, maybe it's a slightly better and updated implementation
+[x] Have a look at https://github.com/Playform/Compress, maybe it's a slightly better and updated implementation
+    - switch to @playform/compress
+[-] Find out why it's taking so long to build
+    - Lack of caching and parallel computing when compressing files
+    - Adds about 5 minutes to the build process (on my machine)
+[x] Rename all occurences of the `blog-posts` path to `blog` to be consistent with the collection of the same name
+[x] lazy load blog posts to avoid CLS and improve performance
+    - Lighthouse still somehow complains about CLS, but in this case there is nothing else to be done that I can think of
+[x] Fix mobile navigation items not showing

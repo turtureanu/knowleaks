@@ -13,7 +13,6 @@ $dark-blue: hsl(205deg 100% 25%);
 $blue: hsl(205deg 100% 60%);
 $light-blue: hsl(205deg 100% 80%);
 $red: hsl(334deg 50% 45%);
-$orange: hsl(207, 100%, 40%);
 $purple: hsl(250deg 50% 50%);
 $yellow: hsl(60deg 50% 60%);
 $green: hsl(143, 35%, 37%);
@@ -21,7 +20,7 @@ $green: hsl(143, 35%, 37%);
 // Tags
 $linux-tag: rgb(97, 97, 97);
 $security-tag: $red;
-$origami-tag: $orange;
+$origami-tag: hsl(207, 100%, 40%);
 $android-tag: $green;
 $coding-tag: $purple;
 
@@ -37,6 +36,7 @@ $article-width: 700px;
 $sidebar-width: 500px;
 
 // Fonts
+$base-font-size: 1.6rem;
 $code-font: "Fira Code Variable";
 $normal-font: $code-font, "Roboto Variable", ubuntu, system-ui, -apple-system, blinkmacsystemfont, "Segoe UI", oxygen, cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 $article-font: "Rethink Sans Variable", $normal-font;

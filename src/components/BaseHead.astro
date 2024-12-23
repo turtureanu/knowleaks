@@ -16,6 +16,14 @@ import '@fontsource-variable/rethink-sans';
 import '@fontsource-variable/fira-code';
 ---
 
+<!-- RSS feed -->
+<link
+	rel="alternate"
+	type="application/rss+xml"
+	title={title}
+	href={new URL('rss.xml', Astro.site)}
+/>
+
 <!-- Sitemap -->
 <link rel="sitemap" href="/sitemap-index.xml" />
 

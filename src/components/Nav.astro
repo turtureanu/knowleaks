@@ -83,6 +83,7 @@ import ThemeButton from './src/ThemeButton.astro';
 	@use 'sass:math';
 
 	$top-padding: 2.5rem;
+	$mobile-nav-width: 60vw;
 
 	.site-nav {
 		display: flex;
@@ -108,8 +109,12 @@ import ThemeButton from './src/ThemeButton.astro';
 			position: fixed;
 			z-index: 10;
 			background-color: $dark1;
-			width: 60vw;
+			width: $mobile-nav-width;
 			height: 100vh;
+		}
+
+		.desktop-container {
+			width: $mobile-nav-width;
 		}
 
 		.nav-items {
@@ -117,7 +122,7 @@ import ThemeButton from './src/ThemeButton.astro';
 			z-index: 20;
 			margin-top: calc(6.375rem + $top-padding);
 			padding: 0;
-			width: 60vw;
+			width: $mobile-nav-width;
 			list-style-type: none;
 
 			li {
@@ -212,12 +217,12 @@ import ThemeButton from './src/ThemeButton.astro';
 			}
 
 			~ .mobile-background,
-			~ .nav-items {
+			~ .desktop-container .nav-items {
 				transform: scale(1, 1);
 				transition: transform 150ms ease;
 			}
 
-			~ .nav-items li {
+			~ .desktop-container .nav-items li {
 				transition: 225ms opacity ease-in;
 				opacity: 1;
 			}
