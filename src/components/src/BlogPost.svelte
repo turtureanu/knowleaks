@@ -44,6 +44,7 @@
 			font-weight: 700;
 
 			.new {
+				color: $light;
 				background-color: $light3;
 				padding: 0 0.5rem;
 
