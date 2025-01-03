@@ -13,7 +13,7 @@
   "dependencies": {
     "@astrojs/image": "^0.18.0",
     "@astrojs/mdx": "4.0.3",
-    "@astrojs/rss": "4.0.10",
+    "@astrojs/rss": "4.0.11",
     "@astrojs/sitemap": "^3.2.1",
     "@astrojs/svelte": "^7.0.2",
     "@fontsource-variable/fira-code": "^5.1.0",
