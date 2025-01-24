@@ -161,11 +161,6 @@ article {
       padding: 0 1em;
     }
 
-    // Dirty fix to get rid of the extra line that is there for some reason
-    .line:last-child {
-      display: none;
-    }
-
     &,
     code {
       font-family: $code-font;

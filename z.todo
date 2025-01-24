@@ -55,3 +55,6 @@
 [x] lazy load blog posts to avoid CLS and improve performance
     - Lighthouse still somehow complains about CLS, but in this case there is nothing else to be done that I can think of
 [x] Fix mobile navigation items not showing
+[x] Disable file compression to avoid Netlify build limiting (time)
+[x] Fix Shiki formatting for signle line code formatting (MD: ``)
+  // it was just a weird `display: none` rule
