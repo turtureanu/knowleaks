@@ -10,7 +10,7 @@ import svelte from "@astrojs/svelte";
 
 // https://astro.build/config
 export default defineConfig({
-  site: "https://knowleaks.netlify.app",
+  site: "https://knowleaks.org",
   markdown: {
     shikiConfig: {
       // Choose from Shiki"s built-in themes (or add your own)
