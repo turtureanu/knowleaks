@@ -80,6 +80,23 @@ import "../styles/layouts/blogPost.scss";
             </div>
           </a>
         </li>
+        <li>
+          <a
+            class="certificate-container"
+            href="https://www.freecodecamp.org/certification/turtureanu/front-end-development-libraries"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <img
+              class="certificate"
+              src="/FCC-frontend-certification.avif"
+              alt="Screenshot of my FreeCodeCamp certification for Front End Development Libraries"
+            />
+            <div class="overlay">
+              <p class="certificate-name">Front End Development Libraries</p>
+            </div>
+          </a>
+        </li>
       </ul>
       <h2>Contact/Socials</h2>
       <ul class="social">
@@ -146,6 +163,10 @@ import "../styles/layouts/blogPost.scss";
           &:visited {
             color: $light;
           }
+        }
+
+        *:last-child {
+          grid-column: 1/-1;
         }
 
         .overlay {
