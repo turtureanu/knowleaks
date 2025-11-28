@@ -41,7 +41,7 @@
     "stylelint-color-format": "^1.1.0",
     "stylelint-config-concentric-order": "^5.2.0",
     "stylelint-config-html": "^1.1.0",
-    "stylelint-config-standard-scss": "^14.0.0",
+    "stylelint-config-standard-scss": "^16.0.0",
     "stylelint-declaration-block-no-ignored-properties": "^2.8.0",
     "stylelint-scss": "^6.10.1",
     "svelte": "^5.19.2",
