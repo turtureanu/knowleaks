@@ -1,34 +1,34 @@
 ---
-import BaseHead from '../components/BaseHead.astro';
-import Header from '../components/Header.astro';
-import BlogPosts from '../components/BlogPosts.astro';
-import { SITE_TITLE, SITE_DESCRIPTION } from '../config';
+import BaseHead from "../components/BaseHead.astro";
+import Header from "../components/Header.astro";
+import BlogPosts from "../components/BlogPosts.astro";
+import { SITE_TITLE, SITE_DESCRIPTION } from "../config";
 ---
 
 <html lang="en">
-	<head>
-		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-	</head>
-	<body>
-		<div class="center">
-			testing automatic git building (and detection of new commits)
-			<Header />
-			<BlogPosts />
-		</div>
-	</body>
+  <head>
+    <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+  </head>
+  <body>
+    <div class="center">
+      <Header />
+      <BlogPosts />
+    </div>
+  </body>
 </html>
 
 <style lang="scss">
-	@use '../styles/variables.scss' as *;
+  @use "../styles/variables.scss" as *;
 
-	.center {
-		display: flex;
-		flex-direction: column;
-		margin: 0 auto;
-		max-width: $medium;
-	}
+  .center {
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    padding: 1em;
+    max-width: $medium;
+  }
 </style>
 
 <style lang="scss" is:global>
-	@use '../styles/components/button.scss' as *;
+  @use "../styles/components/button.scss" as *;
 </style>
