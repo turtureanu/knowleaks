@@ -3,30 +3,30 @@ const { origami } = Astro.props;
 
 // I'm sick with working with Astro.glob(), too abstract and hard to work with
 const imagesPath = import.meta.glob("/public/origami/instructions/*/*.svg", {
-  eager: true,
+	eager: true,
 });
 
-let images = [];
+let images: string[] = [];
 for (let image in imagesPath) {
-  if (image.includes(origami)) {
-    images.push(image.replace("/public", ""));
-  }
+	if (image.includes(origami)) {
+		images.push(image.replace("/public", ""));
+	}
 }
 
 // How Astro.glob likes to sort: 1 10 11 12 13 ... 2 21 23 ...
 // How I like to sort: 1 2 3 ... 11 12 13 ...
 let ascendingSort = (x: string, y: string) => {
-  const numX = parseInt(x.match(/\d+/g)?.[0] || '0');
-  const numY = parseInt(y.match(/\d+/g)?.[0] || '0');
-  return numX - numY;
+	const numX = parseInt(x.match(/\d+/g)?.[0] || "0", 10);
+	const numY = parseInt(y.match(/\d+/g)?.[0] || "0", 10);
+	return numX - numY;
 };
 
 images.sort(ascendingSort);
 ---
 
 <script>
-  import { register } from 'swiper/element/bundle';
-  register()
+  import { register } from "swiper/element/bundle";
+  register();
 </script>
 
 <swiper-container
@@ -35,22 +35,24 @@ images.sort(ascendingSort);
   pagination="true"
   pagination-type="fraction"
 >
-  {images.map((image) => (
-    <swiper-slide>
-      <img
-        class="origami-image"
-        src={image}
-        alt="origami instruction"
-        loading="lazy"
-      />
-      <div class="swiper-lazy-preloader"></div>
-    </swiper-slide>
-  ))}
+  {
+    images.map((image) => (
+      <swiper-slide>
+        <img
+          class="origami-image"
+          src={image}
+          alt="origami instruction"
+          loading="lazy"
+        />
+        <div class="swiper-lazy-preloader" />
+      </swiper-slide>
+    ))
+  }
 </swiper-container>
 
 <style lang="scss">
   @use "../styles/variables.scss" as *;
-  @use 'sass:math';
+  @use "sass:math";
 
   .swiper {
     margin-top: 2rem;

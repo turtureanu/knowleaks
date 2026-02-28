@@ -1,12 +1,13 @@
-import rss from '@astrojs/rss';
-import { SITE_TITLE, SITE_DESCRIPTION } from '../config';
-import { getCollection } from 'astro:content';
-import sanitizeHtml from 'sanitize-html';
-import MarkdownIt from 'markdown-it';
+import { getCollection } from "astro:content";
+import rss from "@astrojs/rss";
+import MarkdownIt from "markdown-it";
+import sanitizeHtml from "sanitize-html";
+import { SITE_DESCRIPTION, SITE_TITLE } from "../config";
+
 const parser = new MarkdownIt();
 
 export async function GET(context) {
-	const blog = await getCollection('blog');
+	const blog = await getCollection("blog");
 	return rss({
 		title: SITE_TITLE,
 		description: SITE_DESCRIPTION,
@@ -19,9 +20,9 @@ export async function GET(context) {
 			// This example assumes all posts are rendered as `/blog/[id]` routes
 			link: `/blog/${post.id}/`,
 			content: sanitizeHtml(parser.render(post.body), {
-				allowedTags: sanitizeHtml.defaults.allowedTags.concat(['img'])
-			})
+				allowedTags: sanitizeHtml.defaults.allowedTags.concat(["img"]),
+			}),
 		})),
-		customData: `<language>en-us</language>`
+		customData: `<language>en-us</language>`,
 	});
 }

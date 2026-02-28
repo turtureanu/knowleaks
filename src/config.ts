@@ -3,4 +3,4 @@
 
 export const SITE_TITLE = "The Knowleaks Blog";
 export const SITE_DESCRIPTION =
-  "Sharing things I might forget. A blog about the things I need to remind myself.";
+	"Sharing things I might forget. A blog about the things I need to remind myself.";

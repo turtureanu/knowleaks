@@ -1,12 +1,11 @@
-import { defineConfig } from "astro/config";
 import mdx from "@astrojs/mdx";
+import astroCompress from "gab-astro-compress";
 import sitemap from "@astrojs/sitemap";
-
+import svelte from "@astrojs/svelte";
+import { defineConfig } from "astro/config";
+import purgeCSS from "astro-purgecss";
 // https://astro.build/config
 import robotsTxt from "astro-robots-txt";
-import purgeCSS from "astro-purgecss";
-
-import svelte from "@astrojs/svelte";
 
 // https://astro.build/config
 export default defineConfig({
@@ -39,6 +38,7 @@ export default defineConfig({
       content: ["./src/**/*.{astro,svelte,vue,tsx,jsx,ts,js}"],
     }),
     svelte(),
+    astroCompress(),
   ],
   optimizeDeps: {
     include: ["lodash.get", "lodash.isequal", "lodash.clonedeep"],

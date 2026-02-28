@@ -1,7 +1,8 @@
 ---
-import { getCollection } from 'astro:content';
-import BlogPost from './src/BlogPost.svelte';
-const blogCollection = await getCollection('blog');
+import { getCollection } from "astro:content";
+import BlogPost from "./src/BlogPost.svelte";
+
+const blogCollection = await getCollection("blog");
 ---
 
 <section class="blog-posts">
@@ -130,6 +131,12 @@ const blogCollection = await getCollection('blog');
           background-color: $hardware-tag;
         }
       }
+
+
+    .tag .hardware {
+      background: red;
+    }
+      
 
       .tag-container {
         display: flex;
