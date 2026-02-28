@@ -48,9 +48,11 @@
 [x] Convert all PNG and JPEG images to AVIF (except social-image.png)
 [x] Have a look at https://github.com/Playform/Compress, maybe it's a slightly better and updated implementation
     - switch to @playform/compress
-[-] Find out why it's taking so long to build
+[+] Find out why it's taking so long to build
     - Lack of caching and parallel computing when compressing files
     - Adds about 5 minutes to the build process (on my machine)
+    + Added @Playform/compress gab-astro-compress by [@jgabriel98](https://github.com/jgabriel98),
+      which gets it done in like 90 seconds + has cache support
 [x] Rename all occurences of the `blog-posts` path to `blog` to be consistent with the collection of the same name
 [x] lazy load blog posts to avoid CLS and improve performance
     - Lighthouse still somehow complains about CLS, but in this case there is nothing else to be done that I can think of
@@ -58,3 +60,4 @@
 [x] Disable file compression to avoid Netlify build limiting (time)
 [x] Fix Shiki formatting for signle line code formatting (MD: ``)
   // it was just a weird `display: none` rule
+[ ] Look at Biome vs. Stylelint compatibility issues (always use Stylelint for SCSS/CSS)
