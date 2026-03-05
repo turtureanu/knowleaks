@@ -37,6 +37,7 @@ import ThemeButton from "./ThemeButton.astro";
 					paint-order="stroke fill markers"></path></svg
 			>
 		</div>
+		<div class="divider"></div>
 		<p>
 			<strong>
 				Sharing things
@@ -46,8 +47,8 @@ import ThemeButton from "./ThemeButton.astro";
 		</p>
 	</div>
 	<nav class="other-links">
-		<a class="button" href="/about-me">About me</a>
 		<ThemeButton />
+		<a class="button" href="/about-me">About me</a>
 		<a
 			class="button"
 			href="https://github.com/turtureanu/knowleaks"
@@ -68,12 +69,18 @@ import ThemeButton from "./ThemeButton.astro";
 
 	.header-banner {
 		display: flex;
+		gap: 1.25rem;
 		align-items: center;
 		justify-content: center;
-		margin: 0 auto;
+		margin: 1em 2.4rem;
+		outline: 0.2rem $dark3 solid;
+		border-radius: 1rem;
+		background-color: $dark2;
+		padding: 1rem 0;
+		max-width: calc($article-width - 2.4rem * 2);
 
 		.logo-container {
-			width: 85px;
+			width: 90px;
 
 			svg {
 				display: block;
@@ -82,20 +89,27 @@ import ThemeButton from "./ThemeButton.astro";
 			}
 		}
 
+		.divider {
+			border-radius: 1rem;
+			background-color: $dark3;
+			width: 0.3rem;
+			height: 5rem;
+		}
+
 		p {
-			padding-left: 2.5rem;
 			text-align: left;
 			line-height: 2.25ch;
 			font-family: $code-font;
-			font-size: 2rem;
+			font-size: 2.2rem;
 		}
 
 		@media screen and (width >= 400px) {
-			margin: 2em auto;
-			margin-bottom: 1em;
-
 			.logo-container {
 				width: 100px;
+			}
+
+			.divider {
+				height: 6rem;
 			}
 
 			p {
@@ -106,27 +120,75 @@ import ThemeButton from "./ThemeButton.astro";
 
 	.other-links {
 		display: grid;
-		grid-template-columns: repeat(2, 1fr);
+		grid-template-columns: 1fr 1fr;
 		margin: 0 1em; // fixme: magic value
+	}
 
-		.button {
-			margin: 0.5em;
-			height: fit-content;
-			text-align: center;
+	.button {
+		margin: 0.5em;
+		height: fit-content;
+		text-align: center;
 
-			&:first-child {
-				grid-row: 1;
-				grid-column: span 2;
+		&:nth-of-type(1) {
+			grid-row: 1;
+			grid-column: span 2;
+		}
+
+		&:nth-of-type(2) {
+			grid-row: 2;
+			grid-column: 2;
+		}
+
+		&:nth-of-type(3) {
+			grid-row: 2;
+			grid-column: 3;
+		}
+	}
+
+	@media screen and (min-width: $medium) {
+		.header-banner {
+			.logo-container {
+				width: 125px;
 			}
 
-			&:nth-child(2) {
-				grid-row: 2;
-				grid-column: 1;
+			p {
+				font-size: 2.5rem;
 			}
+		}
 
-			&:nth-child(3) {
-				grid-row: 2;
-				grid-column: 2;
+		.other-links {
+			grid-template-columns: 1fr 1fr 1fr;
+			gap: 0 2rem;
+			margin: 0 1.6rem;
+
+			.button {
+				margin: 0.5em;
+				height: fit-content;
+				text-align: center;
+
+				&:nth-of-type(1) {
+					grid-row: 1;
+					grid-column: 2;
+				}
+
+				&:nth-of-type(2) {
+					grid-row: 1;
+					grid-column: 3;
+				}
+
+				&:nth-of-type(3) {
+					grid-row: 1;
+					grid-column: 1;
+				}
+			}
+		}
+
+		html.light .header-banner {
+			outline: 0.2rem $light2 solid;
+			background-color: $light;
+
+			.divider {
+				background-color: $light3;
 			}
 		}
 	}
