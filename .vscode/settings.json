@@ -1,3 +1,50 @@
 {
-    "npm.packageManager": "bun"
+	"npm.packageManager": "bun",
+	"typescript.tsdk": "node_modules/typescript/lib",
+	"biome.suggestInstallingGlobally": false,
+
+	"[astro]": {
+		"editor.defaultFormatter": "astro-build.astro-vscode"
+	},
+
+	"svelte.enable-ts-plugin": true,
+	"[svelte]": {
+		"editor.defaultFormatter": "svelte.svelte-vscode"
+	},
+
+	"[javascript]": {
+		"editor.defaultFormatter": "biomejs.biome"
+	},
+
+	"[jsonc]": {
+		"editor.defaultFormatter": "biomejs.biome"
+	},
+	"json.schemaDownload.trustedDomains": {
+		"https://schemastore.azurewebsites.net/": true,
+		"https://raw.githubusercontent.com/": true,
+		"https://www.schemastore.org/": true,
+		"https://json.schemastore.org/": true,
+		"https://json-schema.org/": true,
+		"https://biomejs.dev": true
+	},
+
+	"editor.codeActionsOnSave": {
+		"source.fixAll.stylelint": "always"
+	},
+
+	"stylelint.validate": [
+		"css",
+		"postcss",
+		"scss",
+		"astro",
+		"typescript",
+		"typescriptreact",
+		"html"
+	],
+	"css.validate": false,
+	"less.validate": false,
+	"scss.validate": false,
+	"[scss]": {
+		"editor.defaultFormatter": "stylelint.vscode-stylelint"
+	}
 }
