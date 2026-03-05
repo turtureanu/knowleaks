@@ -1,0 +1,58 @@
+---
+const { pdfPath, label = "Print" } = Astro.props;
+// Astro style random id (in case we might use multiple instances)
+const BUTTON_ID = `print-button-${Math.random().toString(36).slice(2, 10)}`;
+---
+
+<button
+    id={BUTTON_ID}
+    data-pdf-path={pdfPath}
+    type="button"
+    class="button action-button"
+>
+    {label}
+</button>
+
+<style lang="scss">
+    @use "../styles/components/button.scss" as *;
+    @use "../styles/components/action-button" as *;
+</style>
+
+<script define:vars={{ BUTTON_ID }}>
+    async function printPDF(pdfPath) {
+        const iframe = document.createElement("iframe");
+
+        Object.assign(iframe, {
+            id: "pdf-print-iframe",
+            src: pdfPath,
+            style: "position: fixed; width: 0; height: 0;",
+        });
+
+        document.body.appendChild(iframe);
+
+        const removeFocus = () => {
+            iframe.remove();
+            window.removeEventListener("focus", removeFocus);
+        };
+
+        // focus listener to handle iframe cleanup
+        // the afterprint event doesn't work, focus can be used instead though: https://stackoverflow.com/a/79507465
+        window.addEventListener("focus", removeFocus);
+
+        iframe.addEventListener(
+            "load",
+            () => {
+                try {
+                    iframe.contentWindow.print();
+                } catch (err) {
+                    console.error("Error printing PDF:", err);
+                }
+            },
+            { once: true },
+        );
+    }
+
+    document.querySelector(`#${BUTTON_ID}`).addEventListener("click", (e) => {
+        printPDF(e.currentTarget.dataset.pdfPath);
+    });
+</script>

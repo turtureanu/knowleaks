@@ -66,3 +66,6 @@
 [x] Add recommended extensions to .vscode workspace
 [x] Remove now useless nixpacks file
 [x] Fully switch to Biome + Stylelint in favor of Prettier
+[x] Redesing index.astro header
+[x] Fix the "print" function on origami pages
+    - get rid of print-js and write my own 60-line implementation as an Astro component

@@ -14,11 +14,11 @@ import Carousel from "../../components/OrigamiCarouselAstro.astro";
 <Carousel origami="popper" />
 
 import Download from "../../components/Download.astro";
-import PrintPDF from "../../components/PrintPDF.astro";
+import Print from "../../components/Print.astro";
 
-<div style="display: flex; justify-content: space-around; margin: 2em 0;">
+<div style="display: flex; justify-content: space-evenly; margin: 2em 0;">
   <Download URL="/origami/popper/instructions.pdf" />
-  <PrintPDF pdfURL="/origami/popper/instructions.pdf" />
+  <Print pdfPath="/origami/popper/instructions.pdf" />
 </div>
 ### Video
 
