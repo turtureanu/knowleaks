@@ -1,6 +1,6 @@
 ---
 import { getCollection } from "astro:content";
-import BlogPost from "./src/BlogPost.svelte";
+import BlogPost from "./BlogPost.svelte";
 
 const blogCollection = await getCollection("blog");
 ---
@@ -85,17 +85,17 @@ const blogCollection = await getCollection("blog");
     @use "../styles/components/button.scss" as *;
 
     .rss-btn {
-      color: inherit;
-      text-decoration: none;
       display: inline-block;
       vertical-align: middle;
+      text-decoration: none;
+      color: inherit;
 
       svg {
         width: 2rem;
         height: 2rem;
 
         #background {
-          fill: #c07e04;
+          fill: hsl(39deg 96% 38%);
         }
 
         #icon-shapes {

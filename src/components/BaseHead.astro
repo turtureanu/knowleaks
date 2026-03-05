@@ -21,7 +21,7 @@ import "@fontsource-variable/fira-code";
 	rel="alternate"
 	type="application/rss+xml"
 	title={title}
-	href={new URL('rss.xml', Astro.site)}
+	href={new URL("rss.xml", Astro.site)}
 />
 
 <!-- Sitemap -->
@@ -30,7 +30,7 @@ import "@fontsource-variable/fira-code";
 <!-- Global Metadata -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<link rel="icon" type="image/svg+xml" href="/logo-know.svg" />
+<link rel="icon" type="image/svg+xml" href="/logo.svg" />
 <meta name="generator" content={Astro.generator} />
 
 <!-- Primary Meta Tags -->
@@ -54,7 +54,7 @@ import "@fontsource-variable/fira-code";
 
 <!-- Theme -->
 <script is:inline>
-	if (localStorage.getItem('theme') == 'light') {
-		document.documentElement.classList.add('light');
+	if (localStorage.getItem("theme") == "light") {
+		document.documentElement.classList.add("light");
 	}
 </script>

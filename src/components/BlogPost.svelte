@@ -1,19 +1,20 @@
 <script lang="ts">
-let { blogPost } = $props();
+	let { blogPost } = $props();
 </script>
 
 <a
-	class={`button blog-post ${blogPost.data.tags.toString().replaceAll(',', ' ')}`}
+	class={`button blog-post ${blogPost.data.tags.toString().replaceAll(",", " ")}`}
 	href={`/blog/${blogPost.slug}/`}
 >
 	<div class="title">
 		<!-- Check if posts are newer than 30 days, and if so, add a New span tag (using CSS ::after) -->
 		<span
 			class={Math.floor(
-				(new Date().getTime() - blogPost.data.pubDate.getTime()) / (24 * 60 * 60 * 1000)
+				(new Date().getTime() - blogPost.data.pubDate.getTime()) /
+					(24 * 60 * 60 * 1000),
 			) <= 30
-				? 'new'
-				: 'hidden'}
+				? "new"
+				: "hidden"}
 		></span>
 		{blogPost.data.title}
 	</div>
@@ -27,9 +28,10 @@ let { blogPost } = $props();
 	</span>
 </a>
 
+<!-- svelte-ignore css_unused_selector -->
 <style lang="scss">
-	@use '../../styles//components/button.scss' as *;
-	@use '../../styles/variables.scss' as *;
+	@use "../styles/components/button.scss" as *;
+	@use "../styles/variables.scss" as *;
 	.blog-post {
 		// Post aligning
 		display: grid;
@@ -49,7 +51,7 @@ let { blogPost } = $props();
 				padding: 0 0.5rem;
 
 				&::after {
-					content: 'New';
+					content: "New";
 				}
 			}
 		}
@@ -86,6 +88,11 @@ let { blogPost } = $props();
 		&.coding + .close-button,
 		&.coding {
 			background-color: $coding-tag;
+		}
+
+		&.hardware + .close-button,
+		&.hardware {
+			background-color: $hardware-tag;
 		}
 	}
 
