@@ -2,8 +2,8 @@
 @use "./variables.scss" as *;
 
 html {
-  font-size: 62.5%; // 1rem = 10px
   background: $background-dark;
+  font-size: 62.5%; // 1rem = 10px
 }
 
 body {
@@ -11,7 +11,7 @@ body {
   padding: 0;
   color: $light;
   font-family: $normal-font;
-  font-size: $base-font-size;;
+  font-size: $base-font-size;
 }
 
 .light {

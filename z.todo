@@ -60,4 +60,9 @@
 [x] Disable file compression to avoid Netlify build limiting (time)
 [x] Fix Shiki formatting for signle line code formatting (MD: ``)
   // it was just a weird `display: none` rule
-[ ] Look at Biome vs. Stylelint compatibility issues (always use Stylelint for SCSS/CSS)
+[x] Look at Biome vs. Stylelint compatibility issues (always use Stylelint for SCSS/CSS)
+[-] Troubleshoot the green blocks on the .avif images, when building the website on arm64
+    - Currently waiting for a fix in the upstream: https://github.com/lovell/sharp/issues/4491
+[x] Add recommended extensions to .vscode workspace
+[x] Remove now useless nixpacks file
+[x] Fully switch to Biome + Stylelint in favor of Prettier

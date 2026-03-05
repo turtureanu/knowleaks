@@ -1,8 +1,0 @@
-# nixpacks.toml
-
-[phases.setup]
-nixPkgs = ['bun']
-cmd = 'bun install'
-
-[phases.build]
-cmd = 'bun run build'
