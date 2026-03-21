@@ -64,6 +64,15 @@ import ThemeButton from "./ThemeButton.astro";
 	@use "../styles/components/button.scss" as *;
 
 	html.light {
+		.header-banner {
+			outline: 0.2rem $light2 solid;
+			background-color: $light;
+
+			.divider {
+				background-color: $light3;
+			}
+		}
+
 		.logo-font {
 			fill: $dark1 !important;
 		}
@@ -182,15 +191,6 @@ import ThemeButton from "./ThemeButton.astro";
 					grid-row: 1;
 					grid-column: 1;
 				}
-			}
-		}
-
-		html.light .header-banner {
-			outline: 0.2rem $light2 solid;
-			background-color: $light;
-
-			.divider {
-				background-color: $light3;
 			}
 		}
 	}
