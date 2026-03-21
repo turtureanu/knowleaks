@@ -13,7 +13,8 @@ $dark-blue: hsl(205deg 100% 25%);
 $blue: hsl(205deg 100% 60%);
 $light-blue: hsl(205deg 100% 80%);
 $red: hsl(334deg 50% 45%);
-$purple: hsl(250deg 50% 50%);
+$purple-dark: hsl(250deg 50% 50%);
+$purple-light: hsl(250deg 80% 80%);
 $yellow: hsl(60deg 50% 60%);
 $green: hsl(143deg 35% 37%);
 
@@ -22,7 +23,7 @@ $linux-tag: rgb(97 97 97);
 $security-tag: $red;
 $origami-tag: hsl(207deg 100% 40%);
 $android-tag: $green;
-$coding-tag: $purple;
+$coding-tag: $purple-dark;
 $hardware-tag: hsl(21deg 47% 40%);
 
 // Media Query Breakpoints

@@ -17,8 +17,12 @@ body {
 .light {
   &,
   body {
-    background: $background-light;
+    background: $background-light !important;
     color: $dark;
+  }
+
+  article a:visited, a:visited {
+    color: $purple-dark;
   }
 }
 
@@ -46,7 +50,7 @@ a {
   }
 
   &:visited {
-    color: $purple;
+    color: $purple-light;
   }
 }
 
