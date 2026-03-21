@@ -1,0 +1,50 @@
+---
+title: "Privacy is dying (for real this time)"
+description: "From Google killing F-droid to systemd paving the way to age verification on Linux, this is perhaps the fastest path to a bleak future regarding privacy."
+pubDate: 2026-03-21
+draft: true
+tags: [linux, security, hardware, android]
+---
+
+![Image collage of various issues regarding the past year in privacy](/other/privacy-is-dying-for-real-this-time/thumbnail.avif)
+
+## 10 years ago
+
+If I were to tell you the only way to install an app on ***your own Android device*** that ***you developed*** would be to send Google your state-issued ID, you wouldn't believe me.
+
+If I were to tell you ***Linux distros*** would have to check the age of their users, you wouldn't have even understood what I had just said.
+
+If I were to tell you Samsung would remove the ability for ***official firmware*** to be flashed on their mobile devices, you would have laughed and called it nonsense.
+
+If I were to tell you mass private ***message scanning*** would be incentivized or even forced ***by governments*** without prior suspicion, you would've probably said we lived in a democracy, where this could never happen for *various* reasons (unless you were from a country like China).
+
+Unfortunately, this ***will*** soon happen, and it has already begun!
+
+## The state of privacy and freedom as of March 2026
+
+
+### Age verification
+
+Several countries are pushing for online regulation of content deemed inappropriate for children, which may sound good, but the way it's being implemented comes at the price of mass surveillance and free speech, while other less invasive methods already exist.
+
+The EU is pushing for but also [somewhat fighting against](https://fightchatcontrol.eu/) [Chat Control](https://www.patrick-breyer.de/en/posts/chat-control/), while other countries and [states](https://en.wikipedia.org/wiki/Social_media_age_verification_laws_in_the_United_States) already have similar laws in place (e.g. the Online Safety Act in [Australia](https://en.wikipedia.org/wiki/Online_Safety_Act_2021) and the [UK](https://en.wikipedia.org/wiki/Online_Safety_Act_2023)).
+
+The proposed solutions start with age verification systems, which require scanning your face or your state-issued ID, or both. This is a major security risk; you don't want to give away your ID or passport to some random website or company. And if [you're OK with that](https://www.schneier.com/essays/archives/2006/05/the_eternal_value_of.html), then you should also be OK with your [ID being exposed in a data breach](https://kotaku.com/the-discord-hack-sounds-really-really-bad-2000633690).
+
+Some people also find it scary to have a government ID tied directly to your online presence, not to mention that [such solutions absolutely obliterate the right to anonymity](https://www.eff.org/issues/anonymity). There are already [better zero-knowledge solutions](https://self.xyz/) to age verification, which do not require scanning your ID for each website or app.
+
+California passed a verification law that tries to enforce [age verification **at the OS level**](https://www.tomshardware.com/software/operating-systems/california-introduces-age-verification-law), which takes effect on January 1st 2027. Yikes!
+
+As if systemd didn't already [suck](https://suckless.org/sucks/systemd/) enough, a guy named [Dylan M. Taylor](https://dylanmtaylor.com/), who [works](https://files.dylanmtaylor.com/dylan-resume.pdf) for what appears to be a [suspicious looking and possibly unethical credit company](https://www.creditgenie.com/) has pushed a PR paving the way to future endorsement and compliance with the Californian age verification law. Dylan [has hit many other big open source projects](https://news.ycombinator.com/item?id=47458832) such as Arch Linux and Ubuntu. Yes, it's literally a field in a file at this point in time that anyone for some time will be able to lie about, [but that doesn't mean the idea won't be built upon in the future](https://www.imdb.com/title/tt1375666/), and this is exactly what others in the open source community fear. On the flip side, open source is open source, and you can still remove or add whatever you like to it, the problem is that the majority of people will still use what's available, hence [the](https://www.sambent.com/the-engineer-who-tried-to-put-age-verification-into-linux-5/) [backlash](https://www.reddit.com/r/privacy/comments/1rz8i4r/dylan_useful_idiot_with_commit_access_pushed_age/). Let's just hope the law won't actually be enforced anytime soon.
+
+### Mobile freedom
+
+Looking at the mobile market, it seems that we are speedily heading towards a future, where the software (and firmware for that matter) on your mobile device is not controlled (or in some cases even installed by you) but by whoever is in control (be it the [vendor](https://www.techtarget.com/searchsecurity/answer/How-can-we-detect-and-uninstall-bloatware) and/or the [government](https://techcrunch.com/2025/12/03/after-intense-backlash-india-pulls-mandate-to-pre-install-government-app-on-smartphones/)).
+
+I've already seen stories of people on [XDA](https://xdaforums.com), who say their bank requires them to have their app installed in order to log in (even from the desktop). This is and was the case with [Revolut](https://www.revolut.com) from the beginning, which cannot be installed on ***some*** custom Android ROMs because of [Play Integrity](https://grapheneos.org/articles/attestation-compatibility-guide) and other [shenanigans](https://f-droid.org/packages/io.nandandesai.privacybreacher/).
+
+About 2–3 months ago I installed a custom GSI on a new Samsung tablet using some really niche (and smart) methods that few knew of, but in order to do that I still had to unlock the bootloader (OEM unlock toggle in settings). 2 months ago I wanted to put on a new GSI and do a clean install, so I flashed the latest firmware and to my surprise the OEM toggle wasn't anywhere to be found. It turns out Samsung had [silently removed the option to unlock the bootloader in One UI 8.0](https://xdaforums.com/t/bootloader-unlocking-option-removed-from-one-ui-8-0.4751904/), and so **I had just locked myself out**, bootloader locked, forever. You can't downgrade because you would blow a physical fuse, which would hard brick the device (thanks Samsung! I just don't get what this protects the user from!).
+
+What's more, [Samsung has doubled down and has started removing](https://www.androidauthority.com/samsung-disables-odin-removes-download-mode-3648469/) the option to flash **official firmware** for Samsung devices. In the best case scenario, you will still have to go through hoops to re-enable it. Imagine a Samsung update corrupts your phone's system, and you can't flash the official firmware on it... And yes, doing a factory reset is sometimes not enough, or you might not even be able to boot into recovery mode to do it. This is really concerning seeing that the [mobile vendor market share of Samsung in the USA is about 20%](https://gs.statcounter.com/vendor-market-share/mobile/united-states-of-america/).
+
+Perhaps the worst news of all is [Google killing](https://arstechnica.com/gadgets/2025/09/f-droid-calls-for-regulators-to-stop-googles-crackdown-on-sideloading/) alternate open source stores such as F-droid by [requiring developers to give up their government IDs](https://keepandroidopen.org) to install apps locally, even if they don't want to publish their app on the Play store.
