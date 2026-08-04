@@ -154,13 +154,13 @@ const blogCollection = await getCollection("blog");
         margin: 0.25em;
         border: none;
         background-color: transparent;
-        cursor: pointer;
         padding: 0.5em 0.2em;
         white-space: pre;
         color: $light;
         font-family: $code-font;
         font-size: 1.5rem;
         font-weight: 500;
+        cursor: pointer;
 
         &::before {
           padding-right: 0.25em;
@@ -190,24 +190,6 @@ const blogCollection = await getCollection("blog");
           margin-top: 2em;
           margin-bottom: 0.625em;
           text-align: center;
-        }
-
-        .tags {
-          display: flex;
-          justify-content: right;
-          margin-top: 0.5em;
-          font-weight: 500;
-
-          * + * {
-            margin-left: 0.5em;
-          }
-
-          .tag {
-            padding: 0 0.375em;
-            text-shadow: none;
-            color: $light;
-            font-size: 1.4rem;
-          }
         }
 
         .hidden {

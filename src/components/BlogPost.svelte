@@ -1,10 +1,10 @@
 <script lang="ts">
-let { blogPost } = $props();
+	let { blogPost } = $props();
 </script>
 
 <a
 	class={`button blog-post ${blogPost.data.tags.toString().replaceAll(",", " ")}`}
-	href={`/blog/${blogPost.slug}/`}
+	href={`/blog/${blogPost.id}/`}
 >
 	<div class="title">
 		<!-- Check if posts are newer than 30 days, and if so, add a New span tag (using CSS ::after) -->
@@ -42,7 +42,8 @@ let { blogPost } = $props();
 			grid-row: 1;
 			grid-column: span 2;
 			font-family: $article-font;
-			font-size: 1.75rem;
+			font-size: $base-font-size * 1.05;
+			line-height: $base-font-size * 1.5;
 			font-weight: 700;
 
 			.new {
@@ -57,6 +58,8 @@ let { blogPost } = $props();
 		}
 
 		.date {
+			width: max-content;
+			font-family: $article-font;
 			grid-row: 2;
 			grid-column: 1;
 		}
@@ -98,13 +101,12 @@ let { blogPost } = $props();
 
 	.tags {
 		display: flex;
+		flex-wrap: wrap;
+		gap: 0.5em;
+
 		justify-content: right;
 		margin-top: 0.5em;
 		font-weight: 500;
-
-		* + * {
-			margin-left: 0.5em;
-		}
 
 		.tag {
 			padding: 0 0.375em;

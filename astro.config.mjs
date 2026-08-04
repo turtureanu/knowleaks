@@ -38,9 +38,9 @@ export default defineConfig({
 			content: ["./src/**/*.{astro,svelte,vue,tsx,jsx,ts,js}"],
 		}),
 		svelte(),
-		astroCompress(),
+		process.env.ASTRO_COMPRESS === "true" && astroCompress(),
 	],
 	optimizeDeps: {
-		include: ["lodash.get", "lodash.isequal", "lodash.clonedeep"],
+		include: ["loash.get", "lodash.isequal", "lodash.clonedeep"],
 	},
 });

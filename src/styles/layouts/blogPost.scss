@@ -7,8 +7,8 @@ article {
   padding: 5rem 2.5rem;
   padding-top: 3rem;
   max-width: $article-width;
-  font-family: $article-font;
   overflow-wrap: break-word;
+  font-family: $article-font;
 
   a {
     color: $light;
@@ -110,8 +110,8 @@ article {
 
   .copied {
     &::after {
-      opacity: 0.5;
       animation: fade-out 1000ms ease-out 500ms;
+      opacity: 0.5;
       font-size: smaller;
       content: " (copied URL)";
 
@@ -128,7 +128,7 @@ article {
   }
 
   p {
-    line-height: 3ch;
+    line-height: $base-font-size * 1.7; // magic number
   }
 
   blockquote {

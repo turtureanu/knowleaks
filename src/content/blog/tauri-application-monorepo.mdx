@@ -5,7 +5,7 @@ pubDate: 2024-12-03
 tags: [coding]
 ---
 
-![thumbnail](/coding/tauri-application-monorepo/thumbnail.avif)
+![Thumbnail](/coding/tauri-application-monorepo/thumbnail.avif)
 
 ## Project file structure
 
@@ -29,7 +29,7 @@ tauri/
 └── ...
 ```
 
-> The above setup is a Sveltekit + Tauri setup. \
+> The above setup is a SvelteKit + Tauri setup. \
 > If you want similar tree diagrams, head on over to https://tree.nathanfriend.com/
 
 ### Initializing moon
@@ -38,7 +38,7 @@ tauri/
 moon init
 ```
 
-This creates a `.moon/` directory at the roon of the project. Inside it there is a `workspace.yml` file.
+This creates a `.moon/` directory at the root of the project. Inside it there is a `workspace.yml` file.
 
 The `workspace.yml` file tells moon where the projects are located (in our case in `src/` and `src-tauri`).
 
@@ -75,7 +75,7 @@ Each project must have a `moon.yml`, which tells moon how the project should be 
 
 It must contain a `name` and a `description`, other metadata is optional. The language, for example, is inherited from the files in the project but may be optionally specified.
 
-Tasks define the, you guessed it, tasks that can be run, for brevity, here are the tasks I want configured:
+Tasks define the tasks that can be run, for brevity, here are the tasks I want configured:
 
 - frontend
   - build: `cd ../ && bun run build`
@@ -83,7 +83,7 @@ Tasks define the, you guessed it, tasks that can be run, for brevity, here are t
 
 - backend
   - build: `cargo build`
-  - dev:  `bunx tauri dev`
+  - dev: `bunx tauri dev`
 
 To run each task you just have to write `moon run <project-name>:<task>`. For example, if I wanted to build the web portion of my Tauri app I would just run `moon run frontend:build`.
 
